@@ -32,9 +32,9 @@ void setup() {
 	Serial3.println(F("Start incubation project status log"));
 
 
-	pinMode(BUTTON_OK, INPUT_PULLUP);
-	pinMode(BUTTON_M, INPUT_PULLUP);
-	pinMode(BUTTON_P, INPUT_PULLUP);
+	pinMode(BUTTON_U, INPUT_PULLUP);
+	pinMode(BUTTON_R, INPUT_PULLUP);
+	pinMode(BUTTON_L, INPUT_PULLUP);
 	lcd.begin(LCDCOLS, LCDROWS);  // initializes the 16x2 LCD
 	pinMode(ALARMLEDPIN, OUTPUT);
 	pinMode(ALARMSOUNDPIN, OUTPUT);
@@ -66,11 +66,11 @@ void setup() {
 		bState[i] = btn_up;
 	}
 
-	if (digitalRead(BUTTON_OK) == LOW)
+	if (digitalRead(BUTTON_D) == LOW)
 	{
 		pinMode(RESETLEDPIN, OUTPUT);
 		unsigned long timer = millis();
-		while (digitalRead(BUTTON_OK) == LOW)
+		while (digitalRead(BUTTON_D) == LOW)
 		{
 			digitalWrite(RESETLEDPIN, HIGH); // turn the LED on (HIGH is the voltage level)
 			delay(50); // wait for a second

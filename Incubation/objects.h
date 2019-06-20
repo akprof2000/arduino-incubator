@@ -20,9 +20,9 @@
 #include <DallasTemperature.h>
 
 
-const	Bounce pinbounced0 = Bounce(BUTTON_OK, INTERVAL);
-const	Bounce pinbounced1 = Bounce(BUTTON_P, INTERVAL);
-const   Bounce pinbounced2 = Bounce(BUTTON_M, INTERVAL);
+const	Bounce pinbounced0 = Bounce(BUTTON_L, INTERVAL);
+const	Bounce pinbounced1 = Bounce(BUTTON_U, INTERVAL);
+const   Bounce pinbounced2 = Bounce(BUTTON_R, INTERVAL);
 extern  Bounce bouncer[3];
 extern  LiquidCrystalRus lcd;
 extern  LCDAdjustments adjustments;

@@ -9,67 +9,68 @@
 #include "WProgram.h"
 #endif
 
-#define BUTTON_OK A14
-#define BUTTON_M A15
-#define BUTTON_P A13
-      
-constexpr auto RESETLEDPIN = 35;
-constexpr auto ALARMLEDPIN = 35;
-constexpr auto ALARMSOUNDPIN = 33;
+#define BUTTON_L A14
+#define BUTTON_R A15
+#define BUTTON_U A13
+#define BUTTON_D A12
+
+constexpr auto RESETLEDPIN = 5;
+constexpr auto ALARMLEDPIN = 5;
+constexpr auto ALARMSOUNDPIN = 6;
 
 
 #define DOOREPIN A10
 
-constexpr auto TRAYLEFTPIN = 39;
-constexpr auto TRAYRIGHTPIN = 37;
-constexpr auto TRAYCENTERPIN = 5;
+constexpr auto TRAYLEFTPIN = 17;
+constexpr auto TRAYRIGHTPIN = 18;
+constexpr auto TRAYCENTERPIN = A11;
 
 constexpr auto HEATCONTROL = 2;
 
 constexpr auto PEEKVALUE = 5000;
 constexpr auto PEEKDEV = 100;
 
-constexpr auto FANPIN = 41;
-constexpr auto COOLERPIN = 43;
+constexpr auto FANPIN = 3;
+constexpr auto COOLERPIN = 4;
 
 constexpr auto NEEDCHANGEPIN = true;
 constexpr auto ROTATEVENT = 90000;
 constexpr auto INTERVAL = 9;
 constexpr auto PUSHINTERVAL = 1000;
-#define PROGRESSINT 300
-#define SCROLLDELAY 50
-#define DISPLAYINTERVAL 10000
-#define MENUEXIT 60000
-#define BLINKINTERVAL 500
-#define RESETINTERVAL 5000
-#define ERRORINTERVAL 500
-#define REFRESHDATA 1000
-#define VENTDEFROTATE 127
-#define SCROLLSPEED 250
+constexpr auto PROGRESSINT = 300;
+constexpr auto SCROLLDELAY = 50;
+constexpr auto DISPLAYINTERVAL = 10000;
+constexpr auto MENUEXIT = 60000;
+constexpr auto BLINKINTERVAL = 500;
+constexpr auto RESETINTERVAL = 5000;
+constexpr auto ERRORINTERVAL = 500;
+constexpr auto REFRESHDATA = 1000;
+constexpr auto VENTDEFROTATE = 127;
+constexpr auto SCROLLSPEED = 250;
 
-#define WAITAFTEREVENT 180000
-#define WAITOPENDOOR 180000
+constexpr auto WAITAFTEREVENT = 180000;
+constexpr auto WAITOPENDOOR = 180000;
 
-#define BASETEMP 30
-#define BASEHUM 45
+constexpr auto BASETEMP = 30;
+constexpr auto BASEHUM = 45;
 
-#define LCDCOLS 16
-#define LCDROWS 2
+constexpr auto LCDCOLS = 16;
+constexpr auto LCDROWS = 2;
 
-#define BRITHPIN 45
-#define CONTRPIN 6
+constexpr auto BRITHPIN = 7;
+constexpr auto CONTRPIN = 6;
 
-#define LCDRS 13
-#define LCDE 12
-#define LCDD4 8
-#define LCDD5 11 
-#define LCDD6 9
-#define LCDD7 10
+constexpr auto LCDRS = 13;
+constexpr auto LCDE = 12;
+constexpr auto LCDD4 = 11;
+constexpr auto LCDD5 = 10 ;
+constexpr auto LCDD6 = 9;
+constexpr auto LCDD7 = 8;
 
-#define COEFF 11.29158979063621
+constexpr auto COEFF = 11.29158979063621;
 
 
-#define ONE_WIRE_BUS 2
-#define TEMPERATURE_PRECISION 11
+constexpr auto ONE_WIRE_BUS = 2;
+constexpr auto TEMPERATURE_PRECISION = 11;
 
 #endif
