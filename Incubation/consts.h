@@ -13,29 +13,29 @@
 #define BUTTON_M A15
 #define BUTTON_P A13
       
-#define RESETLEDPIN 35
-#define ALARMLEDPIN 35
-#define ALARMSOUNDPIN 33
+constexpr auto RESETLEDPIN = 35;
+constexpr auto ALARMLEDPIN = 35;
+constexpr auto ALARMSOUNDPIN = 33;
 
 
 #define DOOREPIN A10
 
-#define TRAYLEFTPIN 39
-#define TRAYRIGHTPIN 37
+constexpr auto TRAYLEFTPIN = 39;
+constexpr auto TRAYRIGHTPIN = 37;
 constexpr auto TRAYCENTERPIN = 5;
 
-#define HEATCONTROL 2
+constexpr auto HEATCONTROL = 2;
 
-#define PEEKVALUE 5000
-#define PEEKDEV 100
+constexpr auto PEEKVALUE = 5000;
+constexpr auto PEEKDEV = 100;
 
-#define FANPIN 41
-#define COOLERPIN 43
+constexpr auto FANPIN = 41;
+constexpr auto COOLERPIN = 43;
 
-#define NEEDCHANGEPIN true
-#define ROTATEVENT 90000
-#define INTERVAL 9
-#define PUSHINTERVAL 1000
+constexpr auto NEEDCHANGEPIN = true;
+constexpr auto ROTATEVENT = 90000;
+constexpr auto INTERVAL = 9;
+constexpr auto PUSHINTERVAL = 1000;
 #define PROGRESSINT 300
 #define SCROLLDELAY 50
 #define DISPLAYINTERVAL 10000
