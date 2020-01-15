@@ -17,7 +17,7 @@ void NodeManagerClass::work()
 {
 
 	
-	for (byte i = 0; i < 3; i++)
+	for (byte i = 0; i < 4; i++)
 	{
 		if (bouncer[i].update())
 		{
@@ -54,7 +54,7 @@ void NodeManagerClass::work()
 	if (bState[0] == btn_down)
 		Alerting.BlockSound();
 
-	if (bState[0] == btn_push)
+	if (bState[4] == btn_down)
 	{	
 		
 
@@ -66,12 +66,11 @@ void NodeManagerClass::work()
 				_show = false;
 				
 				_currentnode = _currentnode-> getOwner();
-				bPressTime[0] = millis();
-				bState[0] = btn_down;
-				appl[0] = true;
+				bPressTime[4] = millis();				
+				appl[4] = true;
 			}
 		}
-		else if (!appl[0])
+		else if (!appl[4])
 		{
 			_show = false;						
 			if (_status)
@@ -88,7 +87,7 @@ void NodeManagerClass::work()
 				Menuconfig.clearmenu();
 				_status = true; 
 			}
-			appl[0] = true;
+			appl[4] = true;
 		}
 		
 	}

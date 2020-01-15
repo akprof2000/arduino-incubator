@@ -23,7 +23,8 @@
 const	Bounce pinbounced0 = Bounce(BUTTON_L, INTERVAL);
 const	Bounce pinbounced1 = Bounce(BUTTON_U, INTERVAL);
 const   Bounce pinbounced2 = Bounce(BUTTON_R, INTERVAL);
-extern  Bounce bouncer[3];
+const   Bounce pinbounced3 = Bounce(BUTTON_D, INTERVAL);
+extern  Bounce bouncer[4];
 extern  LiquidCrystalRus lcd;
 extern  LCDAdjustments adjustments;
 
@@ -33,9 +34,9 @@ extern  DallasTemperature sensors;
 
 
 extern bool toroot;
-extern ButtonState bState[3];
-extern bool appl[3];
-extern unsigned long bPressTime[3];
+extern ButtonState bState[4];
+extern bool appl[4];
+extern unsigned long bPressTime[4];
 
 extern byte minheat;
 extern byte minhum;

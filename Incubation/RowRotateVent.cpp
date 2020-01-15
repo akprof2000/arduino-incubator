@@ -172,7 +172,7 @@ void RowRotateVentClass::refresh()
 		if (_shift == 1)
 		{
 			float val = _rotate;
-			if (scrollBar(0, 24, 1, val))
+			if (scrollBar(0, 50, 1, val))
 			{
 				_rotate = val;
 			}
@@ -180,7 +180,7 @@ void RowRotateVentClass::refresh()
 		else if (_shift == 2)
 		{
 			float val = _vent;
-			if (scrollBar(0, 24, 1, val))
+			if (scrollBar(0, 150, 1, val))
 			{
 				_vent = val;
 

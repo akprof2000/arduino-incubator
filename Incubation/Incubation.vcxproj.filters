@@ -69,9 +69,6 @@
     <ClInclude Include="MainNodeBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RowCooling.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NodeChoseStart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -159,9 +156,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainNodeBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RowCooling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NodeChoseStart.cpp">

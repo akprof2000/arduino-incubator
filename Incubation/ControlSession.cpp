@@ -13,32 +13,18 @@
 timeshift ControlSessionClass::calculate(byte count)
 {
 	timeshift ts;
-
-	for (size_t i = 0; i < 24; i++)
-	{
-		ts.min[i] = -1;
-	}
-
-	float sh = 24.0 / count;
+	float sh = (24 * 60) / count;
 	float ind = sh;
 
-	for (;;)
+	for (size_t i = 0; i < 24 * 60; i++)
 	{
-		if (ind > 25)
-			break;
-
-		if (ind >= 24)
+		ts.min[i] = false;
+		if (ind = i)
 		{
-			ts.min[0] = 60.0 * (ind - (int)ind);
-
+			ts.min[i] = true;
+			ind = ind + sh;
 		}
-		else
-		{
-			ts.min[(int)ind] = 60.0 * (ind - (int)ind);
-		}
-		ind = ind + sh;
 	}
-
 	return ts;
 }
 
@@ -48,7 +34,7 @@ bool ControlSessionClass::compare(timeshift data)
 		return false;
 
 
-	if (data.min[hour()] == minute())
+	if (data.min[hour() * minute()] == true)
 	{
 		return true;
 	}
@@ -70,44 +56,8 @@ void ControlSessionClass::init()
 	else
 		_delayvent.skip = true;
 
-	if (currentRow.GetCoolCount() > 0)
-		_delayfreze = calculate(currentRow.GetCoolCount());
-	else
-		_delayfreze.skip = true;
-
-	if (_delayfreze.skip == false && _delayvent.skip == false)
-	{
-		_delayvent = calculate(currentRow.GetCoolCount() + currentRow.GetVentCount());
-		_delayfreze = calculate(currentRow.GetCoolCount() + currentRow.GetVentCount());
-
-		float dx = currentRow.GetVentCount() / (currentRow.GetCoolCount() + currentRow.GetVentCount());
-		float dy = 1 - dx;
-		float s = 0;
-
-		for (size_t i = 0; i < 24; i++)
-		{
-			if (_delayvent.min[i] > -1)
-			{
-				if (s >= 0)
-				{
-					_delayfreze.min[i] = -1;					
-					s = s - dx;
-				}
-				else
-				{
-					_delayvent.min[i] = -1;
-					s = s + dy;
-				}
-			}
-
-		}
-
-	}
-
-
 	_timing = millis();
 	_rotchange = false;
-
 	_starting = true;
 }
 
@@ -131,7 +81,7 @@ void ControlSessionClass::refresh()
 		Alerting.SetWaitAllert();
 		if (door.read() == HIGH)
 		{
-			
+
 			_timing = millis();
 			Hum = false;
 			Heet = false;
@@ -155,7 +105,7 @@ void ControlSessionClass::refresh()
 		}
 		else
 		{
-			
+
 			Hum = true;
 			Heet = true;
 			StatusInfo.AddStatus(so_door, 0);
@@ -188,7 +138,6 @@ void ControlSessionClass::refresh()
 	{
 		if (abs(millis() - _timing) > WAITOPENDOOR)
 		{
-			
 			_timing = millis();
 			Alerting.Start(at_connect);
 		}
@@ -256,39 +205,6 @@ void ControlSessionClass::refresh()
 		_ventelate = true;
 		Hum = false;
 	}
-
-	
-	if (_freeze)
-	{
-		currentSetTemp = currentRow.GetCoolHeat();
-
-		if (abs(millis() - _timefreze) > (long)currentRow.GetCoolTime() * 60 * 1000)
-		{
-			_timefreze = 0;
-			Hum = true;
-			_wait = WAITAFTEREVENT;
-			_timmer = millis();
-			_freeze = false;
-			StatusInfo.AddStatus(so_blow, 0);
-			VentilationControl.SetSpeed(0, fu_vent);
-			Alerting.SetWaitAllert();
-		}
-		else
-		{
-			VentilationControl.SetSpeed(VENTDEFROTATE, fu_vent);
-		}
-	}
-	else if (compare(_delayfreze))
-	{
-		Alerting.SetWaitAllert();
-		StatusInfo.AddStatus(so_blow, VENTDEFROTATE);		
-		VentilationControl.SetSpeed(VENTDEFROTATE, fu_vent);
-		_timefreze = millis();
-		_freeze = true;
-		Hum = false;
-		
-	}
-
 }
 
 

@@ -4,10 +4,10 @@
 
 #include "objects.h"
 
-bool appl[3];
+bool appl[4];
 bool toroot;
-ButtonState bState[3];
-unsigned long bPressTime[3];
+ButtonState bState[4];
+unsigned long bPressTime[4];
 byte minheat;
 byte minhum;
 
@@ -26,7 +26,7 @@ byte started;
 byte timerUpdated;
 
 bool allertEnable;
-Bounce bouncer[3] = { pinbounced0, pinbounced1, pinbounced2 };
+Bounce bouncer[4] = { pinbounced0, pinbounced1, pinbounced2, pinbounced3 };
 LiquidCrystalRus lcd(LCDRS, LCDE, LCDD4, LCDD5, LCDD6, LCDD7);
 LCDAdjustments adjustments;
 DataRowClass currentRow;

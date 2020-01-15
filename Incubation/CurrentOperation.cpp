@@ -17,10 +17,7 @@ void CurrentOperationClass::show()
 	Serial.print(gettextprj(212));
 	Serial.println(_data);
 
-	Serial3.print(gettextprj(49));
-	Serial3.print(gettextprj(212));
-	Serial3.println(_data);
-
+	
 	baseShowData(2, gettextprj(49), _data);
 	pos = 0;
 	if (StrLength(_data) > LCDCOLS)

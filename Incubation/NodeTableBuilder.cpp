@@ -10,9 +10,9 @@
 #include "RowDayCount.h"
 #include "RowTHVal.h"
 #include "RowRotateVent.h"
-#include "RowCooling.h"
 
-#define MENULENGTHT 5
+
+#define MENULENGTHT 4
 
 
 BaseNodeClass * NodeTableBuilderClass::getInner()
@@ -54,28 +54,18 @@ BaseNodeClass * NodeTableBuilderClass::getInner()
 	mt->setNext(mr);
 	mr->setPrev(mt);
 
-	RowCoolingClass *mf = new RowCoolingClass();
-	mf->type = type;
-	mf->type1 = type1;
-
-	_listMenu[3] = (mf);
-	mf->setOwner(this);
-	mr->setNext(mf);
-	mf->setPrev(mr);
-
-
 	NodeClass *me = new NodeClass();
-	_listMenu[4] = (me);
+	_listMenu[3] = (me);
 
+	mr->setNext(me);
 	me->Text[0] = 253;
 
 	me->setOwner(this);
 	me->setInner(this);
-	mf->setNext(me);
 	me->setNext(mp);
-	me->setPrev(mf);
+	me->setPrev(mr);
 	mp->setPrev(me);
-
+	
 	return mp;
 }
 
