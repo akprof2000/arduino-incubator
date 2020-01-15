@@ -14,7 +14,7 @@
 
 struct timeshift
 {
-	bool min[24 * 60];
+	int count;
 	bool skip;
 };
 

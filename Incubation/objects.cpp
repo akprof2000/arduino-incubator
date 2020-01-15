@@ -27,6 +27,7 @@ byte timerUpdated;
 
 bool allertEnable;
 Bounce bouncer[4] = { pinbounced0, pinbounced1, pinbounced2, pinbounced3 };
+
 LiquidCrystalRus lcd(LCDRS, LCDE, LCDD4, LCDD5, LCDD6, LCDD7);
 LCDAdjustments adjustments;
 DataRowClass currentRow;

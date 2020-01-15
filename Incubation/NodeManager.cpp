@@ -11,12 +11,11 @@ NodeManagerClass NodeManager;
 void NodeManagerClass::init()
 {
 	_currentnode = Menuconfig.initstatus();
+	_mainnode = _currentnode;
 }
 
 void NodeManagerClass::work()
 {
-
-	
 	for (byte i = 0; i < 4; i++)
 	{
 		if (bouncer[i].update())
@@ -54,7 +53,7 @@ void NodeManagerClass::work()
 	if (bState[0] == btn_down)
 		Alerting.BlockSound();
 
-	if (bState[4] == btn_down)
+	if (bState[3] == btn_down)
 	{	
 		
 
@@ -66,11 +65,11 @@ void NodeManagerClass::work()
 				_show = false;
 				
 				_currentnode = _currentnode-> getOwner();
-				bPressTime[4] = millis();				
-				appl[4] = true;
+				bPressTime[3] = millis();				
+				appl[3] = true;
 			}
 		}
-		else if (!appl[4])
+		else if (!appl[3])
 		{
 			_show = false;						
 			if (_status)
@@ -87,7 +86,7 @@ void NodeManagerClass::work()
 				Menuconfig.clearmenu();
 				_status = true; 
 			}
-			appl[4] = true;
+			appl[3] = true;
 		}
 		
 	}
@@ -182,6 +181,14 @@ void NodeManagerClass::work()
 	{
 		if (abs(millis() - _timing) > DISPLAYINTERVAL)
 		{
+			_show = false;
+		}
+
+		if (abs(millis() - _timing) > ENDINTERVAL)
+		{
+			_currentnode = _mainnode;
+			_show = false;
+			/*
 			if (_currentnode->autoinner)
 			{
 				if (_currentnode->getInner() != NULL)
@@ -192,7 +199,7 @@ void NodeManagerClass::work()
 						_show = false;
 					}
 				}
-			}			
+			}	*/		
 		}
 	}
 	_currentnode -> refresh();

@@ -40,6 +40,7 @@ constexpr auto PUSHINTERVAL = 1000;
 constexpr auto PROGRESSINT = 300;
 constexpr auto SCROLLDELAY = 50;
 constexpr auto DISPLAYINTERVAL = 10000;
+constexpr auto ENDINTERVAL = 1000 * 5 * 60;
 constexpr auto MENUEXIT = 60000;
 constexpr auto BLINKINTERVAL = 500;
 constexpr auto RESETINTERVAL = 5000;

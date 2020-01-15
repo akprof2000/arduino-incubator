@@ -17,12 +17,15 @@ void CurrentOperationClass::show()
 	Serial.print(gettextprj(212));
 	Serial.println(_data);
 
-	
-	baseShowData(2, gettextprj(49), _data);
 	pos = 0;
 	if (StrLength(_data) > LCDCOLS)
 	{
+		baseShowData(2, gettextprj(49), "");
 		_data = gettextprj(110) + _data + gettextprj(110);
+	}
+	else
+	{
+		baseShowData(2, gettextprj(49), _data);
 	}
 
 }

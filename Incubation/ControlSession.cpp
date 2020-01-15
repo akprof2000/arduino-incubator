@@ -13,18 +13,7 @@
 timeshift ControlSessionClass::calculate(byte count)
 {
 	timeshift ts;
-	float sh = (24 * 60) / count;
-	float ind = sh;
-
-	for (size_t i = 0; i < 24 * 60; i++)
-	{
-		ts.min[i] = false;
-		if (ind = i)
-		{
-			ts.min[i] = true;
-			ind = ind + sh;
-		}
-	}
+	ts.count = (24 * 60) / count;
 	return ts;
 }
 
@@ -34,7 +23,7 @@ bool ControlSessionClass::compare(timeshift data)
 		return false;
 
 
-	if (data.min[hour() * minute()] == true)
+	if ((hour() + 1) * (minute() + 1) % data.count == 0)
 	{
 		return true;
 	}
@@ -120,15 +109,13 @@ void ControlSessionClass::refresh()
 
 	if (center.update())
 	{
-		if (center.read() == LOW)
+		if (door.read() == HIGH)
 		{
-			if (door.read() == HIGH)
-			{
-				StatusInfo.AddStatus(so_cent, 0);
-				digitalWrite(TRAYLEFTPIN, LOW);
-				digitalWrite(TRAYRIGHTPIN, LOW);
-			}
+			StatusInfo.AddStatus(so_cent, 0);
+			digitalWrite(TRAYLEFTPIN, LOW);
+			digitalWrite(TRAYRIGHTPIN, LOW);
 		}
+
 	}
 
 
@@ -141,6 +128,12 @@ void ControlSessionClass::refresh()
 			_timing = millis();
 			Alerting.Start(at_connect);
 		}
+
+		if (Hum & Heet == true)
+		{
+			_starting = true;
+		}
+
 		return;
 	}
 

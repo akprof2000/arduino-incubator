@@ -79,7 +79,7 @@ void setup() {
 				EEPROM.write(i, 0);
 			}
 
-			currentRow.writeRow(0, 0, 11, 37.9, 66, 4, 0, 0);
+			currentRow.writeRow(0, 0, 11, 37.9, 66, 4, 20, 30);
 			currentRow.save();
 
 			currentRow.writeRow(0, 1, 6, 37.3, 53, 4, 2, 5);
@@ -229,7 +229,7 @@ void setup() {
 
 	adjustments.setup(BRITHPIN, CONTRPIN, bright, 100 - contr);
 
-
+	
 
 	NodeManager.init();
 	currentRow.init(currentPeriod, currentTable);
@@ -237,7 +237,7 @@ void setup() {
 	ControlSession.init();
 
 	lcd.clear();
-
+	
 }
 
 int freeRam() {
@@ -252,7 +252,7 @@ byte sec = 0;
 
 void loop() {
 	
-	/*
+	
 	if (abs(millis() - timer) > REFRESHDATA)
 	{
 		currentTemp = myHumidity.readTemperature();
@@ -332,29 +332,22 @@ void loop() {
 
 
 	Alerting.refresh();
-	*/
+	
 	NodeManager.work();
 	
-	
 
-	
-	/*
-		if (second() % 10 == 0 && second() != sec)
-		{
-			check = !check;
-			sec = second();
-		}
-		if (check)
-		{
 
-			lcd.setCursor(0, 1);
-			lcd.print(freeRam());
-
-			lcd.setCursor(0, 1);
-			lcd.print(digitalRead(A10));
-			lcd.setCursor(0, 0);
-			lcd.print(digitalRead(A11));
-		}*/
+		//if (second() % 10 == 0 && second() != sec)
+		//{
+		//	check = !check;
+		//	sec = second();
+		//}
+		//if (check)
+		//{
+		//
+		//	lcd.setCursor(0, 1);
+		//	lcd.print(freeRam());
+		//}
 }
 
 

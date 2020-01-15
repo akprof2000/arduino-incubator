@@ -188,11 +188,11 @@ String gettextprj(byte data)
 	case 203:
 		return F(", час: ");
 	case 204:
-		return F("Тeмпература: Установленая: ");
+		return F("Температура: Установленная: ");
 	case 205:
 		return F(", текущая: ");
 	case 206:
-		return F("Влажность: Установленая: ");
+		return F("Влажность: Установленная: ");
 
 	case 207:
 		return F("Температура: ");

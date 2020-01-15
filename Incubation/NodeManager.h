@@ -18,6 +18,7 @@ class NodeManagerClass
 	 int test;
 	 bool _status = true;
 	 BaseNodeClass *_currentnode;	 
+	 BaseNodeClass* _mainnode;
 	 unsigned long _timing;
 	 unsigned long _timingsleep;
 	 bool _show = false;
