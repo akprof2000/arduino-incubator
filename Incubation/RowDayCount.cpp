@@ -121,8 +121,6 @@ void RowDayCountClass::refresh()
 			if (scrollBar(0, 30, 1, val))
 			{
 				_day = val;
-
-
 			}
 		}
 

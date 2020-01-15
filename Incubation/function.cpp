@@ -304,12 +304,8 @@ void baseShowData(int len, String str1, String str2)
 	for (byte i = 0; i < len; i++)
 	{
 		String str = i == 0 ? str1 : str2;
-		byte l = (LCDCOLS - StrLength(str)) >> 1;
-		/*		if (l != 0 && l % 2 == 0)
-				{
-					l--;
-				}
-			*/	lcd.setCursor(l, i);
+		int l = (LCDCOLS - StrLength(str)) >> 1;
+		lcd.setCursor(l, i);
 		lcd.print(str);
 	}
 }
