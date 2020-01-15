@@ -30,6 +30,7 @@ void setup() {
 	pinMode(BUTTON_U, INPUT_PULLUP);
 	pinMode(BUTTON_R, INPUT_PULLUP);
 	pinMode(BUTTON_L, INPUT_PULLUP);
+	pinMode(BUTTON_D, INPUT_PULLUP);
 	lcd.begin(LCDCOLS, LCDROWS);  // initializes the 16x2 LCD
 	pinMode(ALARMLEDPIN, OUTPUT);
 	pinMode(ALARMSOUNDPIN, OUTPUT);

@@ -53,7 +53,7 @@ void NodeManagerClass::work()
 	if (bState[0] == btn_down)
 		Alerting.BlockSound();
 
-	if (bState[3] == btn_down)
+	if (bState[3] == btn_down && appl[3] == false)
 	{	
 		
 
