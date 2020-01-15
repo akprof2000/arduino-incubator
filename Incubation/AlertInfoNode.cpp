@@ -18,11 +18,15 @@ void AlertInfoNodeClass::show()
 	Serial.print(gettextprj(212));
 	Serial.println(_data);
 
-	Serial3.print(gettextprj(50));
-	Serial3.print(gettextprj(212));
-	Serial3.println(_data);
+	if (StrLength(_data) <= LCDCOLS)
+	{
+		baseShowData(2, gettextprj(50), _data);
+	}
+	else
+	{
+		baseShowData(2, gettextprj(50), "");
+	}
 
-	baseShowData(2, gettextprj(50), _data);
 	pos = 0;
 	if (StrLength(_data) > LCDCOLS)
 	{
@@ -30,9 +34,6 @@ void AlertInfoNodeClass::show()
 	}
 
 }
-
-
-
 
 void AlertInfoNodeClass::refresh()
 {
@@ -47,7 +48,7 @@ void AlertInfoNodeClass::printLine(int refreshMSeconds) {
 	if (abs(millis() - _time) > refreshMSeconds) {
 		int len = (int)_data.length();
 
-		const char *message = _data.c_str();
+		const char* message = _data.c_str();
 
 		_time = millis();
 		lcd.setCursor(0, 1);

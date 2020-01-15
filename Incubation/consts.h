@@ -39,7 +39,7 @@ constexpr auto INTERVAL = 9;
 constexpr auto PUSHINTERVAL = 1000;
 constexpr auto PROGRESSINT = 300;
 constexpr auto SCROLLDELAY = 50;
-constexpr auto DISPLAYINTERVAL = 10000;
+constexpr auto DISPLAYINTERVAL = 300000;
 constexpr auto MENUEXIT = 60000;
 constexpr auto BLINKINTERVAL = 500;
 constexpr auto RESETINTERVAL = 5000;
@@ -70,7 +70,7 @@ constexpr auto LCDD7 = 8;
 constexpr auto COEFF = 11.29158979063621;
 
 
-constexpr auto ONE_WIRE_BUS = 2;
+constexpr auto ONE_WIRE_BUS = 19;
 constexpr auto TEMPERATURE_PRECISION = 11;
 
 #endif

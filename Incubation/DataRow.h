@@ -18,13 +18,10 @@ private:
 	byte _rotation;
 	byte _ventilatecount;
 	byte _ventilatetime;
-	byte _cooling;
 	byte _period;
 	byte _gperiod;
 	byte _gtable;
 	byte _from;
-	byte _coolingtime;
-	byte _coolingheat;
 
 public:
 	byte GetFrom();
@@ -34,19 +31,13 @@ public:
 	byte GetRotate() { return _rotation; };
 	byte GetVentCount() { return _ventilatecount; };
 	byte GetVentTime() { return _ventilatetime; };
-	byte GetCoolTime() { return _coolingtime; };
-	byte GetCoolCount() { return _cooling; };
-	byte GetCoolHeat() { return _coolingheat; };
 	byte GetHum() { return _humidity; };
 	void SetTemp(byte temperature) { _temperature = temperature; };
-	void SetCoolCount(byte count) { _cooling = count; };
-	void SetCoolHeat(byte heat) { _coolingheat = heat; };
-	void SetCoolTime(byte time) { _coolingtime = time; };
 	void SetRotate(byte rotate) { _rotation = rotate; };
 	void SetVentCount(byte count) { _ventilatecount = count; };
 	void SetVentTime(byte time) { _ventilatetime= time; };
 	void SetHum(byte humidity) { _humidity = humidity; };
-	void writeRow(byte tbl, byte period, byte day, float  temp, byte hum, byte rot, byte vent, byte ventt, byte cool, byte coolt, byte coolh);
+	void writeRow(byte tbl, byte period, byte day, float  temp, byte hum, byte rot, byte vent, byte ventt);
 
 	void save();
 	void init(int period, int table);

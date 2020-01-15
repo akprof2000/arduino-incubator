@@ -5,6 +5,27 @@
 */
 
 
+#include <Servo.h>
+#include <Wire.h>
+#include <SparkFunHTU21D.h>
+#include <YunServer.h>
+#include <YunClient.h>
+#include <Process.h>
+#include <Mailbox.h>
+#include <HttpClient.h>
+#include <FileIO.h>
+#include <Console.h>
+#include <BridgeUdp.h>
+#include <BridgeSSLClient.h>
+#include <BridgeServer.h>
+#include <BridgeClient.h>
+#include <Bridge.h>
+#include <SpacebrewYun.h>
+#include <QList.h>
+#include <OneWire.h>
+#include <LiquidCrystalRus.h>
+#include <DallasTemperature.h>
+#include <Bounce2.h>
 #include "AlertInfoNode.h"
 #include "StatusInfo.h"
 #include "ControlSession.h"
@@ -23,14 +44,19 @@ unsigned long timer = 0;
 
 void setup() {
 	Serial.begin(9600);
+	Serial.println(F("Start incubation project full log"));
+	
+/*
 	Serial1.begin(9600);
+	Serial1.println(F("Start incubation project log events"));
+
 	Serial2.begin(9600);
 	Serial3.begin(9600);
-	Serial.println(F("Start incubation project full log"));
-	Serial1.println(F("Start incubation project log events"));
+	
+	
 	Serial2.println(F("Start incubation project log alerts"));
 	Serial3.println(F("Start incubation project status log"));
-
+	*/
 
 	pinMode(BUTTON_U, INPUT_PULLUP);
 	pinMode(BUTTON_R, INPUT_PULLUP);
@@ -84,83 +110,83 @@ void setup() {
 				EEPROM.write(i, 0);
 			}
 
-			currentRow.writeRow(0, 0, 11, 37.9, 66, 4, 0, 0, 0, 0, 0);
+			currentRow.writeRow(0, 0, 11, 37.9, 66, 4, 40, 20);
 			currentRow.save();
 
-			currentRow.writeRow(0, 1, 6, 37.3, 53, 4, 2, 5, 2, 10, 35);
+			currentRow.writeRow(0, 1, 6, 37.3, 53, 4, 2, 5);
 			currentRow.save();
 
-			currentRow.writeRow(0, 2, 2, 37.3, 47, 4, 2, 20, 2, 10, 35);
+			currentRow.writeRow(0, 2, 2, 37.3, 47, 4, 2, 20);
 			currentRow.save();
 
-			currentRow.writeRow(0, 3, 2, 37.9, 66, 0, 2, 5, 0, 0, 0);
-			currentRow.save();
-
-
-			currentRow.writeRow(1, 0, 8, 38, 70, 4, 0, 0, 0, 0, 0);
-			currentRow.save();
-
-			currentRow.writeRow(1, 1, 4, 37.5, 60, 4, 1, 5, 2, 10, 35);
-			currentRow.save();
-
-			currentRow.writeRow(1, 2, 10, 37.2, 56, 4, 2, 20, 2, 10, 35);
-			currentRow.save();
-
-			currentRow.writeRow(1, 3, 3, 37, 70, 0, 1, 10, 0, 0, 0);
+			currentRow.writeRow(0, 3, 2, 37.9, 66, 0, 2, 5);
 			currentRow.save();
 
 
-
-			currentRow.writeRow(2, 0, 16, 38, 60, 4, 1, 5, 0, 0, 0);
+			currentRow.writeRow(1, 0, 8, 38, 70, 4, 0, 0);
 			currentRow.save();
 
-			currentRow.writeRow(2, 1, 10, 37.5, 52, 4, 2, 20, 2, 10, 35);
+			currentRow.writeRow(1, 1, 4, 37.5, 60, 4, 1, 5);
 			currentRow.save();
 
-			currentRow.writeRow(2, 2, 2, 37.2, 70, 0, 1, 10, 2, 10, 35);
+			currentRow.writeRow(1, 2, 10, 37.2, 56, 4, 2, 20);
 			currentRow.save();
 
-			currentRow.writeRow(2, 3, 2, 37, 70, 0, 0, 0, 0, 0, 0);
+			currentRow.writeRow(1, 3, 3, 37, 70, 0, 1, 10);
 			currentRow.save();
 
 
 
-			currentRow.writeRow(3, 0, 3, 37.8, 55, 4, 0, 0, 0, 0, 0);
+			currentRow.writeRow(2, 0, 16, 38, 60, 4, 1, 5);
 			currentRow.save();
 
-			currentRow.writeRow(3, 1, 8, 37.5, 52, 4, 1, 5, 2, 10, 35);
+			currentRow.writeRow(2, 1, 10, 37.5, 52, 4, 2, 20);
 			currentRow.save();
 
-			currentRow.writeRow(3, 2, 10, 37.2, 52, 4, 3, 20, 2, 10, 35);
+			currentRow.writeRow(2, 2, 2, 37.2, 70, 0, 1, 10);
 			currentRow.save();
 
-			currentRow.writeRow(3, 3, 2, 37.0, 70, 0, 1, 10, 0, 0, 0);
-			currentRow.save();
-
-
-			currentRow.writeRow(4, 0, 6, 37.8, 55, 4, 0, 0, 0, 0, 0);
-			currentRow.save();
-
-			currentRow.writeRow(4, 1, 8, 37.5, 52, 4, 1, 5, 2, 10, 35);
-			currentRow.save();
-
-			currentRow.writeRow(4, 2, 13, 37.2, 52, 4, 2, 20, 2, 10, 35);
-			currentRow.save();
-
-			currentRow.writeRow(4, 3, 2, 37, 70, 0, 1, 10, 0, 0, 0);
+			currentRow.writeRow(2, 3, 2, 37, 70, 0, 0, 0);
 			currentRow.save();
 
 
-			currentRow.writeRow(5, 0, 12, 37.6, 58, 4, 1, 5, 0, 0, 0);
+
+			currentRow.writeRow(3, 0, 3, 37.8, 55, 4, 0, 0);
 			currentRow.save();
 
-			currentRow.writeRow(5, 1, 4, 37.3, 53, 4, 1, 20, 2, 10, 35);
+			currentRow.writeRow(3, 1, 8, 37.5, 52, 4, 1, 5);
 			currentRow.save();
 
-			currentRow.writeRow(5, 2, 2, 37.2, 47, 0, 0, 0, 2, 10, 35);
+			currentRow.writeRow(3, 2, 10, 37.2, 52, 4, 3, 20);
 			currentRow.save();
 
-			currentRow.writeRow(5, 3, 2, 37, 66, 0, 0, 0, 0, 0, 0);
+			currentRow.writeRow(3, 3, 2, 37.0, 70, 0, 1, 10);
+			currentRow.save();
+
+
+			currentRow.writeRow(4, 0, 6, 37.8, 55, 4, 0, 0);
+			currentRow.save();
+
+			currentRow.writeRow(4, 1, 8, 37.5, 52, 4, 1, 5);
+			currentRow.save();
+
+			currentRow.writeRow(4, 2, 13, 37.2, 52, 4, 2, 20);
+			currentRow.save();
+
+			currentRow.writeRow(4, 3, 2, 37, 70, 0, 1, 10);
+			currentRow.save();
+
+
+			currentRow.writeRow(5, 0, 12, 37.6, 58, 4, 1, 5);
+			currentRow.save();
+
+			currentRow.writeRow(5, 1, 4, 37.3, 53, 4, 1, 20);
+			currentRow.save();
+
+			currentRow.writeRow(5, 2, 2, 37.2, 47, 0, 0, 0);
+			currentRow.save();
+
+			currentRow.writeRow(5, 3, 2, 37, 66, 0, 0, 0);
 			currentRow.save();
 
 
@@ -260,8 +286,6 @@ byte sec = 0;
 
 
 void loop() {
-
-
 	if (abs(millis() - timer) > REFRESHDATA)
 	{
 		currentTemp = myHumidity.readTemperature();
@@ -269,29 +293,7 @@ void loop() {
 		timer = millis();
 	}
 
-	/*
-		currentRow = new DataRowClass();
-		for (size_t i = 0; i < 4; i++)
-		{
 
-			currentRow->init(i, 0);
-			lcd.print(currentRow->GetDay());
-			lcd.print(" ");
-			lcd.print(currentRow->GetTemp());
-			lcd.print(" ");
-			lcd.print(currentRow->GetHum());
-			lcd.print(" ");
-			lcd.print(currentRow->GetRotate());
-			lcd.print(" ");
-			lcd.print(currentRow->GetVentCount());
-			lcd.print(" ");
-			lcd.print(currentRow->GetCoolCount());
-
-			delay(500);
-			lcd.clear();
-
-		}
-		*/
 	if (hour() != currentHour)
 	{
 		currentHour = hour();
@@ -343,9 +345,6 @@ void loop() {
 		}
 	}
 
-	
-
-
 	ControlSession.refresh();
 
 	if (ControlSession.Hum || ControlSession.Heet)
@@ -363,14 +362,11 @@ void loop() {
 	else
 		HumidityControl.wait();
 
-
-
-
 	Alerting.refresh();
 	NodeManager.work();
-	
 
 	/*
+	
 		if (second() % 10 == 0 && second() != sec)
 		{
 			check = !check;

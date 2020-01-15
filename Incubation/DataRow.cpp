@@ -23,7 +23,7 @@ byte DataRowClass::GetFrom()
 }
 
 
-void DataRowClass::writeRow(byte tbl, byte period, byte day, float temp, byte hum, byte rot, byte vent, byte ventt, byte cool, byte coolt, byte coolh)
+void DataRowClass::writeRow(byte tbl, byte period, byte day, float temp, byte hum, byte rot, byte vent, byte ventt)
 {
 	_gperiod = period;
 	_gtable = tbl;
@@ -34,10 +34,6 @@ void DataRowClass::writeRow(byte tbl, byte period, byte day, float temp, byte hu
 	_rotation = rot;
 	_ventilatecount = vent;
 	_ventilatetime = ventt;
-	_cooling = cool;
-	_coolingheat = coolh;
-	_coolingtime = coolt;
-
 }
 
 void DataRowClass::save()
@@ -56,7 +52,6 @@ void DataRowClass::save()
 			EEPROM.update(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 1, _temperature);
 			break;
 		case 2:
-
 			EEPROM.update(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 2, _humidity);
 			break;
 		case 3:
@@ -68,16 +63,6 @@ void DataRowClass::save()
 		case 5:
 			EEPROM.update(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 5, _ventilatetime);
 			break;
-		case 6:
-			EEPROM.update(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 6, _cooling);
-			break;
-		case 7:
-			EEPROM.update(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 7, _coolingheat);
-			break;
-		case 8:
-			EEPROM.update(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 8, _coolingtime);
-			break;
-
 		default:
 			break;
 		}
@@ -114,16 +99,6 @@ void DataRowClass::init(int period, int table)
 		case 5:
 			_ventilatetime = EEPROM.read(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 5);
 			break;
-		case 6:
-			_cooling = EEPROM.read(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 6);
-			break;
-		case 7:
-			_coolingheat = EEPROM.read(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 7);
-			break;
-		case 8:
-			_coolingtime = EEPROM.read(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 8);
-			break;
-
 		default:
 			break;
 		}

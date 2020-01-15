@@ -15,7 +15,7 @@
 struct timeshift
 {
 	bool skip;
-	int min[24];		
+	int count;
 };
 
 
@@ -26,7 +26,6 @@ class ControlSessionClass
 	Bounce door = Bounce(DOOREPIN, INTERVAL);
 	Bounce center = Bounce(TRAYCENTERPIN, INTERVAL);
 	bool _ventelate = false;
-	bool _freeze = false;
 	bool _rotate = false;
 	bool _rotchange = false;
 	
@@ -35,9 +34,8 @@ class ControlSessionClass
 	unsigned long  _refreshtimmer = 0;
 	unsigned long  _timerot = 0;
 	unsigned long _timevent = 0;
-	unsigned long _timefreze = 0;
+
 	timeshift _delayvent;
-	timeshift _delayfreze;
 	timeshift _rotation;
 	
 	bool _needrot = false;	

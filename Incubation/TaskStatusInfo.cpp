@@ -42,14 +42,14 @@ void TaskStatusInfoClass::show()
 	Serial.print(":");
 	Serial.println(second());
 
-	Serial3.print(gettextprj(200));
-	Serial3.print(gettextprj(12 + currentTable));
-	Serial3.print(gettextprj(201));
-	Serial3.print(currentPeriod + 1);
-	Serial3.print(gettextprj(202));
-	Serial3.print(day());
-	Serial3.print(gettextprj(203));
-	Serial3.println(hour());
+	//Serial3.print(gettextprj(200));
+	//Serial3.print(gettextprj(12 + currentTable));
+	//Serial3.print(gettextprj(201));
+	//Serial3.print(currentPeriod + 1);
+	//Serial3.print(gettextprj(202));
+	//Serial3.print(day());
+	//Serial3.print(gettextprj(203));
+	//Serial3.println(hour());
 
 }
 

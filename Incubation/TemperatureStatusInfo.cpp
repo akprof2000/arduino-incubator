@@ -21,12 +21,12 @@ void TemperatureStatusInfoClass::printTemp(byte ind)
 
 		lcd.print(tempC, 1);
 		Serial.print(tempC, 1);
-		Serial3.print(tempC, 1);
+		//Serial3.print(tempC, 1);
 	}
 	else
 	{
 		Serial.print(gettextprj(249));
-		Serial3.print(gettextprj(249));
+		//Serial3.print(gettextprj(249));
 		lcd.print(gettextprj(249));
 	}
 
@@ -76,10 +76,10 @@ void TemperatureStatusInfoClass::show()
 	_min = 100;
 
 	Serial.print(gettextprj(207));
-	Serial3.print(gettextprj(207));
+	//Serial3.print(gettextprj(207));
 
 	Serial.print(gettextprj(208));
-	Serial3.print(gettextprj(208));
+	//Serial3.print(gettextprj(208));
 	if (ind >= 1)
 	{
 		printTemp(0);
@@ -87,12 +87,12 @@ void TemperatureStatusInfoClass::show()
 	else
 	{
 		Serial.print(gettextprj(249));
-		Serial3.print(gettextprj(249));
+		//Serial3.print(gettextprj(249));
 		lcd.print(gettextprj(249));
 	}
 
 	Serial.print(gettextprj(209));
-	Serial3.print(gettextprj(209));
+	//Serial3.print(gettextprj(209));
 
 	lcd.setCursor(11, 0);
 	if (ind >= 2)
@@ -103,12 +103,12 @@ void TemperatureStatusInfoClass::show()
 	{
 		lcd.print(gettextprj(249));
 		Serial.print(gettextprj(249));
-		Serial3.print(gettextprj(249));
+		//Serial3.print(gettextprj(249));
 
 	}
 
 	Serial.print(gettextprj(210));
-	Serial3.print(gettextprj(210));
+	//Serial3.print(gettextprj(210));
 
 	lcd.setCursor(3, 1);
 	if (ind >= 3)
@@ -119,11 +119,11 @@ void TemperatureStatusInfoClass::show()
 	{
 		lcd.print(gettextprj(249));
 		Serial.print(gettextprj(249));
-		Serial3.print(gettextprj(249));
+		//Serial3.print(gettextprj(249));
 	}
 
 	Serial.print(gettextprj(211));
-	Serial3.print(gettextprj(211));
+	//Serial3.print(gettextprj(211));
 
 	lcd.setCursor(11, 1);
 	if (ind >= 4)
@@ -134,11 +134,11 @@ void TemperatureStatusInfoClass::show()
 	{
 		lcd.print(gettextprj(249));
 		Serial.print(gettextprj(249));
-		Serial3.print(gettextprj(249));
+		//Serial3.print(gettextprj(249));
 	}
 
 	Serial.println("");
-	Serial3.println("");
+	//Serial3.println("");
 	if (currentTemp > _max)
 		_max = currentTemp;
 	if (currentTemp < _min)

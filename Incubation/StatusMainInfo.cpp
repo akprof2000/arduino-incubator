@@ -90,15 +90,15 @@ void StatusMainInfoClass::show()
 		Serial.print(gettextprj(205));
 		Serial.println(humd, 1);
 
-		Serial3.print(gettextprj(204));
-		Serial3.print(currentRow.GetTemp() / 10.0 + BASETEMP, 1);
-		Serial3.print(gettextprj(205));
-		Serial3.println(currentTemp, 1);
+		//Serial3.print(gettextprj(204));
+		//Serial3.print(currentRow.GetTemp() / 10.0 + BASETEMP, 1);
+		//Serial3.print(gettextprj(205));
+		//Serial3.println(currentTemp, 1);
 
-		Serial3.print(gettextprj(206));
-		Serial3.print(currentRow.GetHum() + BASEHUM, 1);
-		Serial3.print(gettextprj(205));
-		Serial3.println(humd, 1);
+		//Serial3.print(gettextprj(206));
+		//Serial3.print(currentRow.GetHum() + BASEHUM, 1);
+		//Serial3.print(gettextprj(205));
+		//Serial3.println(humd, 1);
 	}
 	currentHumd = humd;
 
