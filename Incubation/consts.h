@@ -33,8 +33,7 @@ constexpr auto PEEKDEV = 100;
 constexpr auto FANPIN = 3;
 constexpr auto COOLERPIN = 4;
 
-constexpr auto NEEDCHANGEPIN = true;
-constexpr auto ROTATEVENT = 15000;
+constexpr auto ROTATEVENT = 20000;
 constexpr auto INTERVAL = 9;
 constexpr auto PUSHINTERVAL = 1000;
 constexpr auto PROGRESSINT = 300;

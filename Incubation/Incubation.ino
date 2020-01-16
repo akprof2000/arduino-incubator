@@ -62,7 +62,7 @@ void setup() {
 	sensors.begin();
 
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		bState[i] = btn_up;
 	}
@@ -85,40 +85,40 @@ void setup() {
 				EEPROM.write(i, 0);
 			}
 
-			currentRow.writeRow(0, 0, 11, 37.9, 66, 0, 20, 30);
+			currentRow.writeRow(0, 0, 11, 37.9, 66, 4, 0, 0);
 			currentRow.save();
 
-			currentRow.writeRow(0, 1, 6, 37.3, 53, 4, 2, 5);
+			currentRow.writeRow(0, 1, 6, 37.3, 53, 4, 4, 5);
 			currentRow.save();
 
-			currentRow.writeRow(0, 2, 2, 37.3, 47, 4, 2, 20);
+			currentRow.writeRow(0, 2, 2, 37.3, 47, 4, 4, 20);
 			currentRow.save();
 
-			currentRow.writeRow(0, 3, 2, 37.9, 66, 0, 2, 5);
+			currentRow.writeRow(0, 3, 2, 37.9, 66, 0, 4, 5);
 			currentRow.save();
 
 
 			currentRow.writeRow(1, 0, 8, 38, 70, 4, 0, 0);
 			currentRow.save();
 
-			currentRow.writeRow(1, 1, 4, 37.5, 60, 4, 1, 5);
+			currentRow.writeRow(1, 1, 4, 37.5, 60, 4, 2, 5);
 			currentRow.save();
 
-			currentRow.writeRow(1, 2, 10, 37.2, 56, 4, 2, 20);
+			currentRow.writeRow(1, 2, 10, 37.2, 56, 4, 4, 20);
 			currentRow.save();
 
-			currentRow.writeRow(1, 3, 3, 37, 70, 0, 1, 10);
+			currentRow.writeRow(1, 3, 3, 37, 70, 0, 2, 10);
 			currentRow.save();
 
 
 
-			currentRow.writeRow(2, 0, 16, 38, 60, 4, 1, 5);
+			currentRow.writeRow(2, 0, 16, 38, 60, 4, 2, 5);
 			currentRow.save();
 
-			currentRow.writeRow(2, 1, 10, 37.5, 52, 4, 2, 20);
+			currentRow.writeRow(2, 1, 10, 37.5, 52, 4, 4, 20);
 			currentRow.save();
 
-			currentRow.writeRow(2, 2, 2, 37.2, 70, 0, 1, 10);
+			currentRow.writeRow(2, 2, 2, 37.2, 70, 0, 2, 10);
 			currentRow.save();
 
 			currentRow.writeRow(2, 3, 2, 37, 70, 0, 0, 0);
@@ -129,33 +129,33 @@ void setup() {
 			currentRow.writeRow(3, 0, 3, 37.8, 55, 4, 0, 0);
 			currentRow.save();
 
-			currentRow.writeRow(3, 1, 8, 37.5, 52, 4, 1, 5);
+			currentRow.writeRow(3, 1, 8, 37.5, 52, 4, 2, 5);
 			currentRow.save();
 
-			currentRow.writeRow(3, 2, 10, 37.2, 52, 4, 3, 20);
+			currentRow.writeRow(3, 2, 10, 37.2, 52, 4, 6, 20);
 			currentRow.save();
 
-			currentRow.writeRow(3, 3, 2, 37.0, 70, 0, 1, 10);
+			currentRow.writeRow(3, 3, 2, 37.0, 70, 0, 2, 10);
 			currentRow.save();
 
 
 			currentRow.writeRow(4, 0, 6, 37.8, 55, 4, 0, 0);
 			currentRow.save();
 
-			currentRow.writeRow(4, 1, 8, 37.5, 52, 4, 1, 5);
+			currentRow.writeRow(4, 1, 8, 37.5, 52, 4, 2, 5);
 			currentRow.save();
 
-			currentRow.writeRow(4, 2, 13, 37.2, 52, 4, 2, 20);
+			currentRow.writeRow(4, 2, 13, 37.2, 52, 4, 4, 20);
 			currentRow.save();
 
-			currentRow.writeRow(4, 3, 2, 37, 70, 0, 1, 10);
+			currentRow.writeRow(4, 3, 2, 37, 70, 0, 2, 10);
 			currentRow.save();
 
 
-			currentRow.writeRow(5, 0, 12, 37.6, 58, 4, 1, 5);
+			currentRow.writeRow(5, 0, 12, 37.6, 58, 4, 2, 5);
 			currentRow.save();
 
-			currentRow.writeRow(5, 1, 4, 37.3, 53, 4, 1, 20);
+			currentRow.writeRow(5, 1, 4, 37.3, 53, 4, 2, 20);
 			currentRow.save();
 
 			currentRow.writeRow(5, 2, 2, 37.2, 47, 0, 0, 0);
@@ -277,7 +277,8 @@ void loop() {
 			float tempC = sensors.getTempC(tDevice);
 		}
 		currentTemp = myHumidity.readTemperature();
-		if (tempC < 80 && currentTemp < tempC && currentRow.GetTemp() / 10.0 + BASETEMP < tempC)
+		float bt = currentRow.GetTemp() / 10.0 + BASETEMP;
+		if (tempC < 80 && currentTemp < tempC && bt < tempC && bt - alTmpMax  < currentTemp)
 			currentTemp = tempC;
 		currentHumd = myHumidity.readHumidity();
 		timer = millis();
