@@ -11,9 +11,12 @@
 
 void AlertInfoNodeClass::show()
 {
-
-	lcd.clear();
-	_data = Alerting.Print();
+	String data = Alerting.Print();
+	baseShowData(2, gettextprj(50), "");
+	if (_olddata == data)
+		return;
+	_olddata = data;	
+	_data = data;
 	Serial.print(gettextprj(50));
 	Serial.print(gettextprj(212));
 	Serial.println(_data);
@@ -21,8 +24,7 @@ void AlertInfoNodeClass::show()
 	pos = 0;
 	if (StrLength(_data) > LCDCOLS)
 	{
-		baseShowData(2, gettextprj(50), "");
-		_data = gettextprj(110) + _data + gettextprj(110);
+		_data = gettextprj(110) + gettextprj(110) + gettextprj(110) + gettextprj(110) + _data + gettextprj(110) + gettextprj(110) + gettextprj(110) + gettextprj(110);
 	}
 	else
 	{

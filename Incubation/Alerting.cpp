@@ -15,9 +15,7 @@ String AlertingClass::Print()
 	String res = "";
 	for (size_t i = 0; i < ENUMALERTLENGTH; i++)
 	{
-		String curr = len > 0 ? "; " : "";		
-
-
+		String curr = len > 0 ? "; " : "";
 		curr += gettextprj(150 + i);
 		
 		if (_info[i])

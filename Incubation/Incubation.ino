@@ -21,6 +21,7 @@
 #include "Alerting.h"
 
 unsigned long timer = 0;
+DeviceAddress tDevice;
 
 void setup() {
 	Serial.begin(9600);
@@ -31,6 +32,10 @@ void setup() {
 	pinMode(BUTTON_R, INPUT_PULLUP);
 	pinMode(BUTTON_L, INPUT_PULLUP);
 	pinMode(BUTTON_D, INPUT_PULLUP);
+	pinMode(DOOREPIN, INPUT_PULLUP);
+	pinMode(TRAYCENTERPIN, INPUT_PULLUP);
+
+
 	lcd.begin(LCDCOLS, LCDROWS);  // initializes the 16x2 LCD
 	pinMode(ALARMLEDPIN, OUTPUT);
 	pinMode(ALARMSOUNDPIN, OUTPUT);
@@ -80,7 +85,7 @@ void setup() {
 				EEPROM.write(i, 0);
 			}
 
-			currentRow.writeRow(0, 0, 11, 37.9, 66, 4, 20, 30);
+			currentRow.writeRow(0, 0, 11, 37.9, 66, 0, 20, 30);
 			currentRow.save();
 
 			currentRow.writeRow(0, 1, 6, 37.3, 53, 4, 2, 5);
@@ -239,6 +244,14 @@ void setup() {
 
 	lcd.clear();
 	
+
+	byte ind = sensors.getDeviceCount();
+	
+	if (ind > 0)
+	{
+		sensors.getAddress(tDevice, 0);
+		sensors.setResolution(tDevice, TEMPERATURE_PRECISION);
+	}
 }
 
 int freeRam() {
@@ -256,7 +269,16 @@ void loop() {
 	
 	if (abs(millis() - timer) > REFRESHDATA)
 	{
+		byte ind = sensors.getDeviceCount();
+		sensors.requestTemperatures();
+		float tempC = -127;
+		if (ind >= 1)
+		{
+			float tempC = sensors.getTempC(tDevice);
+		}
 		currentTemp = myHumidity.readTemperature();
+		if (tempC < 80 && currentTemp < tempC && currentRow.GetTemp() / 10.0 + BASETEMP < tempC)
+			currentTemp = tempC;
 		currentHumd = myHumidity.readHumidity();
 		timer = millis();
 	}

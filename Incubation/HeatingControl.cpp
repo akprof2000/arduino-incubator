@@ -25,10 +25,6 @@ void HeatingControlClass::funcontrol()
 {
 	float temp = currentSetTemp;
 	float base = currentTemp - temp;
-
-
-
-
 	if (base <= 0)
 	{
 		VentilationControl.SetSpeed(0, fu_temp);

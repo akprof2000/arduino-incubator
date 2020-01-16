@@ -62,12 +62,13 @@ void TemperatureStatusInfoClass::show()
 	byte ind = sensors.getDeviceCount();
 	sensors.requestTemperatures();
 
-	lcd.clear();
-	lcd.setCursor(0, 0);
-	lcd.print(gettextprj(43));
-	lcd.setCursor(0, 1);
-	lcd.print(gettextprj(44));
-
+	if (_refersh)
+	{
+		lcd.setCursor(0, 0);
+		lcd.print(gettextprj(43));
+		lcd.setCursor(0, 1);
+		lcd.print(gettextprj(44));
+	}
 	lcd.setCursor(3, 0);
 
 	_max = 0;
@@ -98,7 +99,7 @@ void TemperatureStatusInfoClass::show()
 		lcd.print(gettextprj(249));
 		Serial.print(gettextprj(249));
 	}
-
+	
 	Serial.print(gettextprj(210));
 
 	lcd.setCursor(3, 1);
@@ -124,7 +125,7 @@ void TemperatureStatusInfoClass::show()
 		lcd.print(gettextprj(249));
 		Serial.print(gettextprj(249));
 	}
-
+	
 	Serial.println("");
 	if (currentTemp > _max)
 		_max = currentTemp;

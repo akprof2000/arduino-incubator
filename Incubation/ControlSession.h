@@ -37,8 +37,8 @@ class ControlSessionClass
 	unsigned long _timefreze = 0;
 	timeshift _delayvent;
 	timeshift _rotation;
-	
-	bool _needrot = false;	
+	bool _needcenter = false;
+	bool _cetration = false;
 	bool _starting = false;
 	unsigned long _timing;
  public:	 	 

@@ -33,20 +33,36 @@ bool ControlSessionClass::compare(timeshift data)
 
 void ControlSessionClass::init()
 {
+	center.update();
+	if (center.read() == LOW)
+	{
+		StatusInfo.AddStatus(so_cent, 0);
+		digitalWrite(TRAYLEFTPIN, LOW);
+		digitalWrite(TRAYRIGHTPIN, LOW);
+		_cetration = true;
+		_needcenter = false;
+	}
+
 	if (currentRow.GetRotate() > 0)
 	{
 		_rotation = calculate(currentRow.GetRotate());
 	}
 	else
+	{
 		_rotation.skip = true;
+		if (_cetration == false)
+			_needcenter = true;
+	}
 
 	if (currentRow.GetVentCount() > 0)
 		_delayvent = calculate(currentRow.GetVentCount());
 	else
+	{
 		_delayvent.skip = true;
 
+	}
+
 	_timing = millis();
-	_rotchange = false;
 	_starting = true;
 }
 
@@ -79,64 +95,33 @@ void ControlSessionClass::refresh()
 			StatusInfo.AddStatus(so_cent, 155);
 
 			_rotchange = !_rotchange;
-
-			if (_rotchange)
+			if (_cetration == false)
 			{
-				digitalWrite(TRAYLEFTPIN, LOW);
-				digitalWrite(TRAYRIGHTPIN, HIGH);
+				_needcenter = true;
 			}
-			else
-			{
-				digitalWrite(TRAYLEFTPIN, HIGH);
-				digitalWrite(TRAYRIGHTPIN, LOW);
-			}
-
 		}
 		else
 		{
-
 			Hum = true;
 			Heet = true;
 			StatusInfo.AddStatus(so_door, 0);
-			StatusInfo.AddStatus(so_cent, 0);
 			Alerting.Finish(at_connect);
-			_needrot = true;
-
 		}
 	}
-
 
 
 	if (center.update())
-	{
-		if (door.read() == HIGH)
+		if (center.read() == LOW)
 		{
-			StatusInfo.AddStatus(so_cent, 0);
-			digitalWrite(TRAYLEFTPIN, LOW);
-			digitalWrite(TRAYRIGHTPIN, LOW);
+			if (_needcenter)
+			{
+				StatusInfo.AddStatus(so_cent, 0);
+				digitalWrite(TRAYLEFTPIN, LOW);
+				digitalWrite(TRAYRIGHTPIN, LOW);
+				_cetration = true;
+				_needcenter = false;
+			}
 		}
-
-	}
-
-
-
-
-	if (door.read() == HIGH)
-	{
-		if (abs(millis() - _timing) > WAITOPENDOOR)
-		{
-			_timing = millis();
-			Alerting.Start(at_connect);
-		}
-
-		if (Hum & Heet == true)
-		{
-			_starting = true;
-		}
-
-		return;
-	}
-
 
 	if (_rotate)
 	{
@@ -151,13 +136,10 @@ void ControlSessionClass::refresh()
 				digitalWrite(TRAYRIGHTPIN, LOW);
 			}
 		}
-
-
 	}
-	else if (compare(_rotation) || _needrot)
+	else if (compare(_rotation) || _needcenter)
 	{
 		StatusInfo.AddStatus(so_rot, 155);
-		_needrot = false;
 		_timerot = millis();
 		_rotchange = !_rotchange;
 
@@ -174,6 +156,22 @@ void ControlSessionClass::refresh()
 
 		_rotate = true;
 
+	}
+
+	if (door.read() == HIGH)
+	{
+		if (abs(millis() - _timing) > WAITOPENDOOR)
+		{
+			_timing = millis();
+			Alerting.Start(at_connect);
+		}
+
+		if (Hum & Heet == true)
+		{
+			_starting = true;
+		}
+
+		return;
 	}
 
 	if (_ventelate)
@@ -198,6 +196,8 @@ void ControlSessionClass::refresh()
 		_ventelate = true;
 		Hum = false;
 	}
+
+
 }
 
 

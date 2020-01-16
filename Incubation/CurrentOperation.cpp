@@ -11,17 +11,21 @@
 void CurrentOperationClass::show()
 {
 
-	lcd.clear();
-	_data = StatusInfo.Print();
+	String data = StatusInfo.Print();
+	baseShowData(2, gettextprj(49), "");
+	if (_olddata == data)
+		return;
+	_olddata = data;	
+	_data = data;
 	Serial.print(gettextprj(49));
 	Serial.print(gettextprj(212));
 	Serial.println(_data);
-
 	pos = 0;
+
 	if (StrLength(_data) > LCDCOLS)
 	{
 		baseShowData(2, gettextprj(49), "");
-		_data = gettextprj(110) + _data + gettextprj(110);
+		_data = gettextprj(110) + gettextprj(110) + gettextprj(110) + gettextprj(110) + _data + gettextprj(110) + gettextprj(110) + gettextprj(110) + gettextprj(110);
 	}
 	else
 	{

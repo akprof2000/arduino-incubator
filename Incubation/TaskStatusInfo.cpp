@@ -11,7 +11,7 @@
 void TaskStatusInfoClass::show()
 {
 
-	lcd.clear();
+	
 	lcd.setCursor(0, 0);
 	lcd.print(gettextprj(47));
 	lcd.setCursor(8, 0);

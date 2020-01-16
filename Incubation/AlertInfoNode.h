@@ -13,6 +13,7 @@
 class AlertInfoNodeClass: public BaseNodeClass
 {
 	 String _data;
+	 String _olddata = "--";
 	 unsigned long _time = 0;
 	 int pos = 0;
 

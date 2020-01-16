@@ -9,10 +9,10 @@
 #include "WProgram.h"
 #endif
 
-#define BUTTON_L A14
-#define BUTTON_R A15
+#define BUTTON_L A15
+#define BUTTON_R A12
 #define BUTTON_U A13
-#define BUTTON_D A12
+#define BUTTON_D A14
 
 constexpr auto RESETLEDPIN = 5;
 constexpr auto ALARMLEDPIN = 5;
@@ -34,12 +34,12 @@ constexpr auto FANPIN = 3;
 constexpr auto COOLERPIN = 4;
 
 constexpr auto NEEDCHANGEPIN = true;
-constexpr auto ROTATEVENT = 90000;
+constexpr auto ROTATEVENT = 15000;
 constexpr auto INTERVAL = 9;
 constexpr auto PUSHINTERVAL = 1000;
 constexpr auto PROGRESSINT = 300;
 constexpr auto SCROLLDELAY = 50;
-constexpr auto DISPLAYINTERVAL = 10000;
+constexpr auto DISPLAYINTERVAL = 3000;
 constexpr auto ENDINTERVAL = 1000 * 5 * 60;
 constexpr auto MENUEXIT = 60000;
 constexpr auto BLINKINTERVAL = 500;
@@ -71,7 +71,7 @@ constexpr auto LCDD7 = 8;
 constexpr auto COEFF = 11.29158979063621;
 
 
-constexpr auto ONE_WIRE_BUS = 2;
+constexpr auto ONE_WIRE_BUS = 19;
 constexpr auto TEMPERATURE_PRECISION = 11;
 
 #endif

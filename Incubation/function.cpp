@@ -108,30 +108,30 @@ String gettextprj(byte data)
 		return F("Охл.нет         ");
 
 	case 39:
-		return F("Т у.:    т.:   ");
+		return F("Т у.:    т.:    ");
 
 	case 40:
-		return F("В у.:    т.:   ");
+		return F("В у.:    т.:    ");
 	case 41:
 		return F("Аварийная");
 	case 42:
 		return F("Ситуация!!!");
 	case 43:
-		return F("Т1:     Т2:");
+		return F("Т1:     Т2:     ");
 	case 44:
-		return F("Т3:     Т4:");
+		return F("Т3:     Т4:     ");
 	case 45:
 		return F("Выберите режим");
 	case 46:
 		return F("и период старта");
 	case 47:
-		return F("Схема");
+		return F("Схема           ");
 	case 48:
 		return F("П.:  Д.:   ч.:  ");
 	case 49:
 		return F("Текущая операция");
 	case 50:
-		return F("Текущее событие");
+		return F("Текущее событие ");
 
 	case 51:
 		return F("Мин.нагрев:    %");

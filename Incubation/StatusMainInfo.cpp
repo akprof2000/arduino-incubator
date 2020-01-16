@@ -26,7 +26,6 @@ bool StatusMainInfoClass::allowPrev()
 
 void StatusMainInfoClass::show()
 {
-	lcd.clear();
 	_timer = millis();
 	float humd = myHumidity.readHumidity();
 
@@ -64,20 +63,26 @@ void StatusMainInfoClass::show()
 	{
 		_work = true;
 		//Alerting.Finish(at_hum);
-		lcd.setCursor(0, 0);
-		lcd.print(gettextprj(39));
-		lcd.setCursor(0, 1);
-		lcd.print(gettextprj(40));
-
+		if (_refersh)
+		{
+			lcd.setCursor(0, 0);
+			lcd.print(gettextprj(39));
+			lcd.setCursor(0, 1);
+			lcd.print(gettextprj(40));
+		}
 		lcd.setCursor(5, 0);
 		lcd.print(currentSetTemp, 1);
+		
 		lcd.setCursor(5, 1);
 		lcd.print(currentRow.GetHum() + BASEHUM);
+		
 
 		currentTemp = myHumidity.readTemperature();
 		lcd.setCursor(12, 0);
+		
 		lcd.print(myHumidity.readTemperature(), 1);
 		lcd.setCursor(12, 1);
+		
 		lcd.print(humd, 0);
 
 		Serial.print(gettextprj(204));

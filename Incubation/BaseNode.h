@@ -31,6 +31,7 @@ void* myint = type->allocate();
 */
 class BaseNodeClass
 {
+	
 protected:
 	BaseNodeClass *_Owner = NULL;
 	BaseNodeClass *_Inner = NULL;
@@ -40,6 +41,7 @@ public:
 	//bool taiming = false;
 	bool autoinner = false;
 	bool exit = false;
+	bool _refersh = true;
 	byte type = 0;
 	byte type1 = 0;
 	virtual ~BaseNodeClass() {};
@@ -60,6 +62,11 @@ public:
 
 	virtual void show() {};
 	virtual void refresh() {};	
+	void renew() {
+		_refersh = false;
+		show();
+		_refersh = true;
+	};
 };
 
 

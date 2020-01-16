@@ -54,59 +54,59 @@ void NodeManagerClass::work()
 		Alerting.BlockSound();
 
 	if (bState[3] == btn_down && appl[3] == false)
-	{	
-		
+	{
 
-		if (_currentnode-> getOwner() != NULL)
+
+		if (_currentnode->getOwner() != NULL)
 		{
-				
+
 			if (_currentnode->allowOwner())
 			{
 				_show = false;
-				
-				_currentnode = _currentnode-> getOwner();
-				bPressTime[3] = millis();				
+
+				_currentnode = _currentnode->getOwner();
+				bPressTime[3] = millis();
 				appl[3] = true;
 			}
 		}
 		else if (!appl[3])
 		{
-			_show = false;						
+			_show = false;
 			if (_status)
 			{
-				
+
 				_currentnode = Menuconfig.initmenu();
 				Menuconfig.clearstatus();
-				_status = false; 
+				_status = false;
 			}
 			else
 			{
-				
+
 				_currentnode = Menuconfig.initstatus();
 				Menuconfig.clearmenu();
-				_status = true; 
+				_status = true;
 			}
 			appl[3] = true;
 		}
-		
+
 	}
 	else if (bState[0] == btn_down && appl[0] == false)
 	{
-		
+
 		if (_currentnode->getInner() != NULL)
 		{
-			
+
 			if (_currentnode->allowInner())
 			{
 				_show = false;
-				
-				_currentnode = _currentnode-> getInner();
+
+				_currentnode = _currentnode->getInner();
 				appl[0] = true;
 			}
 		}
 		else if (_currentnode->exit && !_status)
 		{
-			
+
 			_currentnode = Menuconfig.initstatus();
 			Menuconfig.clearmenu();
 			_status = true;
@@ -117,45 +117,45 @@ void NodeManagerClass::work()
 	else if (bState[1] == btn_down && appl[1] == false)
 	{
 
-		
+
 		if (_currentnode->getNext() != NULL)
 		{
-			
+
 			if (_currentnode->allowNext())
 			{
 				_show = false;
-				
-				_currentnode = _currentnode-> getNext();
+
+				_currentnode = _currentnode->getNext();
 				appl[1] = true;
 			}
 		}
 	}
 	else	if (bState[2] == btn_down && appl[2] == false)
 	{
-		
+
 		if (_currentnode->getPrev() != NULL)
-		{			
+		{
 			if (_currentnode->allowPrev())
 			{
 				_show = false;
-				
-				_currentnode = _currentnode-> getPrev();
+
+				_currentnode = _currentnode->getPrev();
 				appl[2] = true;
 			}
 		}
 	}
-	
+
 	if (abs(millis() - _timingsleep) > MENUEXIT || toroot)
 	{
 		toroot = false;
 		if (!_status)
 		{
-		
+
 			while (_currentnode->allowOwner() != NULL)
 			{
 				_currentnode = _currentnode->getOwner();
 				_currentnode->show();
-			}			
+			}
 			_currentnode = Menuconfig.initstatus();
 
 			Menuconfig.clearmenu();
@@ -173,15 +173,15 @@ void NodeManagerClass::work()
 	{
 		_timing = millis();
 		_currentnode->show();
-		
 		_show = true;
 	}
-	
+
 	else
 	{
 		if (abs(millis() - _timing) > DISPLAYINTERVAL)
 		{
-			_show = false;
+			_timing = millis();
+			_currentnode->renew();
 		}
 
 		if (abs(millis() - _timing) > ENDINTERVAL)
@@ -194,15 +194,15 @@ void NodeManagerClass::work()
 				if (_currentnode->getInner() != NULL)
 				{
 					if (_currentnode->allowInner())
-					{						
+					{
 						_currentnode = _currentnode-> getInner();
 						_show = false;
 					}
 				}
-			}	*/		
+			}	*/
 		}
 	}
-	_currentnode -> refresh();
+	_currentnode->refresh();
 
 }
 
