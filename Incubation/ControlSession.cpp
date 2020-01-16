@@ -137,12 +137,12 @@ void ControlSessionClass::refresh()
 			}
 		}
 	}
-	else if (compare(_rotation) || _needcenter)
+	else if ((compare(_rotation) && door.read() == LOW) || _needcenter)
 	{
 		StatusInfo.AddStatus(so_rot, 155);
 		_timerot = millis();
 		_rotchange = !_rotchange;
-
+		_cetration = false;
 		if (_rotchange)
 		{
 			digitalWrite(TRAYLEFTPIN, LOW);
