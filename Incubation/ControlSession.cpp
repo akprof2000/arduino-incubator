@@ -14,6 +14,7 @@ timeshift ControlSessionClass::calculate(byte count)
 {
 	timeshift ts;
 	ts.count = (24 * 60) / count;
+	ts.startIt = ts.count >> 1;
 	return ts;
 }
 
@@ -22,8 +23,9 @@ bool ControlSessionClass::compare(timeshift data)
 	if (data.skip == true)
 		return false;
 
+	int mn = hour() * minute() - data.startIt;
 
-	if ((hour() + 1) * (minute() + 1) % data.count == 0)
+	if ((mn >= 0) && (mn % data.count == 0))
 	{
 		return true;
 	}

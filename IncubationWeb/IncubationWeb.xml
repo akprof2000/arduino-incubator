@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IncubationWeb</name>
+    </assembly>
+    <members>
+        <member name="T:IncubationWeb.Controllers.WeatherForecastController">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:IncubationWeb.Controllers.WeatherForecastController.#ctor(Microsoft.Extensions.Logging.ILogger{IncubationWeb.Controllers.WeatherForecastController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:IncubationWeb.Controllers.WeatherForecastController"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:IncubationWeb.Controllers.WeatherForecastController.Get">
+            <summary>
+            Gets this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:IncubationWeb.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:IncubationWeb.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:IncubationWeb.Program.CreateHostBuilder(System.String[],System.Int32)">
+            <summary>
+            Creates the host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <param name="port">The port.</param>
+            <returns></returns>
+        </member>
+        <member name="T:IncubationWeb.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:IncubationWeb.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:IncubationWeb.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:IncubationWeb.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:IncubationWeb.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:IncubationWeb.Startup"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="P:IncubationWeb.Startup.Configuration">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="M:IncubationWeb.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:IncubationWeb.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configures the specified application.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The env.</param>
+        </member>
+        <member name="T:IncubationWeb.WeatherForecast">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:IncubationWeb.WeatherForecast.Date">
+            <summary>
+            Gets or sets the date.
+            </summary>
+            <value>
+            The date.
+            </value>
+        </member>
+        <member name="P:IncubationWeb.WeatherForecast.TemperatureC">
+            <summary>
+            Gets or sets the temperature c.
+            </summary>
+            <value>
+            The temperature c.
+            </value>
+        </member>
+        <member name="P:IncubationWeb.WeatherForecast.TemperatureF">
+            <summary>
+            Gets the temperature f.
+            </summary>
+            <value>
+            The temperature f.
+            </value>
+        </member>
+        <member name="P:IncubationWeb.WeatherForecast.Summary">
+            <summary>
+            Gets or sets the summary.
+            </summary>
+            <value>
+            The summary.
+            </value>
+        </member>
+        <member name="T:WebService.IPExtensions">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:WebService.IPExtensions.UserID(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Gets the user identifier.
+            </summary>
+            <param name="user">The user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.IPExtensions.GetRequestIP(Microsoft.AspNetCore.Http.HttpRequest,System.Boolean)">
+            <summary>
+            Gets the request ip.
+            </summary>
+            <param name="Request"></param>
+            <param name="tryUseXForwardHeader">if set to <c>true</c> [try use x forward header].</param>
+            <returns></returns>
+            <exception cref="T:System.Exception">Unable to determine caller's IP.</exception>
+        </member>
+        <member name="M:WebService.IPExtensions.getHeaderValueAs``1(Microsoft.AspNetCore.Http.HttpRequest,System.String)">
+            <summary>
+            Gets the header value as.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="Request"></param>
+            <param name="headerName">Name of the header.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.IPExtensions.SID(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Sids the specified user.
+            </summary>
+            <param name="user">The user.</param>
+            <returns></returns>
+        </member>
+        <member name="T:WebService.StringExtension">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:WebService.StringExtension.IsNullOrWhitespace(System.String)">
+            <summary>
+            Determines whether [is null or whitespace].
+            </summary>
+            <param name="s">The s.</param>
+            <returns>
+            <c>true</c> if [is null or whitespace] [the specified s]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:WebService.StringExtension.IsNullOrEmpty(System.String)">
+            <summary>
+            Determines whether [is null or whitespace].
+            </summary>
+            <param name="s">The s.</param>
+            <returns>
+            <c>true</c> if [is null or empty] [the specified s]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:WebService.StringExtension.SplitCsv(System.String,System.Boolean)">
+            <summary>
+            Splits the CSV.
+            </summary>
+            <param name="csvList">The CSV list.</param>
+            <param name="nullOrWhitespaceInputReturnsNull">if set to <c>true</c> [null or whitespace input returns null].</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.StringExtension.ConvertTo``1(System.String)">
+            <summary>
+            Converts to.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data">The data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.StringExtension.ConvertTo``1(System.Object)">
+            <summary>
+            Converts to.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data">The data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebService.StringExtension.ConvertTo(System.Object,System.String)">
+            <summary>
+            Converts to.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="typeName">Name of the type.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

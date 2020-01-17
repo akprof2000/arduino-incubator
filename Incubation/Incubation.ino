@@ -235,7 +235,7 @@ void setup() {
 
 	adjustments.setup(BRITHPIN, CONTRPIN, bright, 100 - contr);
 
-	
+
 
 	NodeManager.init();
 	currentRow.init(currentPeriod, currentTable);
@@ -243,10 +243,10 @@ void setup() {
 	ControlSession.init();
 
 	lcd.clear();
-	
+
 
 	byte ind = sensors.getDeviceCount();
-	
+
 	if (ind > 0)
 	{
 		sensors.getAddress(tDevice, 0);
@@ -255,7 +255,7 @@ void setup() {
 }
 
 int freeRam() {
-	extern int __heap_start, *__brkval;
+	extern int __heap_start, * __brkval;
 	int v;
 	return (int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval);
 }
@@ -265,8 +265,8 @@ byte sec = 0;
 
 
 void loop() {
-	
-	
+
+
 	if (abs(millis() - timer) > REFRESHDATA)
 	{
 		byte ind = sensors.getDeviceCount();
@@ -278,7 +278,7 @@ void loop() {
 		}
 		currentTemp = myHumidity.readTemperature();
 		float bt = currentRow.GetTemp() / 10.0 + BASETEMP;
-		if (tempC < 80 && currentTemp < tempC && bt < tempC && bt - alTmpMax  < currentTemp)
+		if (tempC < 80 && currentTemp < tempC && bt < tempC && bt - alTmpMax < currentTemp)
 			currentTemp = tempC;
 		currentHumd = myHumidity.readHumidity();
 		timer = millis();
@@ -318,23 +318,23 @@ void loop() {
 			EEPROM.update(14, currentPeriod);
 			EEPROM.update(15, currentTable);
 			EEPROM.update(16, 1);
-			setTime(0, 0, 0, currentDay + 1, 1, 2017);		
+			setTime(0, 0, 0, currentDay + 1, 1, 2017);
 
 			if (RTC.chipPresent()) {
 				timerUpdated = 1;
-				RTC.set(now());   
+				RTC.set(now());
 			}
 			else
 				timerUpdated = 0;
-				
-			EEPROM.update(17, timerUpdated );
+
+			EEPROM.update(17, timerUpdated);
 		}
 		else
 		{
 			Alerting.Start(at_endplan);
 		}
 	}
-	
+
 	ControlSession.refresh();
 
 	if (ControlSession.Hum || ControlSession.Heet)
@@ -356,22 +356,22 @@ void loop() {
 
 
 	Alerting.refresh();
-	
+
 	NodeManager.work();
-	
 
 
-		//if (second() % 10 == 0 && second() != sec)
-		//{
-		//	check = !check;
-		//	sec = second();
-		//}
-		//if (check)
-		//{
-		//
-		//	lcd.setCursor(0, 1);
-		//	lcd.print(freeRam());
-		//}
+
+	//if (second() % 10 == 0 && second() != sec)
+	//{
+	//	check = !check;
+	//	sec = second();
+	//}
+	//if (check)
+	//{
+	//
+	//	lcd.setCursor(0, 1);
+	//	lcd.print(freeRam());
+	//}
 }
 
 
