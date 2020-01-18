@@ -17,6 +17,7 @@ struct timeshift
 	int count;
 	int startIt;
 	bool skip;
+	bool execute;
 };
 
 
