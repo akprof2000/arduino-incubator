@@ -22,6 +22,7 @@
 
 unsigned long timer = 0;
 DeviceAddress tDevice;
+byte devCount = 0;
 
 void setup() {
 	Serial.begin(9600);
@@ -251,7 +252,9 @@ void setup() {
 	{
 		sensors.getAddress(tDevice, 0);
 		sensors.setResolution(tDevice, TEMPERATURE_PRECISION);
+		devCount = ind;
 	}
+	sensors.setWaitForConversion(false);
 }
 
 int freeRam() {
@@ -266,13 +269,12 @@ byte sec = 0;
 
 void loop() {
 
-
+	
 	if (abs(millis() - timer) > REFRESHDATA)
 	{
-		byte ind = sensors.getDeviceCount();
 		sensors.requestTemperatures();
 		float tempC = -127;
-		if (ind >= 1)
+		if (devCount >= 1)
 		{
 			float tempC = sensors.getTempC(tDevice);
 		}
@@ -283,6 +285,7 @@ void loop() {
 		currentHumd = myHumidity.readHumidity();
 		timer = millis();
 	}
+	
 
 	if (hour() != currentHour)
 	{
@@ -334,7 +337,7 @@ void loop() {
 			Alerting.Start(at_endplan);
 		}
 	}
-
+	
 	ControlSession.refresh();
 
 	if (ControlSession.Hum || ControlSession.Heet)
@@ -352,11 +355,8 @@ void loop() {
 	else
 		HumidityControl.wait();
 
-
-
-
 	Alerting.refresh();
-
+	
 	NodeManager.work();
 
 

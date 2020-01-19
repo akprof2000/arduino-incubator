@@ -167,6 +167,8 @@ String gettextprj(byte data)
 		return F("    ");
 	case 111:
 		return F("Отклонений нет");
+	case 112:
+		return F("                ");
 
 
 	case 150:
@@ -304,8 +306,12 @@ void baseShowData(int len, String str1, String str2)
 	for (byte i = 0; i < len; i++)
 	{
 		String str = i == 0 ? str1 : str2;
-		int l = (LCDCOLS - StrLength(str)) >> 1;
-		lcd.setCursor(l, i);
-		lcd.print(str);
+		int len = StrLength(str);
+		int l = (LCDCOLS - len) >> 1;
+		if (len > 0)
+		{
+			lcd.setCursor(l, i);
+			lcd.print(str);
+		}
 	}
 }
