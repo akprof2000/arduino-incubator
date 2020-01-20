@@ -57,13 +57,13 @@ constexpr auto BASEHUM = 45;
 constexpr auto LCDCOLS = 16;
 constexpr auto LCDROWS = 2;
 
-constexpr auto BRITHPIN = 7;
-constexpr auto CONTRPIN = 6;
+constexpr auto BRITHPIN = A0;
+constexpr auto CONTRPIN = A1;
 
 constexpr auto LCDRS = 13;
 constexpr auto LCDE = 12;
 constexpr auto LCDD4 = 11;
-constexpr auto LCDD5 = 10 ;
+constexpr auto LCDD5 = 10;
 constexpr auto LCDD6 = 9;
 constexpr auto LCDD7 = 8;
 

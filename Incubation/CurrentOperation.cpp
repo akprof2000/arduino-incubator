@@ -12,7 +12,8 @@ void CurrentOperationClass::show()
 {
 
 	String data = StatusInfo.Print();
-	baseShowData(2, gettextprj(49), "");
+	lcd.setCursor(0, 0);
+	lcd.print(gettextprj(49));
 	if (_olddata == data)
 		return;
 	_olddata = data;	
@@ -24,8 +25,9 @@ void CurrentOperationClass::show()
 
 	if (StrLength(_data) > LCDCOLS)
 	{
-		baseShowData(2, gettextprj(49), "");
-		_data = gettextprj(110) + gettextprj(110) + gettextprj(110) + gettextprj(110) + _data + gettextprj(110) + gettextprj(110) + gettextprj(110) + gettextprj(110);
+		lcd.setCursor(0, 0);
+		lcd.print(gettextprj(49));
+		_data = gettextprj(112) + _data + gettextprj(112);
 	}
 	else
 	{

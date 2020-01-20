@@ -150,17 +150,19 @@ void NodeManagerClass::work()
 		toroot = false;
 		if (!_status)
 		{
-
-			while (_currentnode->allowOwner() != NULL)
+			while (_currentnode->getOwner() != NULL)
 			{
-				_currentnode = _currentnode->getOwner();
-				_currentnode->show();
+				if (_currentnode->allowOwner())
+				{
+					_show = false;
+					_currentnode = _currentnode->getOwner();
+					bPressTime[3] = millis();
+				}
 			}
 			_currentnode = Menuconfig.initstatus();
-
 			Menuconfig.clearmenu();
 			_status = true;
-			_show = false;
+			appl[3] = true;
 		}
 
 		_timingsleep = millis();
