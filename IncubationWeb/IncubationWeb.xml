@@ -4,6 +4,60 @@
         <name>IncubationWeb</name>
     </assembly>
     <members>
+        <member name="T:IncubationWeb.Controllers.CurrentConfigurationsController">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:IncubationWeb.Controllers.CurrentConfigurationsController.#ctor(IncubationWeb.IncubDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:IncubationWeb.Controllers.CurrentConfigurationsController"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:IncubationWeb.Controllers.CurrentConfigurationsController.GetConfig">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IncubationWeb.Controllers.CurrentConfigurationsController.GetCurrentConfiguration(System.Int32)">
+            <summary>
+            Gets the current configuration.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IncubationWeb.Controllers.CurrentConfigurationsController.PutCurrentConfiguration(System.Int32,IncubationWeb.CurrentConfiguration)">
+            <summary>
+            Puts the current configuration.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="currentConfiguration">The current configuration.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IncubationWeb.Controllers.CurrentConfigurationsController.PostCurrentConfiguration(IncubationWeb.CurrentConfiguration)">
+            <summary>
+            Posts the current configuration.
+            </summary>
+            <param name="currentConfiguration">The current configuration.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IncubationWeb.Controllers.CurrentConfigurationsController.DeleteCurrentConfiguration(System.Int32)">
+            <summary>
+            Deletes the current configuration.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IncubationWeb.Controllers.CurrentConfigurationsController.currentConfigurationExists(System.Int32)">
+            <summary>
+            Currents the configuration exists.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
         <member name="T:IncubationWeb.Controllers.WeatherForecastController">
             <summary>
             
@@ -21,6 +75,50 @@
             Gets this instance.
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:IncubationWeb.Data.Migrations.Initial">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" />
+        </member>
+        <member name="M:IncubationWeb.Data.Migrations.Initial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            <para>
+            Builds the operations that will migrate the database 'up'.
+            </para>
+            <para>
+            That is, builds the operations that will take the database from the state left in by the
+            previous migration so that it is up-to-date with regard to this migration.
+            </para>
+            <para>
+            This method must be overridden in each class the inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" />.
+            </para>
+            </summary>
+            <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
+        </member>
+        <member name="M:IncubationWeb.Data.Migrations.Initial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <summary>
+            <para>
+            Builds the operations that will migrate the database 'down'.
+            </para>
+            <para>
+            That is, builds the operations that will take the database from the state left in by
+            this migration so that it returns to the state that it was in before this migration was applied.
+            </para>
+            <para>
+            This method must be overridden in each class the inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" /> if
+            both 'up' and 'down' migrations are to be supported. If it is not overridden, then calling it
+            will throw and it will not be possible to migrate in the 'down' direction.
+            </para>
+            </summary>
+            <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
+        </member>
+        <member name="M:IncubationWeb.Data.Migrations.Initial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Implemented to builds the <see cref="P:Microsoft.EntityFrameworkCore.Migrations.Migration.TargetModel" />.
+            </summary>
+            <param name="modelBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.ModelBuilder" /> to use to build the model.</param>
         </member>
         <member name="T:IncubationWeb.Program">
             <summary>
@@ -88,6 +186,67 @@
             </summary>
             <param name="app">The application.</param>
             <param name="env">The env.</param>
+        </member>
+        <member name="T:IncubationWeb.IncubDbContext">
+            <summary></summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="M:IncubationWeb.IncubDbContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:IncubationWeb.IncubDbContext"/> class.
+            </summary>
+        </member>
+        <member name="M:IncubationWeb.IncubDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{IncubationWeb.IncubDbContext})">
+            <summary>
+            Initializes a new instance of the <see cref="T:IncubationWeb.IncubDbContext"/> class.
+            </summary>
+            <param name="options">The options.</param>
+        </member>
+        <member name="P:IncubationWeb.IncubDbContext.Config">
+            <summary>
+            Gets or sets the configuration.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="M:IncubationWeb.IncubDbContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
+            <summary>
+            <para>
+            Override this method to configure the database (and other options) to be used for this context.
+            This method is called for each instance of the context that is created.
+            The base implementation does nothing.
+            </para>
+            <para>
+            In situations where an instance of <see cref="T:Microsoft.EntityFrameworkCore.DbContextOptions" /> may or may not have been passed
+            to the constructor, you can use <see cref="P:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.IsConfigured" /> to determine if
+            the options have already been set, and skip some or all of the logic in
+            <see cref="M:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)" />.
+            </para>
+            </summary>
+            <param name="optionsBuilder">A builder used to create or modify options for this context. Databases (and other extensions)
+            typically define extension methods on this object that allow you to configure the context.</param>
+        </member>
+        <member name="T:IncubationWeb.CurrentConfiguration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:IncubationWeb.CurrentConfiguration.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:IncubationWeb.CurrentConfiguration.RepeatGetInformation">
+            <summary>
+            Gets or sets the repeat get information.
+            </summary>
+            <value>
+            The repeat get information.
+            </value>
         </member>
         <member name="T:IncubationWeb.WeatherForecast">
             <summary>

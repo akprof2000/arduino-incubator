@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -52,6 +53,7 @@ namespace IncubationWeb
         /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<IncubDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
             services.AddSingleton(logger);
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -196,6 +198,71 @@ namespace IncubationWeb
 
             return jo.ToObject<object>();
         }
+    }
+
+    /// <summary></summary>
+    /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext" />
+    public class IncubDbContext : DbContext
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IncubDbContext"/> class.
+        /// </summary>
+        public IncubDbContext() : base()
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IncubDbContext"/> class.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        public IncubDbContext(DbContextOptions<IncubDbContext> options): base(options)
+        { }
+        /// <summary>
+        /// Gets or sets the configuration.
+        /// </summary>
+        /// <value>
+        /// The configuration.
+        /// </value>
+        public DbSet<CurrentConfiguration> Config { get; set; }
+
+
+        /// <summary>
+        /// <para>
+        /// Override this method to configure the database (and other options) to be used for this context.
+        /// This method is called for each instance of the context that is created.
+        /// The base implementation does nothing.
+        /// </para>
+        /// <para>
+        /// In situations where an instance of <see cref="DbContextOptions" /> may or may not have been passed
+        /// to the constructor, you can use <see cref="DbContextOptionsBuilder.IsConfigured" /> to determine if
+        /// the options have already been set, and skip some or all of the logic in
+        /// <see cref="DbContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)" />.
+        /// </para>
+        /// </summary>
+        /// <param name="optionsBuilder">A builder used to create or modify options for this context. Databases (and other extensions)
+        /// typically define extension methods on this object that allow you to configure the context.</param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlite("Data Source=incubatuon.db");
+
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class CurrentConfiguration
+    {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        public int Id { get; set; }
+        /// <summary>
+        /// Gets or sets the repeat get information.
+        /// </summary>
+        /// <value>
+        /// The repeat get information.
+        /// </value>
+        public int RepeatGetInformation { get; set; }
     }
 }
 
