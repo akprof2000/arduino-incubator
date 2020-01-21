@@ -38,16 +38,20 @@ void NodeManagerClass::work()
 
 		if (bState[i] == btn_down)
 		{
+			_timingsleep = _timing;
 			if (abs(millis() - bPressTime[i]) > PUSHINTERVAL)
 			{
 				_timing = millis();
-				_timingsleep = _timing;
 				bState[i] = btn_push;
 				appl[i] = false;
 
 			}
 		}
 
+		if (bState[i] == btn_push)
+		{
+			_timingsleep = _timing;
+		}
 	}
 
 	if (bState[0] == btn_down)
@@ -150,29 +154,21 @@ void NodeManagerClass::work()
 		toroot = false;
 		if (!_status)
 		{
-			while (_currentnode->getOwner() != NULL)
-			{
-
-				if (_currentnode->allowOwner())
-				{
-					_show = false;
-					_currentnode = _currentnode->getOwner();
-					_currentnode->show();
-					bPressTime[3] = millis();
-					appl[3] = true;
-				}
-			}
+			BaseNodeClass* bnc = _currentnode;
 
 			_currentnode = Menuconfig.initstatus();
 			Menuconfig.clearmenu();
 			_status = true;
+			bPressTime[3] = millis();
 			appl[3] = true;
+
+			reset(bnc);
+
 		}
 
 		_timingsleep = millis();
 		//adjustments.enterPowerSaving();
 		adjustments.setup(BRITHPIN, CONTRPIN, 0, 100 - contr);
-
 	}
 
 	if (!_show)
@@ -215,5 +211,13 @@ void NodeManagerClass::work()
 
 }
 
+void NodeManagerClass::reset(BaseNodeClass* bnc)
+{
+		while (bnc->getOwner() != NULL)
+		{
+			bnc = bnc->getOwner();
+			bnc->show();
+		}
+}
 
 
