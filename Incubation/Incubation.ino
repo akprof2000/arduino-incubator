@@ -12,7 +12,6 @@
 #include "HumidityControl.h"
 #include "VentilationControl.h"
 #include "HeatingControl.h"
-#include <TimeLib.h>
 #include <Time.h>
 #include <EEPROM.h>
 #include <DS1307RTC.h>

@@ -290,7 +290,6 @@ bool scrollBar(float minval, float maxval, float curstep, float &val)
 
 	if (bState[1] == btn_push && appl[1] == false)
 	{
-		delay(SCROLLDELAY);
 		val += curstep;
 		if (val > maxval)
 			val = maxval;
@@ -298,7 +297,6 @@ bool scrollBar(float minval, float maxval, float curstep, float &val)
 	}
 	if (bState[2] == btn_push && appl[2] == false)
 	{
-		delay(SCROLLDELAY);
 		val -= curstep;
 		if (val < minval)
 			val = minval;

@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Incubation;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\src;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\src;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\QList-0.6.7\src;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\LiquidCrystalRus-master;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\src;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\utility;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\variants\mega;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\\lib\gcc\avr\7.3.0\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\avr\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\\lib\gcc\avr\7.3.0\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\avr\include-fixed;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\avr\include\avr;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\lib\gcc\avr\4.9.2\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\lib\gcc\avr\4.9.2\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Incubation;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\src;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\src;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\LiquidCrystalRus-master;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\src;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire;C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\utility;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\variants\mega;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\\lib\gcc\avr\7.3.0\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\avr\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\\lib\gcc\avr\7.3.0\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\avr\include-fixed;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\avr\include\avr;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\lib\gcc\avr\4.9.2\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\lib\gcc\avr\4.9.2\include;C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino5\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.Incubation.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_atmega2560__;__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=108010;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -85,6 +85,53 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_pulse.S" />
+    <None Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\library.properties" />
+    <None Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\library.properties" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\annotated.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\bounce2buttons_8ino-example.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\bounce_8ino-example.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\bounce_multiple_8ino-example.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\change_8ino-example.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\classes.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\class_bounce-members.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\class_bounce.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\dir_68267d1309a1af8e8297ef4c3efbcdba.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\examples.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\files.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\functions.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\functions_func.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\index.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_0.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_1.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_2.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_3.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_4.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_5.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_6.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\classes_0.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_0.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_1.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_2.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_3.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_4.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_5.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_6.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\nomatches.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\pages_0.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\_bounce2_8h_source.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\index.html" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\library.json" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\library.properties" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\library.json" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\library.properties" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\library.json" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\library.properties" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\library.json" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\library.properties" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\library.properties" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\library.json" />
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\library.properties" />
     <None Include="Incubation.ino">
       <FileType>CppCode</FileType>
     </None>
@@ -93,6 +140,37 @@
     <ClInclude Include="AlertInfoNode.h" />
     <ClInclude Include="Alerting.h" />
     <ClInclude Include="BaseNode.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Arduino.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\binary.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Client.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial_private.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\IPAddress.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\new.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\PluggableUSB.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Print.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Printable.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Server.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Stream.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Udp.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\USBAPI.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\USBCore.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\USBDesc.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WCharacter.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_private.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WString.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\src\EEPROM.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\utility\twi.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\Wire.h" />
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\variants\mega\pins_arduino.h" />
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\src\Bounce2.h" />
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\DallasTemperature.h" />
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\DS1307RTC.h" />
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\LiquidCrystalRus-master\LiquidCrystalRus.h" />
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\OneWire.h" />
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\src\SparkFunHTU21D.h" />
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\Time.h" />
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\TimeLib.h" />
     <ClInclude Include="ChangeDisplayNode.h" />
     <ClInclude Include="consts.h" />
     <ClInclude Include="ControlSession.h" />
@@ -126,6 +204,40 @@
     <ClCompile Include="AlertInfoNode.cpp" />
     <ClCompile Include="Alerting.cpp" />
     <ClCompile Include="BaseNode.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\abi.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\CDC.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial0.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial1.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial2.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial3.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\hooks.c" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\IPAddress.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\main.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\new.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\PluggableUSB.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Print.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Stream.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Tone.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\USBCore.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WInterrupts.c" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring.c" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_analog.c" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_digital.c" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_pulse.c" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_shift.c" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WMath.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WString.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\utility\twi.c" />
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\Wire.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\src\Bounce2.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\DallasTemperature.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\DS1307RTC.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\LiquidCrystalRus-master\LiquidCrystalRus.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\OneWire.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\src\SparkFunHTU21D.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\DateStrings.cpp" />
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\Time.cpp" />
     <ClCompile Include="ChangeDisplayNode.cpp" />
     <ClCompile Include="ControlSession.cpp" />
     <ClCompile Include="CurrentOperation.cpp" />
@@ -152,6 +264,18 @@
     <ClCompile Include="TaskStatusInfo.cpp" />
     <ClCompile Include="TemperatureStatusInfo.cpp" />
     <ClCompile Include="VentilationControl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\keywords.txt" />
+    <Text Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\keywords.txt" />
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\keywords.txt" />
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\keywords.txt" />
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\keywords.txt" />
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\readme.txt" />
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\LiquidCrystalRus-master\keywords.txt" />
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\keywords.txt" />
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\keywords.txt" />
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\keywords.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

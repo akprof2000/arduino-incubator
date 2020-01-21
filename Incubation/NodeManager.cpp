@@ -184,10 +184,13 @@ void NodeManagerClass::work()
 
 	else
 	{
-		if (abs(millis() - _timing) > DISPLAYINTERVAL)
+		if (_status == true)
 		{
-			_timing = millis();
-			_currentnode->renew();
+			if (abs(millis() - _timing) > DISPLAYINTERVAL)
+			{
+				_timing = millis();
+				_currentnode->renew();
+			}
 		}
 
 		if (abs(millis() - _timing) > ENDINTERVAL)

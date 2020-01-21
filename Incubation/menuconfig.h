@@ -8,7 +8,6 @@
 #else
 	#include "WProgram.h"
 #endif
-	#include <QList.h>	
 	#include "node.h"
 	
 

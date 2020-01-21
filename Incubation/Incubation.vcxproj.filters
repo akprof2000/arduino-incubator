@@ -13,9 +13,189 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{62d580c2-8001-4440-aebb-0b206a43a126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly">
+      <UniqueIdentifier>{b8570806-24b2-4189-bb54-c534f6b3b5fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core">
+      <UniqueIdentifier>{974b6b38-775c-40ae-bf49-cfcfe2b22078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries">
+      <UniqueIdentifier>{0e18347d-1346-4f3f-9cab-4697d374b1b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\Bounce2">
+      <UniqueIdentifier>{1de9ee17-ffd6-495e-9d3c-01fc79b705e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\Time">
+      <UniqueIdentifier>{842c40be-04c3-4172-8e2b-60724aad89bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\EEPROM">
+      <UniqueIdentifier>{ca1222fe-d8b2-4bf9-96a5-d2965d8a3e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\DS1307RTC">
+      <UniqueIdentifier>{cfb2bc28-ade1-4606-aa10-9a9895b7318d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\LiquidCrystalRus-master">
+      <UniqueIdentifier>{ef884be1-ccda-43ac-bf09-a9fd90496a69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master">
+      <UniqueIdentifier>{1a13cc1f-4e34-436b-8f62-2c47fc2eaa0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\Wire">
+      <UniqueIdentifier>{f5ae5de3-27ce-4b44-aab6-4159b1a7773f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\OneWire">
+      <UniqueIdentifier>{0540800b-9614-4ab2-b633-0a75ba92e9bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\DallasTemperature">
+      <UniqueIdentifier>{7168e01b-d8aa-4872-b31f-a56d5b162066}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Incubation.ino" />
+    <None Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_pulse.S">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\library.json">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\index.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\annotated.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\bounce2buttons_8ino-example.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\bounce_8ino-example.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\bounce_multiple_8ino-example.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\change_8ino-example.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\classes.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\class_bounce-members.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\class_bounce.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\dir_68267d1309a1af8e8297ef4c3efbcdba.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\examples.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\files.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\functions.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\functions_func.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\index.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\_bounce2_8h_source.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_0.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_1.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_2.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_3.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_4.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_5.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\all_6.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\classes_0.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_0.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_1.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_2.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_3.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_4.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_5.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\functions_6.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\nomatches.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\docs\files\search\pages_0.html">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\library.json">
+      <Filter>src\_micro-api-readonly\libraries\Time</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\Time</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\EEPROM</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\library.json">
+      <Filter>src\_micro-api-readonly\libraries\DS1307RTC</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\DS1307RTC</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\Wire</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\library.json">
+      <Filter>src\_micro-api-readonly\libraries\OneWire</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\OneWire</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\library.json">
+      <Filter>src\_micro-api-readonly\libraries\DallasTemperature</Filter>
+    </None>
+    <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\DallasTemperature</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Incubation.vsarduino.h">
@@ -111,6 +291,99 @@
     <ClInclude Include="MinActionPercent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Arduino.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\binary.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Client.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial_private.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\IPAddress.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\new.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\PluggableUSB.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Print.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Printable.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Server.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Stream.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Udp.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\USBAPI.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\USBCore.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\USBDesc.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WCharacter.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_private.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WString.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\variants\mega\pins_arduino.h">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\src\Bounce2.h">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\Time.h">
+      <Filter>src\_micro-api-readonly\libraries\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\TimeLib.h">
+      <Filter>src\_micro-api-readonly\libraries\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\src\EEPROM.h">
+      <Filter>src\_micro-api-readonly\libraries\EEPROM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\DS1307RTC.h">
+      <Filter>src\_micro-api-readonly\libraries\DS1307RTC</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\LiquidCrystalRus-master\LiquidCrystalRus.h">
+      <Filter>src\_micro-api-readonly\libraries\LiquidCrystalRus-master</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\src\SparkFunHTU21D.h">
+      <Filter>src\_micro-api-readonly\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\Wire.h">
+      <Filter>src\_micro-api-readonly\libraries\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\utility\twi.h">
+      <Filter>src\_micro-api-readonly\libraries\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\OneWire.h">
+      <Filter>src\_micro-api-readonly\libraries\OneWire</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\DallasTemperature.h">
+      <Filter>src\_micro-api-readonly\libraries\DallasTemperature</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="objects.cpp">
@@ -200,5 +473,139 @@
     <ClCompile Include="MinActionPercent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\abi.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\CDC.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial0.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial1.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial2.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial3.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\hooks.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\IPAddress.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\main.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\new.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\PluggableUSB.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Print.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Stream.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Tone.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\USBCore.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WInterrupts.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_analog.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_digital.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_pulse.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_shift.c">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WMath.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WString.cpp">
+      <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\src\Bounce2.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\DateStrings.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\Time.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\DS1307RTC.cpp">
+      <Filter>src\_micro-api-readonly\libraries\DS1307RTC</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\LiquidCrystalRus-master\LiquidCrystalRus.cpp">
+      <Filter>src\_micro-api-readonly\libraries\LiquidCrystalRus-master</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\src\SparkFunHTU21D.cpp">
+      <Filter>src\_micro-api-readonly\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\Wire.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\src\utility\twi.c">
+      <Filter>src\_micro-api-readonly\libraries\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\OneWire.cpp">
+      <Filter>src\_micro-api-readonly\libraries\OneWire</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\DallasTemperature.cpp">
+      <Filter>src\_micro-api-readonly\libraries\DallasTemperature</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\Bounce2</Filter>
+    </Text>
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\Time</Filter>
+    </Text>
+    <Text Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\EEPROM</Filter>
+    </Text>
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\DS1307RTC</Filter>
+    </Text>
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\readme.txt">
+      <Filter>src\_micro-api-readonly\libraries\DS1307RTC</Filter>
+    </Text>
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\LiquidCrystalRus-master\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\LiquidCrystalRus-master</Filter>
+    </Text>
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\SparkFun_HTU21D_Breakout_Arduino_Library-master</Filter>
+    </Text>
+    <Text Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\Wire\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\Wire</Filter>
+    </Text>
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\OneWire\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\OneWire</Filter>
+    </Text>
+    <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\DallasTemperature</Filter>
+    </Text>
   </ItemGroup>
 </Project>
