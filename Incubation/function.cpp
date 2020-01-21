@@ -261,9 +261,16 @@ void deleteListMenu(byte size, BaseNodeClass **listMenu) noexcept
 	}
 }
 
+unsigned long _refreshtime = 0;
 
 bool scrollBar(float minval, float maxval, float curstep, float &val)
 {
+	if (abs(millis() - _refreshtime) < REFRESHS_SROLL)
+		return false;
+
+	_refreshtime = millis();
+
+
 	if (bState[1] == btn_down && appl[1] == false)
 	{
 		val += curstep;

@@ -152,13 +152,17 @@ void NodeManagerClass::work()
 		{
 			while (_currentnode->getOwner() != NULL)
 			{
+
 				if (_currentnode->allowOwner())
 				{
 					_show = false;
 					_currentnode = _currentnode->getOwner();
+					_currentnode->show();
 					bPressTime[3] = millis();
+					appl[3] = true;
 				}
 			}
+
 			_currentnode = Menuconfig.initstatus();
 			Menuconfig.clearmenu();
 			_status = true;

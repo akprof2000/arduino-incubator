@@ -41,6 +41,7 @@ constexpr auto SCROLLDELAY = 50;
 constexpr auto DISPLAYINTERVAL = 3000;
 constexpr auto ENDINTERVAL = 1000 * 5 * 60;
 constexpr auto MENUEXIT = 60000;
+constexpr auto REFRESHS_SROLL = 300;
 constexpr auto BLINKINTERVAL = 500;
 constexpr auto RESETINTERVAL = 5000;
 constexpr auto ERRORINTERVAL = 500;

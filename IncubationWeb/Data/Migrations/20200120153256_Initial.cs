@@ -28,7 +28,7 @@ namespace IncubationWeb.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("Sqlite:Auto increment", true),
                     RepeatGetInformation = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

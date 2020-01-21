@@ -32,7 +32,7 @@ void TemperatureStatusInfoClass::printTemp(byte ind)
 
 TemperatureStatusInfoClass::TemperatureStatusInfoClass()
 {
-
+	sensors.setWaitForConversion(true);
 	byte ind = sensors.getDeviceCount();
 
 	lDev = new address*[ind];
@@ -43,6 +43,7 @@ TemperatureStatusInfoClass::TemperatureStatusInfoClass()
 		sensors.getAddress(lDev[i]->addr, i);
 		sensors.setResolution(lDev[i]->addr, TEMPERATURE_PRECISION);
 	}
+	sensors.setWaitForConversion(false);
 }
 
 TemperatureStatusInfoClass::~TemperatureStatusInfoClass()
