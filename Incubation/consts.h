@@ -46,7 +46,7 @@ constexpr auto BLINKINTERVAL = 500;
 constexpr auto RESETINTERVAL = 5000;
 constexpr auto ERRORINTERVAL = 500;
 constexpr auto REFRESHDATA = 1000;
-constexpr auto VENTDEFROTATE = 127;
+constexpr auto VENTDEFROTATE = 255;
 constexpr auto SCROLLSPEED = 250;
 
 constexpr auto WAITAFTEREVENT = 180000;

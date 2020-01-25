@@ -31,7 +31,8 @@ bool ControlSessionClass::compare(timeshift data)
 		return false;
 	}
 
-	int mn = (hour() + 1) * (minute() + 1) + data.startIt;
+	int mn = hour() * 60 + minute();
+	mn = mn + data.startIt;
 
 	
 
