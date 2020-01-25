@@ -13,21 +13,29 @@
 timeshift ControlSessionClass::calculate(byte count)
 {
 	timeshift ts;
-	ts.count = (24 * 60) / count;
-	ts.startIt = ts.count >> 1;
+	ts.count = 1440 / count;
+	ts.startIt = ts.count / 2;
 	ts.execute = false;
-	ts.skip = true;
+	ts.skip = false;
 	return ts;
 }
 
 bool ControlSessionClass::compare(timeshift data)
 {
 	if (data.skip == true)
+	{
+		if (data.execute == true)
+		{
+			data.execute = false;
+		}
 		return false;
+	}
 
-	int mn = (hour() + 1) * (minute() + 1) - data.startIt;
+	int mn = (hour() + 1) * (minute() + 1) + data.startIt;
 
-	if ((mn >= 0) && (mn % data.count == 0))
+	
+
+	if ((mn % data.count == 0) && (mn <= 1440))
 	{
 		if (data.execute == false)
 		{
