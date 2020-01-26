@@ -64,7 +64,7 @@ void AlertingClass::Finish(AlertingType alert)
 	bool alrt = false;
 	for (size_t i = 0; i < ENUMALERTLENGTH; i++)
 	{
-		if (_info[i])
+		if (_info[i] == true)
 		{
 			alrt = true;
 		}
@@ -104,7 +104,7 @@ void AlertingClass::refresh()
 	{
 		_blink = !_blink;
 	}
-	digitalWrite(ALARMLEDPIN, _blink && _work ? HIGH : LOW);
-	digitalWrite(ALARMSOUNDPIN, _blink && _work  && _sound ? HIGH : LOW);
+	digitalWrite(ALARMLEDPIN, _blink == true && _work == true ? HIGH : LOW);
+	digitalWrite(ALARMSOUNDPIN, _blink == true && _work == true && _sound == true ? HIGH : LOW);
 
 }
