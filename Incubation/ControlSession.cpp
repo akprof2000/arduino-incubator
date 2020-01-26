@@ -117,8 +117,7 @@ void ControlSessionClass::refresh()
 			VentilationControl.wait();
 			StatusInfo.AddStatus(so_door, 155);
 			StatusInfo.AddStatus(so_cent, 155);
-
-			_rotchange = !_rotchange;
+			
 			if (_cetration == false)
 			{
 				_needcenter = true;
@@ -137,14 +136,14 @@ void ControlSessionClass::refresh()
 	if (center.update())
 		if (center.read() == LOW)
 		{
-			if (_needcenter)
+			if (_needcenter == true)
 			{
-				StatusInfo.AddStatus(so_cent, 0);
 				digitalWrite(TRAYLEFTPIN, LOW);
 				digitalWrite(TRAYRIGHTPIN, LOW);
 				_cetration = true;
 				_needcenter = false;
 			}
+			StatusInfo.AddStatus(so_cent, 0);
 		}
 
 	if (_rotate)
@@ -190,7 +189,7 @@ void ControlSessionClass::refresh()
 			Alerting.Start(at_connect);
 		}
 
-		if (Hum & Heet == true)
+		if (Hum == true && Heet == true)
 		{
 			_starting = true;
 		}

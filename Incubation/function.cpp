@@ -160,7 +160,7 @@ String gettextprj(byte data)
 	case 107:
 		return F("Поворот");
 	case 108:
-		return F("Обслуживание");
+		return F("Центрирование");
 	case 109:
 		return F("Дверь открыта!!!");
 	case 110:
