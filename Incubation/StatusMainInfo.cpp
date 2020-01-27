@@ -47,7 +47,7 @@ void StatusMainInfoClass::show()
 	else if (humd >= 997)
 	{
 		_work = false;
-		Alerting.Start(at_hum);
+		//Alerting.Start(at_hum);
 		lcd.setCursor(0, 0);
 		lcd.print(gettextprj(41));
 		lcd.setCursor(0, 1);
@@ -126,12 +126,12 @@ void StatusMainInfoClass::refresh()
 	}
 	else
 	{
-		if (abs(currentHumd - (currentRow.GetHum() + BASEHUM)) > alHumMax)
+		/*if (abs(currentHumd - (currentRow.GetHum() + BASEHUM)) > alHumMax)
 		{
 			Alerting.Start(at_hum);
 		}
 		else
-			Alerting.Finish(at_hum);
+			Alerting.Finish(at_hum);*/
 
 	}
 

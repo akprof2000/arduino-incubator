@@ -268,7 +268,7 @@ byte sec = 0;
 
 void loop() {
 
-	
+
 	if (abs(millis() - timer) > REFRESHDATA)
 	{
 		sensors.requestTemperatures();
@@ -283,8 +283,38 @@ void loop() {
 			currentTemp = tempC;
 		currentHumd = myHumidity.readHumidity();
 		timer = millis();
+
+		if (started != 0)
+		{
+
+			if (abs(currentHumd - (currentRow.GetHum() + BASEHUM)) > alHumMax)
+			{
+				Alerting.Start(at_hum);
+			}
+			else
+			{
+				Alerting.Finish(at_hum);
+			}
+
+
+			float temp = currentSetTemp;
+
+			if (abs(currentTemp - temp) > alTmpMax || abs(temp - currentTemp) > alTmpMax)
+			{
+				Alerting.Start(at_temp);
+			}
+			else
+			{
+				Alerting.Finish(at_temp);
+			}
+		}
+		else
+		{
+			Alerting.Finish(at_hum);
+			Alerting.Finish(at_temp);
+		}
 	}
-	
+
 
 	if (hour() != currentHour)
 	{
@@ -336,7 +366,7 @@ void loop() {
 			Alerting.Start(at_endplan);
 		}
 	}
-	
+
 	ControlSession.refresh();
 
 	if (ControlSession.Hum || ControlSession.Heet)
@@ -355,7 +385,7 @@ void loop() {
 		HumidityControl.wait();
 
 	Alerting.refresh();
-	
+
 	NodeManager.work();
 
 

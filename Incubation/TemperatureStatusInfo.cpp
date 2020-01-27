@@ -136,11 +136,11 @@ void TemperatureStatusInfoClass::show()
 
 	float temp = currentSetTemp;
 
-	if (abs(_max - temp) > alTmpMax || abs(temp - _min) > alTmpMax)
-	{
-		Alerting.Start(at_temp);
-	}
-	else
-		Alerting.Finish(at_temp);
+	//if (abs(_max - temp) > alTmpMax || abs(temp - _min) > alTmpMax)
+	//{
+	//	Alerting.Start(at_temp);
+	//}
+	//else
+	//	Alerting.Finish(at_temp);
 
 }
