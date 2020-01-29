@@ -214,7 +214,7 @@ void NodeManagerClass::work()
 
 }
 
-void NodeManagerClass::reset(BaseNodeClass* bnc)
+void NodeManagerClass::reset(BaseNodeClass* bnc) noexcept
 {
 	int i = 0;
 	while (bnc->getOwner() != NULL)

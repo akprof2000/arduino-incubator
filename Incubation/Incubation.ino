@@ -382,6 +382,7 @@ void loop() {
 
 	NodeManager.work();
 
+	/*
 	if (second() % 10 == 0 && second() != sec)
 	{
 		check = !check;
@@ -394,7 +395,7 @@ void loop() {
 		lcd.print(" ");
 		lcd.print(currentTemp);
 	}
-
+	*/
 	//if (second() % 10 == 0 && second() != sec)
 	//{
 	//	check = !check;
