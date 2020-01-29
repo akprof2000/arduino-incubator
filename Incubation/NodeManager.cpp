@@ -12,6 +12,7 @@ void NodeManagerClass::init()
 {
 	_currentnode = Menuconfig.initstatus();
 	_mainnode = _currentnode;
+	_status = true;
 }
 
 void NodeManagerClass::work()
@@ -151,9 +152,10 @@ void NodeManagerClass::work()
 
 	if (abs(millis() - _timingsleep) > MENUEXIT || toroot)
 	{
-		toroot = false;
-		if (!_status)
+		
+		if (!_status || toroot)
 		{
+			toroot = false;
 			BaseNodeClass* bnc = _currentnode;
 
 			_currentnode = Menuconfig.initstatus();
@@ -174,6 +176,7 @@ void NodeManagerClass::work()
 	if (!_show)
 	{
 		_timing = millis();
+		_currentnode->deleteMenu();
 		_currentnode->show();
 		_show = true;
 	}
@@ -213,11 +216,15 @@ void NodeManagerClass::work()
 
 void NodeManagerClass::reset(BaseNodeClass* bnc)
 {
-		while (bnc->getOwner() != NULL)
-		{
-			bnc = bnc->getOwner();
-			bnc->show();
-		}
+	int i = 0;
+	while (bnc->getOwner() != NULL)
+	{
+		bnc = bnc->getOwner();
+		bnc->deleteMenu();
+		i++;
+		if (i > 20)
+			return;
+	}
 }
 
 

@@ -163,10 +163,14 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 	return ml;
 }
 
-void MainNodeBuilderClass::show()
+void MainNodeBuilderClass::deleteMenu()
 {
 	deleteListMenu(MENULENGTHM, _listMenu);
 	_listMenu = NULL;
+}
+
+void MainNodeBuilderClass::show()
+{
 	baseShowData(2, gettextprj(1), gettextprj(2));
 
 }

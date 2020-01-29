@@ -15,12 +15,11 @@ timeshift ControlSessionClass::calculate(byte count)
 	timeshift ts;
 	ts.count = 1440 / count;
 	ts.startIt = ts.count / 2;
-	ts.execute = true;
 	ts.skip = false;
 	return ts;
 }
 
-bool ControlSessionClass::compare(timeshift data)
+bool ControlSessionClass::compare(timeshift& data)
 {
 	if (data.skip == true)
 	{
@@ -30,19 +29,9 @@ bool ControlSessionClass::compare(timeshift data)
 	int mn = hour() * 60 + minute();
 	mn = mn + data.startIt;
 
-	
-
-	if ((mn % data.count == 0) && (mn <= 1440))
+	if ((mn % data.count == 0) && (mn <= 1440) && (second() < 30))
 	{
-		if (data.execute == false)
-		{
-			data.execute = true;
-			return true;
-		}
-	}
-	else
-	{
-			data.execute = false;
+		return true;
 	}
 
 	return false;
@@ -110,7 +99,7 @@ void ControlSessionClass::refresh()
 			VentilationControl.wait();
 			StatusInfo.AddStatus(so_door, 155);
 			StatusInfo.AddStatus(so_cent, 155);
-			
+
 			if (_cetration == false)
 			{
 				_needcenter = true;

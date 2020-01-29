@@ -244,15 +244,6 @@ void setup() {
 
 	lcd.clear();
 
-
-	byte ind = sensors.getDeviceCount();
-
-	if (ind > 0)
-	{
-		sensors.getAddress(tDevice, 0);
-		sensors.setResolution(tDevice, TEMPERATURE_PRECISION);
-		devCount = ind;
-	}
 	sensors.setWaitForConversion(false);
 }
 
@@ -264,22 +255,18 @@ int freeRam() {
 
 bool check = false;
 byte sec = 0;
-
+float tempC = 0;
 
 void loop() {
 
-
+	
 	if (abs(millis() - timer) > REFRESHDATA)
 	{
 		sensors.requestTemperatures();
-		float tempC = -127;
-		if (devCount >= 1)
-		{
-			float tempC = sensors.getTempC(tDevice);
-		}
+		tempC = sensors.getTempCByIndex(0);
 		currentTemp = myHumidity.readTemperature();
 		float bt = currentRow.GetTemp() / 10.0 + BASETEMP;
-		if (tempC < 80 && currentTemp < tempC && bt < tempC && bt - alTmpMax < currentTemp)
+		if ((currentTemp < tempC) && ((bt + alTmpMax) < tempC) && (currentTemp > (bt - alTmpMax)))
 			currentTemp = tempC;
 		currentHumd = myHumidity.readHumidity();
 		timer = millis();
@@ -299,7 +286,7 @@ void loop() {
 
 			float temp = currentSetTemp;
 
-			if (abs(currentTemp - temp) > alTmpMax || abs(temp - currentTemp) > alTmpMax)
+			if (abs(currentTemp - temp) > alTmpMax)
 			{
 				Alerting.Start(at_temp);
 			}
@@ -337,7 +324,14 @@ void loop() {
 		ControlSession.init();
 	}
 
-	if (currentRow.GetDay() < day() - 1)
+	if (second() % 10 == 0 && second() != sec)
+	{
+		check = !check;
+		sec = second();
+	}
+
+
+	if (currentRow.GetDay() < day())
 	{
 		if (currentPeriod < 3)
 		{
@@ -388,7 +382,18 @@ void loop() {
 
 	NodeManager.work();
 
-
+	if (second() % 10 == 0 && second() != sec)
+	{
+		check = !check;
+		sec = second();
+	}
+	if (check)
+	{
+		lcd.setCursor(0, 1);
+		lcd.print(tempC);
+		lcd.print(" ");
+		lcd.print(currentTemp);
+	}
 
 	//if (second() % 10 == 0 && second() != sec)
 	//{

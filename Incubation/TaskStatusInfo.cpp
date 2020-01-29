@@ -21,13 +21,13 @@ void TaskStatusInfoClass::show()
 	lcd.setCursor(3, 1);
 	lcd.print(currentPeriod + 1);
 	lcd.setCursor(8, 1);
-	if (day() < 10)
+	if (currentDay < 10)
 		lcd.print('0');
-	lcd.print(day());
+	lcd.print(currentDay);
 	lcd.setCursor(14, 1);
-	if (hour() < 10)
+	if (currentHour < 10)
 		lcd.print('0');
-	lcd.print(hour());
+	lcd.print(currentHour);
 
 	Serial.print(gettextprj(200));
 	Serial.print(gettextprj(12 + currentTable));

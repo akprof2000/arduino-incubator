@@ -69,6 +69,13 @@ BaseNodeClass * NodeTableBuilderClass::getInner()
 	return mp;
 }
 
+void NodeTableBuilderClass::deleteMenu()
+{
+	deleteListMenu(MENULENGTHT, _listMenu);
+	_listMenu = NULL;
+
+}
+
 void NodeTableBuilderClass::show()
 {
 

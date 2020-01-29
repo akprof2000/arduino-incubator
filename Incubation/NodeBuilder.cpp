@@ -76,11 +76,15 @@ BaseNodeClass * NodeBuilderClass::getInner()
 	return msc1;
 }
 
+void NodeBuilderClass::deleteMenu()
+{
+	deleteListMenu(MENULENGTHD, _listMenu);
+
+	_listMenu = NULL;
+}
 
 void NodeBuilderClass::show()
 {
-	deleteListMenu(MENULENGTHD, _listMenu);
-	_listMenu = NULL;
 	baseShowData(1, gettextprj(12 + type), gettextprj(0));
 	
 }

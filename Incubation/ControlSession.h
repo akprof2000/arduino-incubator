@@ -17,14 +17,13 @@ struct timeshift
 	int count;
 	int startIt;
 	bool skip;
-	bool execute;
 };
 
 
 class ControlSessionClass
 {
 	timeshift calculate(byte count);
-	bool compare(timeshift data);
+	bool compare(timeshift &data);
 	Bounce door = Bounce(DOOREPIN, INTERVAL);
 	Bounce center = Bounce(TRAYCENTERPIN, INTERVAL);
 	bool _ventelate = false;

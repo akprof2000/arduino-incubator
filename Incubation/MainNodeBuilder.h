@@ -19,6 +19,7 @@ private:
 	 BaseNodeClass *getInner();
 
 	 void show();
+	 void deleteMenu();
 };
 
 

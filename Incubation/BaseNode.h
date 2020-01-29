@@ -61,6 +61,7 @@ public:
 	virtual void setInner(BaseNodeClass *node);
 
 	virtual void show() {};
+	virtual void deleteMenu() {};
 	virtual void refresh() {};	
 	void renew() {
 		_refersh = false;
