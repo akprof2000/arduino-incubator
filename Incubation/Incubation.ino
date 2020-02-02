@@ -244,6 +244,10 @@ void setup() {
 
 	lcd.clear();
 
+	sensors.setWaitForConversion(true);
+	devCount = sensors.getDeviceCount();
+
+
 	sensors.setWaitForConversion(false);
 }
 
@@ -284,9 +288,40 @@ void loop() {
 			}
 
 
+			float mint = 127;
+			float maxt = -127;
+
+			for (size_t i = 0; i < devCount; i++)
+			{
+				float ct = sensors.getTempCByIndex(i);
+				if (ct > -127)
+				{
+					if (ct < mint)
+					{
+						mint = ct;
+					}
+
+					if (ct > maxt)
+					{
+						maxt = ct;
+					}
+				}
+			}
+
+
+			if (currentTemp > maxt)
+			{
+				maxt = currentTemp;
+			}
+
+			if (currentTemp < mint)
+			{
+				mint = currentTemp;
+			}
+
 			float temp = currentSetTemp;
 
-			if (abs(currentTemp - temp) > alTmpMax)
+			if (abs(mint - temp) > alTmpMax || abs(maxt - temp) > alTmpMax)
 			{
 				Alerting.Start(at_temp);
 			}
