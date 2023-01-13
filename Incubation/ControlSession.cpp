@@ -111,6 +111,9 @@ void ControlSessionClass::refresh()
 			Heet = true;
 			StatusInfo.AddStatus(so_door, 0);
 			Alerting.Finish(at_connect);
+
+			StatusInfo.AddStatus(so_cent, 0);
+			_needcenter = false;
 		}
 	}
 
