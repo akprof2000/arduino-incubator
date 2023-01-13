@@ -23,6 +23,11 @@ unsigned long timer = 0;
 DeviceAddress tDevice;
 byte devCount = 0;
 
+bool check = false;
+byte sec = 0;
+float tempC = 0;
+
+
 void setup() {
 	Serial.begin(9600);
 	Serial.println(F("Start incubation project full log"));
@@ -247,18 +252,7 @@ void setup() {
 	sensors.setWaitForConversion(false);
 }
 
-int freeRam() {
-	extern int __heap_start, * __brkval;
-	int v;
-	return (int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval);
-}
-
-bool check = false;
-byte sec = 0;
-float tempC = 0;
-
 void loop() {
-
 	
 	if (abs(millis() - timer) > REFRESHDATA)
 	{
@@ -301,7 +295,7 @@ void loop() {
 			Alerting.Finish(at_temp);
 		}
 	}
-
+	
 
 	if (hour() != currentHour)
 	{
@@ -409,7 +403,11 @@ void loop() {
 	//}
 }
 
+/*
+int freeRam() {
+	extern int __heap_start, * __brkval;
+	int v = 0;
+	return (int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval);
+}
 
-
-
-
+*/

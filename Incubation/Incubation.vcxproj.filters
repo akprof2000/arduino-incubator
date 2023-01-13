@@ -31,9 +31,6 @@
     <Filter Include="src\_micro-api-readonly\libraries\Time">
       <UniqueIdentifier>{842c40be-04c3-4172-8e2b-60724aad89bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\_micro-api-readonly\libraries\EEPROM">
-      <UniqueIdentifier>{ca1222fe-d8b2-4bf9-96a5-d2965d8a3e33}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\_micro-api-readonly\libraries\DS1307RTC">
       <UniqueIdentifier>{cfb2bc28-ade1-4606-aa10-9a9895b7318d}</UniqueIdentifier>
     </Filter>
@@ -52,9 +49,17 @@
     <Filter Include="src\_micro-api-readonly\libraries\DallasTemperature">
       <UniqueIdentifier>{7168e01b-d8aa-4872-b31f-a56d5b162066}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\EEPROM">
+      <UniqueIdentifier>{a66656c7-1e7d-442c-aaa5-cac848e8709e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\HID">
+      <UniqueIdentifier>{afa8f138-2d10-406b-aae2-f7862e703431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\SoftwareSerial">
+      <UniqueIdentifier>{1b3cf6bf-d341-44de-8777-3acb68eaad96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Incubation.ino" />
     <None Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\wiring_pulse.S">
       <Filter>src\_micro-api-readonly\core</Filter>
     </None>
@@ -169,9 +174,6 @@
     <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\library.properties">
       <Filter>src\_micro-api-readonly\libraries\Time</Filter>
     </None>
-    <None Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\library.properties">
-      <Filter>src\_micro-api-readonly\libraries\EEPROM</Filter>
-    </None>
     <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\library.json">
       <Filter>src\_micro-api-readonly\libraries\DS1307RTC</Filter>
     </None>
@@ -195,6 +197,15 @@
     </None>
     <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\library.properties">
       <Filter>src\_micro-api-readonly\libraries\DallasTemperature</Filter>
+    </None>
+    <None Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\EEPROM\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\EEPROM</Filter>
+    </None>
+    <None Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\HID\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\HID</Filter>
+    </None>
+    <None Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SoftwareSerial\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\SoftwareSerial</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -360,9 +371,6 @@
     <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\TimeLib.h">
       <Filter>src\_micro-api-readonly\libraries\Time</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\src\EEPROM.h">
-      <Filter>src\_micro-api-readonly\libraries\EEPROM</Filter>
-    </ClInclude>
     <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\DS1307RTC.h">
       <Filter>src\_micro-api-readonly\libraries\DS1307RTC</Filter>
     </ClInclude>
@@ -383,6 +391,15 @@
     </ClInclude>
     <ClInclude Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\DallasTemperature.h">
       <Filter>src\_micro-api-readonly\libraries\DallasTemperature</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\EEPROM\src\EEPROM.h">
+      <Filter>src\_micro-api-readonly\libraries\EEPROM</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\HID\src\HID.h">
+      <Filter>src\_micro-api-readonly\libraries\HID</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SoftwareSerial\src\SoftwareSerial.h">
+      <Filter>src\_micro-api-readonly\libraries\SoftwareSerial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -575,6 +592,13 @@
     <ClCompile Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\DallasTemperature.cpp">
       <Filter>src\_micro-api-readonly\libraries\DallasTemperature</Filter>
     </ClCompile>
+    <ClCompile Include="Incubation.ino" />
+    <ClCompile Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\HID\src\HID.cpp">
+      <Filter>src\_micro-api-readonly\libraries\HID</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SoftwareSerial\src\SoftwareSerial.cpp">
+      <Filter>src\_micro-api-readonly\libraries\SoftwareSerial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Bounce2\keywords.txt">
@@ -582,9 +606,6 @@
     </Text>
     <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\keywords.txt">
       <Filter>src\_micro-api-readonly\libraries\Time</Filter>
-    </Text>
-    <Text Include="C:\Users\kozlovas\AppData\Local\arduino15\packages\arduino\hardware\avr\1.8.2\libraries\EEPROM\keywords.txt">
-      <Filter>src\_micro-api-readonly\libraries\EEPROM</Filter>
     </Text>
     <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DS1307RTC\keywords.txt">
       <Filter>src\_micro-api-readonly\libraries\DS1307RTC</Filter>
@@ -606,6 +627,15 @@
     </Text>
     <Text Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\DallasTemperature\keywords.txt">
       <Filter>src\_micro-api-readonly\libraries\DallasTemperature</Filter>
+    </Text>
+    <Text Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\EEPROM\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\EEPROM</Filter>
+    </Text>
+    <Text Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\HID\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\HID</Filter>
+    </Text>
+    <Text Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SoftwareSerial\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\SoftwareSerial</Filter>
     </Text>
   </ItemGroup>
 </Project>

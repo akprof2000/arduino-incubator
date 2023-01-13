@@ -1,2 +1,0 @@
-﻿message=get weather data
-local IP=127.0.0.1
