@@ -11,18 +11,18 @@
 
 
 
-#define MENULENGTHD 5
+const int MENULENGTHD = 5;
 
 
 BaseNodeClass * NodeBuilderClass::getInner()
 {
-	if (_listMenu != NULL)
+	if (_listMenu != nullptr)
 		return _listMenu[0];
 
 	_listMenu = createListMenu(MENULENGTHD);
 
-	NodeTableBuilderClass *msc1 = new NodeTableBuilderClass();
-	_listMenu[0] = (msc1);
+	auto *msc1 = new NodeTableBuilderClass();
+	_listMenu[0] = msc1;
 	msc1->type1 = type;
 	msc1->type = 0;
 
@@ -30,8 +30,8 @@ BaseNodeClass * NodeBuilderClass::getInner()
 	this->setInner(msc1);
 
 	
-	NodeTableBuilderClass *msc2 = new NodeTableBuilderClass();
-	_listMenu[1] = (msc2);
+	auto *msc2 = new NodeTableBuilderClass();
+	_listMenu[1] = msc2;
 	msc2->type1 = type;
 	msc2->type = 1;
 
@@ -41,8 +41,8 @@ BaseNodeClass * NodeBuilderClass::getInner()
 
 
 
-	NodeTableBuilderClass *msc3 = new NodeTableBuilderClass();
-	_listMenu[2] = (msc3);
+	auto *msc3 = new NodeTableBuilderClass();
+	_listMenu[2] = msc3;
 	msc3->type1 = type;
 	msc3->type = 2;
 
@@ -51,8 +51,8 @@ BaseNodeClass * NodeBuilderClass::getInner()
 	msc3->setPrev(msc2);
 
 
-	NodeTableBuilderClass *msc4 = new NodeTableBuilderClass();
-	_listMenu[3] = (msc4);
+	auto *msc4 = new NodeTableBuilderClass();
+	_listMenu[3] = msc4;
 	msc4->type1 = type;
 	msc4->type = 3;
 
@@ -62,8 +62,8 @@ BaseNodeClass * NodeBuilderClass::getInner()
 	msc4->setPrev(msc3);
 
 
-	NodeClass *msce = new NodeClass();
-	_listMenu[4] = (msce);
+	auto *msce = new NodeClass();
+	_listMenu[4] = msce;
 	msce->Text[0] = 253;
 	msce->setOwner(this);
 	msce->setInner(this);
@@ -80,7 +80,7 @@ void NodeBuilderClass::deleteMenu()
 {
 	deleteListMenu(MENULENGTHD, _listMenu);
 
-	_listMenu = NULL;
+	_listMenu = nullptr;
 }
 
 void NodeBuilderClass::show()

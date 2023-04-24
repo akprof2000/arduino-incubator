@@ -196,6 +196,9 @@ void setup() {
 	minheat = 15;
 	minhum = 15;
 
+	deltaEggMin = 5;
+	deltaEggMax = 30;
+
 	int val = EEPROM.read(2);
 	if (val != 0)
 	{
@@ -214,6 +217,8 @@ void setup() {
 		minheat = EEPROM.read(18);
 		minhum = EEPROM.read(19);
 
+		deltaEggMin = EEPROM.read(20);
+		deltaEggMax = EEPROM.read(21);
 	}
 	else
 	{
@@ -233,6 +238,9 @@ void setup() {
 
 		EEPROM.update(18, minheat);
 		EEPROM.update(19, minhum);
+
+		EEPROM.update(20, deltaEggMin);
+		EEPROM.update(21, deltaEggMax);
 
 		EEPROM.update(2, timerUpdated);
 
@@ -266,6 +274,15 @@ void loop() {
 		float bt = currentRow.GetTemp() / 10.0 + BASETEMP;
 		if ((currentTemp < tempC) && ((bt + alTmpMax) < tempC) && (currentTemp > (bt - alTmpMax)))
 			currentTemp = tempC;
+		if (tempC > 0 && tempC < 100)
+		{
+			currentFirstTemp = tempC;
+		}
+		else
+		{
+			currentFirstTemp = currentTemp;
+		}
+
 		currentHumd = myHumidity.readHumidity();
 		timer = millis();
 

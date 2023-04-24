@@ -41,6 +41,10 @@ extern unsigned long bPressTime[4];
 extern byte minheat;
 extern byte minhum;
 
+extern byte deltaEggMin;
+extern byte deltaEggMax;
+
+
 
 extern byte bright;
 extern byte contr;
@@ -61,6 +65,7 @@ extern byte alHumMax;
 extern HTU21D myHumidity;
 
 extern float currentTemp;
+extern float currentFirstTemp;
 extern float currentHumd;
 extern float currentSetTemp;
 

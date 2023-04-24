@@ -24,13 +24,13 @@ MenuconfigClass Menuconfig;
 void MenuconfigClass::clearmenu()
 {
 	deleteListMenu(MENULENGTH, _listMenu);
-	_listMenu = NULL;
+	_listMenu = nullptr;
 
 }
 void MenuconfigClass::clearstatus()
 {
 	deleteListMenu(5, _listStatus);
-	_listStatus = NULL;
+	_listStatus = nullptr;
 
 }
 BaseNodeClass *MenuconfigClass::initstatus()

@@ -11,6 +11,10 @@ unsigned long bPressTime[4];
 byte minheat;
 byte minhum;
 
+
+byte deltaEggMin;
+byte deltaEggMax;
+
 byte bright;
 byte contr;
 byte alTmpDel;
@@ -37,6 +41,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
 float currentTemp;
+float currentFirstTemp;
 float currentHumd;
 float currentSetTemp;
 

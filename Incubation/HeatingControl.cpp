@@ -25,10 +25,25 @@ void HeatingControlClass::funcontrol()
 {
 	double temp = currentSetTemp;
 	double base = currentTemp - temp;
+	double egg = currentFirstTemp - temp;
+
+	if (egg < deltaEggMin / 10.0 && overHeating)
+	{
+		overHeating = false;
+	}
+
+	if (egg > deltaEggMax / 10.0 || overHeating)
+	{
+		overHeating = true;
+		StatusInfo.AddStatus(so_cool, 0xFF);
+		VentilationControl.SetSpeed(0xFF, fu_temp);
+		return;
+	}
+
 	if (base <= 0)
 	{
 		VentilationControl.SetSpeed(0, fu_temp);
-		StatusInfo.AddStatus(so_cool, 0);		
+		StatusInfo.AddStatus(so_cool, 0);
 		return;
 	}
 
@@ -59,7 +74,7 @@ void HeatingControlClass::refresh()
 	float base = temp - currentTemp;
 	funcontrol();
 
-	if (base <= 0)
+	if ((base <= 0) || (currentFirstTemp - temp > deltaEggMin / 10.0))
 	{
 		StatusInfo.AddStatus(so_heet, 0);
 		analogWrite(HEATCONTROL, 0);

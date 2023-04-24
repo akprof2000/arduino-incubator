@@ -135,6 +135,7 @@
     <None Include="C:\Users\kozlovas\OneDrive\Документы\Arduino\libraries\Time\library.properties" />
     <ClCompile Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\HID\src\HID.cpp" />
     <ClCompile Include="C:\Users\akpro\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SoftwareSerial\src\SoftwareSerial.cpp" />
+    <ClCompile Include="DeltaEgg.cpp" />
     <ClCompile Include="Incubation.ino">
       <FileType>CppCode</FileType>
       <DeploymentContent>true</DeploymentContent>
@@ -181,6 +182,7 @@
     <ClInclude Include="consts.h" />
     <ClInclude Include="ControlSession.h" />
     <ClInclude Include="DataRow.h" />
+    <ClInclude Include="DeltaEgg.h" />
     <ClInclude Include="DeltaLineNode.h" />
     <ClInclude Include="function.h" />
     <ClInclude Include="HeatingControl.h" />

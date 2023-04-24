@@ -141,6 +141,11 @@ String gettextprj(byte data)
 		return F("Пороговые");
 	case 54:
 		return F("значения вкл.");
+	case 55:
+		return F("Мин. дел.Т1:    ");
+	case 56:
+		return F("Макс.дел.Т1:    ");
+
 
 	case 100:
 		return F("Действий нет");

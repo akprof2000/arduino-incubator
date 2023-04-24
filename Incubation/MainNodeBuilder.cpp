@@ -1,6 +1,6 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "function.h"
 
@@ -12,19 +12,19 @@
 #include "NodeChoseStart.h"
 #include "node.h"
 #include "MinActionPercent.h"
-//#include "MinActionPercent.cpp"
+#include "DeltaEgg.h"
 
-#define MENULENGTHM 14
+const int MENULENGTHM = 15;
 
 BaseNodeClass * MainNodeBuilderClass::getInner()
 {
-	if (_listMenu != NULL)
+	if (_listMenu != nullptr)
 		return _listMenu[0];
 
 
 	_listMenu = createListMenu(MENULENGTHM);
 
-	NodeClass *ml = new NodeClass();
+	auto *ml = new NodeClass();
 	_listMenu[0] = (ml);
 	ml->Text[0] = 5;
 	ml->Text[1] = 6;
@@ -32,7 +32,7 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 	ml->setOwner(this);
 
 
-	DeltaLineNodeClass *mlc = new DeltaLineNodeClass();
+	auto *mlc = new DeltaLineNodeClass();
 	//NodeClass *mlc = new NodeClass();
 	mlc->type = 0;
 	_listMenu[1] = (mlc);
@@ -40,7 +40,7 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 	ml->setInner(mlc);
 	mlc->setOwner(ml);
 
-	DeltaLineNodeClass *mlch = new DeltaLineNodeClass();
+	auto *mlch = new DeltaLineNodeClass();
 	//NodeClass *mlch = new NodeClass();
 	mlch->type = 1;
 	_listMenu[10] = (mlch);
@@ -51,7 +51,7 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 
 
 
-	NodeClass *mm = new NodeClass();
+	auto *mm = new NodeClass();
 	_listMenu[11] = (mm);
 	mm->Text[0] = 53;
 	mm->Text[1] = 54;
@@ -60,29 +60,45 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 	mm->setOwner(this);
 
 
-	MinActionPercentClass *mmc = new MinActionPercentClass();
+	auto *mmc = new MinActionPercentClass();
 	_listMenu[12] = (mmc);
 
 	mm->setInner(mmc);
 	mmc->setOwner(mm);
 
+	auto *mmc_ = new DeltaEggClass();
+	_listMenu[13] = (mmc_);
 
-	NodeClass *mmme = new NodeClass();
-	_listMenu[13] = (mmme);
+	mmc->setInner(mmc_);
+	mmc_->setOwner(mmc);
+
+
+
+	auto *mmme = new NodeClass();
+	_listMenu[14] = (mmme);
 
 	mmme->Text[0] = 253;
-	mmc->setNext(mmme);
-	mmme->setOwner(mm);
-	mmme->setPrev(mmc);
-	mmc->setPrev(mmme);
+
+	mmc->setNext(mmc_);
+	mmc_->setNext(mmme);
 	mmme->setNext(mmc);
+
+	mmme->setPrev(mmc_);
+	mmc_->setPrev(mmc);
+	mmc->setPrev(mmme);
+
+	mmme->setOwner(mm);
+
+
+
+
 	mmme->setInner(mm);
 
 
-	
 
 
-	NodeClass *mle = new NodeClass();
+
+	auto *mle = new NodeClass();
 	_listMenu[2] = (mle);
 	mle->Text[0] = 253;
 
@@ -95,7 +111,7 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 
 	mle->setInner(ml);
 
-	NodeClass *md = new NodeClass();
+	auto *md = new NodeClass();
 	_listMenu[3] = (md);
 	md->Text[0] = 9;
 	mm->setNext(md);
@@ -103,14 +119,14 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 	md->setOwner(this);
 
 
-	ChangeDisplayNodeClass *mdc = new ChangeDisplayNodeClass();
+	auto *mdc = new ChangeDisplayNodeClass();
 	_listMenu[4] = (mdc);
 
 	md->setInner(mdc);
 	mdc->setOwner(md);
 
 
-	NodeClass *mde = new NodeClass();
+	auto *mde = new NodeClass();
 	_listMenu[5] = (mde);
 
 	mde->Text[0] = 253;
@@ -121,7 +137,7 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 	mde->setNext(mdc);
 	mde->setInner(md);
 
-	NodeClass *mr = new NodeClass();
+	auto *mr = new NodeClass();
 	_listMenu[6] = (mr);
 	mr->Text[0] = 10;
 	mr->Text[1] = 11;
@@ -129,13 +145,13 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 	mr->setPrev(md);
 	mr->setOwner(this);
 
-	NodeChoseStartClass *mrc = new NodeChoseStartClass();
+	auto *mrc = new NodeChoseStartClass();
 	_listMenu[7] = (mrc);
 	mr->setInner(mrc);
 	mrc->setOwner(mr);
 
 
-	NodeClass *mre = new NodeClass();
+	auto *mre = new NodeClass();
 	_listMenu[8] = (mre);
 
 	mre->Text[0] = 253;
@@ -166,7 +182,7 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 void MainNodeBuilderClass::deleteMenu()
 {
 	deleteListMenu(MENULENGTHM, _listMenu);
-	_listMenu = NULL;
+	_listMenu = nullptr;
 }
 
 void MainNodeBuilderClass::show()

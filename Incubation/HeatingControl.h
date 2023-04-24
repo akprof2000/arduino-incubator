@@ -11,7 +11,7 @@
 
 class HeatingControlClass
 {
-
+	bool overHeating = false;
 	void funcontrol();
  protected:
 
