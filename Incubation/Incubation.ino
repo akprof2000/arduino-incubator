@@ -57,9 +57,9 @@ void setup() {
 	pinMode(HEATCONTROL, OUTPUT);
 	digitalWrite(HEATCONTROL, 0);
 	pinMode(FANPIN, OUTPUT);
-	digitalWrite(FANPIN, HIGH);
+	digitalWrite(FANPIN, LOW);
 	pinMode(COOLERPIN, OUTPUT);
-	digitalWrite(COOLERPIN, HIGH);
+	digitalWrite(COOLERPIN, LOW);
 
 
 	myHumidity.begin();

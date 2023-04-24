@@ -8,14 +8,13 @@
 
 StatusInfoClass StatusInfo;
 
-void StatusInfoClass::AddStatus(StatusOper status, byte fill)
+void StatusInfoClass::AddStatus(StatusOper status, double fill)
 {
-	_oper[(int)status] = fill * 100 / 255;
-	if (_oper[so_blow] != 0)
-		if (_oper[so_cool] != 0)
-		{
-			_oper[so_cool] = 0;
-		}
+	_oper[(int)status] = round(fill * 100.0 / 255.0);
+	if (_oper[so_blow] != 0 && _oper[so_cool] != 0)
+	{
+		_oper[so_cool] = 0;
+	}
 }
 
 String StatusInfoClass::Print()

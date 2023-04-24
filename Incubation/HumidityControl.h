@@ -13,7 +13,7 @@ class HumidityControlClass
 {	
 	unsigned long _timer = 0;
 	byte _currentVal = 0;
-	float _delta = 255;
+	double _delta = 255;
 	bool _on = false;
  
  public:

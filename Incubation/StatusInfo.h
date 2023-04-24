@@ -40,7 +40,7 @@ class StatusInfoClass
 			 _oper[i] = 0;
 		 }
 	 }
-	 void AddStatus(StatusOper status, byte fill);
+	 void AddStatus(StatusOper status, double fill);
 	 String Print();
 };
 

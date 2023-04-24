@@ -21,12 +21,15 @@ enum FanUser
 class VentilationControlClass
 {
 	unsigned long _timer = 0;
+	byte _curr_hum = 0;
+	byte _curr_temp = 0;
+	byte _curr_vent = 0;
 	byte _currentVal = 0;
-	float _delta = 255;
+	double _delta = 255;
 	bool _on = false;
 	FanUser _curUser = fu_none;
  public:
-	void SetSpeed(byte val, FanUser user);
+	void SetSpeed(double val, FanUser user);
 	void wait();
 	void refresh();
 };

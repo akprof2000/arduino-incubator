@@ -30,8 +30,8 @@ constexpr auto HEATCONTROL = 2;
 constexpr auto PEEKVALUE = 5000;
 constexpr auto PEEKDEV = 100;
 
-constexpr auto FANPIN = 3;
-constexpr auto COOLERPIN = 4;
+constexpr auto FANPIN = 4;
+constexpr auto COOLERPIN = 3;
 
 constexpr auto ROTATEVENT = 40000;
 constexpr auto INTERVAL = 9;
@@ -58,7 +58,7 @@ constexpr auto BASEHUM = 45;
 constexpr auto LCDCOLS = 16;
 constexpr auto LCDROWS = 2;
 
-constexpr auto BRITHPIN = A0;
+constexpr auto BRITHPIN = 7;
 constexpr auto CONTRPIN = A1;
 
 constexpr auto LCDRS = 13;
@@ -68,7 +68,7 @@ constexpr auto LCDD5 = 10;
 constexpr auto LCDD6 = 9;
 constexpr auto LCDD7 = 8;
 
-constexpr auto COEFF = 11.29158979063621;
+//constexpr auto COEFF = 11.29158979063621;
 
 
 constexpr auto ONE_WIRE_BUS = 19;

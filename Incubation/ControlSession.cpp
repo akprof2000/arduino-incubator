@@ -174,7 +174,7 @@ void ControlSessionClass::refresh()
 			Alerting.Start(at_connect);
 		}
 
-		if (Hum == true && Heet == true)
+		if (Hum == true || Heet == true)
 		{
 			_starting = true;
 		}

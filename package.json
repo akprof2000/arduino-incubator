@@ -1,0 +1,20 @@
+{
+    "name": "Incubation",
+    "version": "0.0.1",
+    "description": "Инкубатор на Arduino",
+    "scripts": {
+        "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+        "postversion": "git push && git push --tags"
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "author": "Alexey Kozlov"
+}

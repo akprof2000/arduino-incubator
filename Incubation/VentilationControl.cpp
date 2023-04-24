@@ -1,6 +1,6 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "VentilationControl.h"
 #include "objects.h"
@@ -9,25 +9,64 @@
 
 VentilationControlClass VentilationControl;
 
-void VentilationControlClass::SetSpeed(byte val, FanUser user)
-{	
-	if (_curUser == user)
+void VentilationControlClass::SetSpeed(double val, FanUser user)
+{
+	_curUser = user;
+	_currentVal = 0;
+	if (_curUser == fu_hum)
 	{
-		_currentVal = val;
+		//_curr_hum = round(val);
 	}
-	else if (_currentVal < val )
+	else if (_curUser == fu_temp)
 	{
-		_currentVal = val;
-		_curUser = user;
+		_curr_temp = round(val);
 	}
-	
-	_delta = (255.0 - _currentVal) * PEEKVALUE / PEEKDEV;
-	
+	else if (_curUser == fu_vent)
+	{
+		//_curr_vent = round(val);
+	}
+	else
+	{
+		//_currentVal = round(val);
+	}
+
+
+	byte cr = 0;
+
+	if (cr < _curr_hum)
+	{
+		cr = _curr_hum;
+	}
+
+	if (cr < _curr_vent)
+	{
+		cr = _curr_vent;
+	}
+
+	if (cr < _curr_temp)
+	{
+		cr = _curr_temp;
+	}
+
+	_currentVal = cr;
+
+
+	if (_curr_hum == 0 && _curr_temp == 0 && _curr_vent == 0)
+	{
+		_currentVal = 0;
+	}
+	else
+	{
+		_delta = (255.0 - _currentVal) * PEEKVALUE / PEEKDEV;
+	}
+
+
+
 }
 
 void VentilationControlClass::wait()
 {
-	digitalWrite(COOLERPIN, HIGH);
+	digitalWrite(COOLERPIN, LOW);
 }
 
 void VentilationControlClass::refresh()
@@ -37,7 +76,7 @@ void VentilationControlClass::refresh()
 	{
 		if (_currentVal >= 255 || _delta < PEEKVALUE)
 		{
-			digitalWrite(COOLERPIN, LOW);
+			digitalWrite(COOLERPIN, HIGH);
 			return;
 		}
 		if (_on)
@@ -46,7 +85,8 @@ void VentilationControlClass::refresh()
 			{
 				_timer = millis();
 				_on = false;
-				digitalWrite(COOLERPIN, HIGH);
+				digitalWrite(COOLERPIN, LOW);
+
 			}
 		}
 		else
@@ -55,15 +95,20 @@ void VentilationControlClass::refresh()
 			{
 				_timer = millis();
 				_on = true;
-				digitalWrite(COOLERPIN, LOW);
+				digitalWrite(COOLERPIN, HIGH);
+
 			}
 		}
+
 
 
 	}
 	else
 	{
-		digitalWrite(COOLERPIN, HIGH);
+		digitalWrite(COOLERPIN, LOW);
+//		lcd.setCursor(0, 0);
+//		lcd.print("V=STOP");
+
 	}
 
 }

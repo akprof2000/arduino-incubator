@@ -40,8 +40,8 @@ void HumidityControlClass::funcontrol()
 	if (base > alHumDel)
 	{
 	
-		float data = base * COEFF / alTmpMax;
-		float cntrl = 2 * sq(data);
+		double data = 0xFF / (double)sq(alHumMax);
+		double cntrl = sq(base) * data;
 
 		if (minhum * 2.6 > cntrl)
 			cntrl = minhum * 2.6;
@@ -57,7 +57,7 @@ void HumidityControlClass::wait()
 	StatusInfo.AddStatus(so_dry, 0);
 	StatusInfo.AddStatus(so_wet, 0);
 	VentilationControl.SetSpeed(0, fu_hum);	
-	digitalWrite(FANPIN, HIGH);
+	digitalWrite(FANPIN, LOW);
 
 }
 
@@ -68,7 +68,7 @@ void HumidityControlClass::refresh()
 
 	if (currentHumd >= 997)
 	{
-		analogWrite(FANPIN, HIGH);
+		analogWrite(FANPIN, LOW);
 		StatusInfo.AddStatus(so_wet, 0);
 		return;
 	}
@@ -82,14 +82,14 @@ void HumidityControlClass::refresh()
 	if (base <= 0)
 	{
 		
-		digitalWrite(FANPIN, HIGH);
+		digitalWrite(FANPIN, LOW);
 		StatusInfo.AddStatus(so_wet, 0);
 		return;
 	}
 
 	if (base >= alHumMax)
 	{
-		digitalWrite(FANPIN, LOW);
+		digitalWrite(FANPIN, HIGH);
 		StatusInfo.AddStatus(so_wet, 0xFF);
 		return;
 	}
@@ -99,15 +99,13 @@ void HumidityControlClass::refresh()
 	if (base > alHumDel )
 	{
 		
-		float data = base * COEFF / alHumMax;
-		float cntrl = 2 * sq(data);
+		double data = 0xFF / (double)sq(alHumMax);
+		double cntrl = sq(base) * data;
 
 		if (minhum * 2.6 > cntrl)
 			cntrl = minhum * 2.6;
 
-
 		_delta = (255.0 - cntrl) * PEEKVALUE / PEEKDEV;
-
 
 		if (cntrl > 0)
 		{
@@ -126,7 +124,7 @@ void HumidityControlClass::refresh()
 					_timer = millis();
 					_on = false;
 
-					digitalWrite(FANPIN, HIGH);
+					digitalWrite(FANPIN, LOW);
 				}
 			}
 			else
@@ -136,7 +134,7 @@ void HumidityControlClass::refresh()
 					_timer = millis();
 					_on = true;
 
-					digitalWrite(FANPIN, LOW);
+					digitalWrite(FANPIN, HIGH);
 				}
 			}
 

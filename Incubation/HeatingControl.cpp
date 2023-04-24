@@ -23,8 +23,8 @@ void HeatingControlClass::wait()
 
 void HeatingControlClass::funcontrol()
 {
-	float temp = currentSetTemp;
-	float base = currentTemp - temp;
+	double temp = currentSetTemp;
+	double base = currentTemp - temp;
 	if (base <= 0)
 	{
 		VentilationControl.SetSpeed(0, fu_temp);
@@ -32,21 +32,20 @@ void HeatingControlClass::funcontrol()
 		return;
 	}
 
-	if (base >= alTmpMax)
+	if (base >= (double)alTmpMax)
 	{
 		StatusInfo.AddStatus(so_cool, 0xFF);
 		VentilationControl.SetSpeed(0xFF, fu_temp);
 		return;
 	}
 
-	float data = abs(base) * COEFF / alTmpMax;
-	float cntrl = 2 * sq(data);
-
-
 	if (base > alTmpDel / 10.0)
 	{
-		if (minheat * 2.6 > cntrl)
-			cntrl = minheat * 2.6;
+		double data = 0xFF / (double)sq(alTmpMax);
+		double cntrl = sq(base) * data;
+
+		if (minheat * 2.55 > cntrl)
+			cntrl = minheat * 2.55;
 		StatusInfo.AddStatus(so_cool, cntrl);
 		VentilationControl.SetSpeed(cntrl, fu_temp);
 	}
@@ -78,11 +77,12 @@ void HeatingControlClass::refresh()
 
 	if (base > alTmpDel / 10.0)
 	{
+		double data = 0xFF / (double)sq(alTmpMax);
+		double cntrl = sq(base) * data;
 
-		float data = base * COEFF / alTmpMax;
-		float cntrl = 2 * sq(data);
-		if (minheat * 2.6 > cntrl)
-			cntrl = minheat * 2.6;
+		if (minheat * 2.55 > cntrl)
+			cntrl = minheat * 2.55;
+
 		analogWrite(HEATCONTROL, cntrl);
 		StatusInfo.AddStatus(so_heet, cntrl);
 	}
