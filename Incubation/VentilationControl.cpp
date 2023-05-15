@@ -15,7 +15,7 @@ void VentilationControlClass::SetSpeed(double val, FanUser user)
 	_currentVal = 0;
 	if (_curUser == fu_hum)
 	{
-		//_curr_hum = round(val);
+		_curr_hum = round(val);
 	}
 	else if (_curUser == fu_temp)
 	{
@@ -23,11 +23,11 @@ void VentilationControlClass::SetSpeed(double val, FanUser user)
 	}
 	else if (_curUser == fu_vent)
 	{
-		//_curr_vent = round(val);
+		_curr_vent = round(val);
 	}
 	else
 	{
-		//_currentVal = round(val);
+		_currentVal = round(val);
 	}
 
 
@@ -74,6 +74,9 @@ void VentilationControlClass::refresh()
 
 	if (_currentVal > 0)
 	{
+		//lcd.setCursor(0, 0);
+		//lcd.print("V=");
+		//lcd.print(_currentVal);
 		if (_currentVal >= 255 || _delta < PEEKVALUE)
 		{
 			digitalWrite(COOLERPIN, HIGH);
@@ -106,8 +109,8 @@ void VentilationControlClass::refresh()
 	else
 	{
 		digitalWrite(COOLERPIN, LOW);
-//		lcd.setCursor(0, 0);
-//		lcd.print("V=STOP");
+		//lcd.setCursor(0, 0);
+		//lcd.print("V=STOP");
 
 	}
 

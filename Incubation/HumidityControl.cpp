@@ -56,7 +56,7 @@ void HumidityControlClass::wait()
 
 	StatusInfo.AddStatus(so_dry, 0);
 	StatusInfo.AddStatus(so_wet, 0);
-	VentilationControl.SetSpeed(0, fu_hum);	
+	VentilationControl.SetSpeed(0, fu_hum);
 	digitalWrite(FANPIN, LOW);
 
 }

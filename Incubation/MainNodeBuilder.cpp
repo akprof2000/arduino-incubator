@@ -68,9 +68,7 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 
 	auto *mmc_ = new DeltaEggClass();
 	_listMenu[13] = (mmc_);
-
-	mmc->setInner(mmc_);
-	mmc_->setOwner(mmc);
+	mmc_->setOwner(mm);
 
 
 
@@ -88,10 +86,6 @@ BaseNodeClass * MainNodeBuilderClass::getInner()
 	mmc->setPrev(mmme);
 
 	mmme->setOwner(mm);
-
-
-
-
 	mmme->setInner(mm);
 
 
