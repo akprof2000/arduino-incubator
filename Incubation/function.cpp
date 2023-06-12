@@ -184,6 +184,8 @@ String gettextprj(byte data)
 		return F("Расхождение по температуре!!");
 	case 153:
 		return F("Расхождение по влажности!!");
+	case 154:
+		return F("Ошибка основного датчика!!");
 
 
 	case 200:

@@ -264,8 +264,10 @@ void setup() {
 	sensors.setWaitForConversion(false);
 }
 
+int humerr = 60;
+
 void loop() {
-	
+
 	if (abs(millis() - timer) > REFRESHDATA)
 	{
 		sensors.requestTemperatures();
@@ -288,58 +290,67 @@ void loop() {
 
 		if (started != 0)
 		{
-
-			if (abs(currentHumd - (currentRow.GetHum() + BASEHUM)) > alHumMax)
+			if (currentHumd <= humerr)
 			{
-				Alerting.Start(at_hum);
-			}
-			else
-			{
-				Alerting.Finish(at_hum);
-			}
+				Alerting.Finish(at_err);
 
-
-			float mint = 127;
-			float maxt = -127;
-
-			for (size_t i = 0; i < devCount; i++)
-			{
-				float ct = sensors.getTempCByIndex(i);
-				if (ct > -127)
+				if (abs(currentHumd - (currentRow.GetHum() + BASEHUM)) > alHumMax)
 				{
-					if (ct < mint)
-					{
-						mint = ct;
-					}
+					Alerting.Start(at_hum);
+				}
+				else
+				{
+					Alerting.Finish(at_hum);
+				}
 
-					if (ct > maxt)
+
+				float mint = 127;
+				float maxt = -127;
+
+				for (size_t i = 0; i < devCount; i++)
+				{
+					float ct = sensors.getTempCByIndex(i);
+					if (ct > -127)
 					{
-						maxt = ct;
+						if (ct < mint)
+						{
+							mint = ct;
+						}
+
+						if (ct > maxt)
+						{
+							maxt = ct;
+						}
 					}
 				}
-			}
 
 
-			if (currentTemp > maxt)
-			{
-				maxt = currentTemp;
-			}
+				if (currentTemp > maxt)
+				{
+					maxt = currentTemp;
+				}
 
-			if (currentTemp < mint)
-			{
-				mint = currentTemp;
-			}
+				if (currentTemp < mint)
+				{
+					mint = currentTemp;
+				}
 
-			float temp = currentSetTemp;
+				float temp = currentSetTemp;
 
-			if (abs(mint - temp) > alTmpMax || abs(maxt - temp) > alTmpMax)
-			{
-				Alerting.Start(at_temp);
+				if (abs(mint - temp) > alTmpMax || abs(maxt - temp) > alTmpMax)
+				{
+					Alerting.Start(at_temp);
+				}
+				else
+				{
+					Alerting.Finish(at_temp);
+				}
 			}
 			else
 			{
-				Alerting.Finish(at_temp);
+				Alerting.Start(at_err);
 			}
+
 		}
 		else
 		{
@@ -347,7 +358,7 @@ void loop() {
 			Alerting.Finish(at_temp);
 		}
 	}
-	
+
 
 	if (hour() != currentHour)
 	{
@@ -357,7 +368,7 @@ void loop() {
 		{
 			if (RTC.chipPresent()) {
 				timerUpdated = 1;
-				RTC.set(now());   // set the RTC and the system time to the received value			
+				RTC.set(now());   // set the RTC and the system time to the received value
 				EEPROM.update(17, timerUpdated);
 			}
 
@@ -407,22 +418,31 @@ void loop() {
 		}
 	}
 
-	ControlSession.refresh();
+	if (currentHumd < humerr)
+	{
+		ControlSession.refresh();
 
-	if (ControlSession.Hum || ControlSession.Heet)
-		VentilationControl.refresh();
+		if (ControlSession.Hum || ControlSession.Heet)
+			VentilationControl.refresh();
+		else
+			VentilationControl.wait();
+
+		if (ControlSession.Heet)
+			HeatingControl.refresh();
+		else
+			HeatingControl.wait();
+
+		if (ControlSession.Hum)
+			HumidityControl.refresh();
+		else
+			HumidityControl.wait();
+	}
 	else
+	{
 		VentilationControl.wait();
-
-	if (ControlSession.Heet)
-		HeatingControl.refresh();
-	else
 		HeatingControl.wait();
-
-	if (ControlSession.Hum)
-		HumidityControl.refresh();
-	else
 		HumidityControl.wait();
+	}
 
 	Alerting.refresh();
 
@@ -442,24 +462,23 @@ void loop() {
 		lcd.print(currentTemp);
 	}
 	*/
-	//if (second() % 10 == 0 && second() != sec)
-	//{
-	//	check = !check;
-	//	sec = second();
-	//}
-	//if (check)
-	//{
-	//
-	//	lcd.setCursor(0, 1);
-	//	lcd.print(freeRam());
-	//}
+	if (second() % 10 == 0 && second() != sec)
+	{
+		check = !check;
+		sec = second();
+	}
+	if (check)
+	{
+
+		lcd.setCursor(0, 1);
+		lcd.print(freeRam());
+	}
 }
 
-/*
+
 int freeRam() {
 	extern int __heap_start, * __brkval;
 	int v = 0;
 	return (int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval);
 }
 
-*/

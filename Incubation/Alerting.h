@@ -9,19 +9,20 @@
 	#include "WProgram.h"
 #endif
 
-#define ENUMALERTLENGTH 4
+#define ENUMALERTLENGTH 5
 
 enum AlertingType
 {
 	at_connect,
 	at_endplan,
 	at_temp,
-	at_hum
+	at_hum,
+	at_err
 };
 
 class AlertingClass
 {
-	bool _info[ENUMALERTLENGTH] = { false, false, false, false };
+	bool _info[ENUMALERTLENGTH] = { false, false, false, false, false };
 	bool _blink = false;
 	bool _work = true;
 	bool _sound = true;
