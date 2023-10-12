@@ -259,20 +259,20 @@ void setup() {
 int humerr = 60;
 
 void loop() {
-
+/*
   if (second() % 10 == 0 && second() != sec) {
     check = !check;
     sec = second();
   }
-
+*/
   if (abs(millis() - timer) > REFRESHDATA) {
-
+/*
     if (check) {
 
       lcd.setCursor(0, 1);
       lcd.print(freeRam());
     }
-
+*/
     Watchdog.reset();
     sensors.requestTemperatures();
     tempC = sensors.getTempCByIndex(0);
@@ -433,10 +433,11 @@ void loop() {
 	}
 	*/
 }
-
+/*
 
 int freeRam() {
   extern int __heap_start, *__brkval;
   int v = 0;
   return (int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval);
 }
+*/
