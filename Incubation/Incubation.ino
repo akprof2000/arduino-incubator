@@ -256,7 +256,7 @@ void setup() {
   Watchdog.enable(RESET_MODE, WDT_PRESCALER_1024);
 }
 
-int humerr = 60;
+int humerr = 100;
 
 void loop() {
 /*
