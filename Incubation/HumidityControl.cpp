@@ -68,7 +68,7 @@ void HumidityControlClass::refresh()
 
 	if (currentHumd >= 997)
 	{
-		analogWrite(FANPIN, LOW);
+		digitalWrite(FANPIN, LOW);
 		StatusInfo.AddStatus(so_wet, 0);
 		return;
 	}

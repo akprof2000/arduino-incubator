@@ -74,9 +74,9 @@ void VentilationControlClass::refresh()
 
 	if (_currentVal > 0)
 	{
-		//lcd.setCursor(0, 0);
-		//lcd.print("V=");
-		//lcd.print(_currentVal);
+		lcd.setCursor(0, 0);
+		lcd.print("V=");
+		lcd.print(_currentVal);
 		if (_currentVal >= 255 || _delta < PEEKVALUE)
 		{
 			digitalWrite(COOLERPIN, HIGH);
@@ -109,9 +109,8 @@ void VentilationControlClass::refresh()
 	else
 	{
 		digitalWrite(COOLERPIN, LOW);
-		//lcd.setCursor(0, 0);
-		//lcd.print("V=STOP");
-
+		lcd.setCursor(0, 0);
+		lcd.print("V=STOP");
 	}
 
 }
