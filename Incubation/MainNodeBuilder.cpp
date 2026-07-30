@@ -2,185 +2,98 @@
 //
 //
 
-#include "function.h"
-
-
-#include "objects.h"
 #include "MainNodeBuilder.h"
-#include "DeltaLineNode.h"
+
 #include "ChangeDisplayNode.h"
-#include "NodeChoseStart.h"
-#include "node.h"
-#include "MinActionPercent.h"
 #include "DeltaEgg.h"
+#include "DeltaLineNode.h"
+#include "MinActionPercent.h"
+#include "NodeChoseStart.h"
+#include "function.h"
+#include "node.h"
+#include "objects.h"
 
-const int MENULENGTHM = 15;
-
-BaseNodeClass * MainNodeBuilderClass::getInner()
-{
-	if (_listMenu != nullptr)
-		return _listMenu[0];
-
-
-	_listMenu = createListMenu(MENULENGTHM);
-
-	auto *ml = new NodeClass();
-	_listMenu[0] = (ml);
-	ml->Text[0] = 5;
-	ml->Text[1] = 6;
-	this->setInner(ml);
-	ml->setOwner(this);
-
-
-	auto *mlc = new DeltaLineNodeClass();
-	//NodeClass *mlc = new NodeClass();
-	mlc->type = 0;
-	_listMenu[1] = (mlc);
-
-	ml->setInner(mlc);
-	mlc->setOwner(ml);
-
-	auto *mlch = new DeltaLineNodeClass();
-	//NodeClass *mlch = new NodeClass();
-	mlch->type = 1;
-	_listMenu[10] = (mlch);
-
-	mlc->setNext(mlch);
-	mlch->setPrev(mlc);
-	mlc->setOwner(ml);
-
-
-
-	auto *mm = new NodeClass();
-	_listMenu[11] = (mm);
-	mm->Text[0] = 53;
-	mm->Text[1] = 54;
-	ml->setNext(mm);
-	mm->setPrev(ml);
-	mm->setOwner(this);
-
-
-	auto *mmc = new MinActionPercentClass();
-	_listMenu[12] = (mmc);
-
-	mm->setInner(mmc);
-	mmc->setOwner(mm);
-
-	auto *mmc_ = new DeltaEggClass();
-	_listMenu[13] = (mmc_);
-	mmc_->setOwner(mm);
-
-
-
-	auto *mmme = new NodeClass();
-	_listMenu[14] = (mmme);
-
-	mmme->Text[0] = 253;
-
-	mmc->setNext(mmc_);
-	mmc_->setNext(mmme);
-	mmme->setNext(mmc);
-
-	mmme->setPrev(mmc_);
-	mmc_->setPrev(mmc);
-	mmc->setPrev(mmme);
-
-	mmme->setOwner(mm);
-	mmme->setInner(mm);
-
-
-
-
-
-	auto *mle = new NodeClass();
-	_listMenu[2] = (mle);
-	mle->Text[0] = 253;
-
-	mlch->setNext(mle);
-	mle->setPrev(mlch);
-	mle->setOwner(ml);
-
-	mlc->setPrev(mle);
-	mle->setNext(mlc);
-
-	mle->setInner(ml);
-
-	auto *md = new NodeClass();
-	_listMenu[3] = (md);
-	md->Text[0] = 9;
-	mm->setNext(md);
-	md->setPrev(mm);
-	md->setOwner(this);
-
-
-	auto *mdc = new ChangeDisplayNodeClass();
-	_listMenu[4] = (mdc);
-
-	md->setInner(mdc);
-	mdc->setOwner(md);
-
-
-	auto *mde = new NodeClass();
-	_listMenu[5] = (mde);
-
-	mde->Text[0] = 253;
-	mdc->setNext(mde);
-	mde->setOwner(md);
-	mde->setPrev(mdc);
-	mdc->setPrev(mde);
-	mde->setNext(mdc);
-	mde->setInner(md);
-
-	auto *mr = new NodeClass();
-	_listMenu[6] = (mr);
-	mr->Text[0] = 10;
-	mr->Text[1] = 11;
-	md->setNext(mr);
-	mr->setPrev(md);
-	mr->setOwner(this);
-
-	auto *mrc = new NodeChoseStartClass();
-	_listMenu[7] = (mrc);
-	mr->setInner(mrc);
-	mrc->setOwner(mr);
-
-
-	auto *mre = new NodeClass();
-	_listMenu[8] = (mre);
-
-	mre->Text[0] = 253;
-	mrc->setNext(mre);
-	mre->setOwner(mr);
-	mre->setPrev(mrc);
-	mrc->setPrev(mre);
-	mre->setNext(mrc);
-	mre->setInner(mr);
-
-	NodeClass *mme = new NodeClass();
-	_listMenu[9] = (mme);
-
-	mme->Text[0] = 253;
-	mr->setNext(mme);
-	mme->setPrev(mr);
-	mme->setOwner(this);
-	mme->setInner(this);
-	mme->setNext(ml);
-
-	ml->setPrev(mme);
-
-
-
-	return ml;
+template <typename TNode>
+TNode *MainNodeBuilderClass::make() {
+  TNode *node = new TNode();
+  if (node != nullptr && _slot < MENU_SIZE) _listMenu[_slot++] = node;
+  return node;
 }
 
-void MainNodeBuilderClass::deleteMenu()
-{
-	deleteListMenu(MENULENGTHM, _listMenu);
-	_listMenu = nullptr;
+BaseNodeClass *MainNodeBuilderClass::closeSubmenu(BaseNodeClass *parent, BaseNodeClass **items,
+                                                  byte count) {
+  auto *exitNode = make<NodeClass>();
+  if (exitNode == nullptr) return items[0];
+
+  exitNode->Text[0] = Txt::Exit;
+  exitNode->setOwner(parent);
+  exitNode->setInner(parent);  // «Выход» возвращает на родительский экран
+
+  for (byte i = 0; i < count; i++) {
+    items[i]->setOwner(parent);  // ИСПРАВЛЕНО: часть узлов оставалась без Owner,
+                                 // из-за чего кнопка «назад» на них не работала
+    if (i > 0) link(items[i - 1], items[i]);
+  }
+  link(items[count - 1], exitNode);
+  link(exitNode, items[0]);
+
+  parent->setInner(items[0]);
+  return items[0];
 }
 
-void MainNodeBuilderClass::show()
-{
-	baseShowData(2, gettextprj(1), gettextprj(2));
+BaseNodeClass *MainNodeBuilderClass::buildMenu() {
+  _slot = 0;
 
+  // --- 1. Пороги аварийных режимов работы -------------------------------
+  auto *alarms = make<NodeClass>();
+  if (alarms == nullptr) return nullptr;
+  alarms->Text[0] = Txt::AlarmSetup1;
+  alarms->Text[1] = Txt::AlarmSetup2;
+
+  auto *alarmTemp = make<DeltaLineNodeClass>();
+  auto *alarmHum = make<DeltaLineNodeClass>();
+  if (alarmTemp == nullptr || alarmHum == nullptr) return nullptr;
+  alarmTemp->type = 0;  // температура
+  alarmHum->type = 1;   // влажность
+  BaseNodeClass *alarmItems[] = {alarmTemp, alarmHum};
+  closeSubmenu(alarms, alarmItems, 2);
+
+  // --- 2. Пороговые значения включения ----------------------------------
+  auto *limits = make<NodeClass>();
+  if (limits == nullptr) return alarms;
+  limits->Text[0] = Txt::TrigVals1;
+  limits->Text[1] = Txt::TrigVals2;
+
+  auto *minPercent = make<MinActionPercentClass>();
+  auto *eggDelta = make<DeltaEggClass>();
+  if (minPercent == nullptr || eggDelta == nullptr) return alarms;
+  BaseNodeClass *limitItems[] = {minPercent, eggDelta};
+  closeSubmenu(limits, limitItems, 2);
+
+  // --- 3. Дисплей --------------------------------------------------------
+  auto *display = make<NodeClass>();
+  if (display == nullptr) return alarms;
+  display->Text[0] = Txt::Display;
+
+  auto *displayEdit = make<ChangeDisplayNodeClass>();
+  if (displayEdit == nullptr) return alarms;
+  BaseNodeClass *displayItems[] = {displayEdit};
+  closeSubmenu(display, displayItems, 1);
+
+  // --- 4. Запуск цикла ---------------------------------------------------
+  auto *start = make<NodeClass>();
+  if (start == nullptr) return alarms;
+  start->Text[0] = Txt::StartCycle1;
+  start->Text[1] = Txt::StartCycle2;
+
+  auto *startEdit = make<NodeChoseStartClass>();
+  if (startEdit == nullptr) return alarms;
+  BaseNodeClass *startItems[] = {startEdit};
+  closeSubmenu(start, startItems, 1);
+
+  // --- верхний уровень ---------------------------------------------------
+  BaseNodeClass *top[] = {alarms, limits, display, start};
+  return closeSubmenu(this, top, 4);
 }
+
+void MainNodeBuilderClass::show() { showTwoLines(Txt::MainMenu1, Txt::MainMenu2); }

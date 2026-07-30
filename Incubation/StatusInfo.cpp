@@ -1,59 +1,45 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "StatusInfo.h"
-#include "function.h"
-#include "objects.h"
 
 StatusInfoClass StatusInfo;
 
-void StatusInfoClass::AddStatus(StatusOper status, double fill)
-{
-	_oper[(int)status] = round(fill * 100.0 / 255.0);
-	if (_oper[so_blow] != 0 && _oper[so_cool] != 0)
-	{
-		_oper[so_cool] = 0;
-	}
+void StatusInfoClass::AddStatus(StatusOper status, double fill) {
+  if (status >= so_count) return;
+
+  long percent = lround(fill * 100.0 / 255.0);
+  if (percent < 0) percent = 0;
+  if (percent > 100) percent = 100;
+  _oper[status] = static_cast<uint8_t>(percent);
+
+  // Одновременно выдувать и проветривать бессмысленно: проветривание главнее.
+  if (_oper[so_blow] != 0) _oper[so_cool] = 0;
 }
 
-String StatusInfoClass::Print()
-{
-	byte len = 0;
-	String res = "";
-	for (size_t i = 0; i < STATLEN; i++)
-	{
-		String curr = len > 0 ? "; " : "";
-		switch ((StatusOper)i)
-		{
-		case so_none:
-		case so_heet:
-		case so_cool:
-		case so_wet:
-		case so_dry:
-			curr += gettextprj(101 + i) + String(_oper[i]) + gettextprj(240);
-			break;
-		case so_blow:
-		case so_rot:
-		case so_cent:
-		case so_door:
-			curr += gettextprj(101 + i);
-			break;
-		default:
-			break;
-		}
+void StatusInfoClass::Print(TextBuilder &builder) const {
+  for (uint8_t i = 0; i < so_count; i++) {
+    if (_oper[i] == 0) continue;
 
-		if (_oper[i] > 0)
-		{
-			res += curr;
-			len++;
-		}
-	}
+    builder.addSeparator();
+    builder.addP(Txt::OperFirst + i);
 
-	if (len == 0)
-		res = gettextprj(100);
+    // У «процентных» операций после названия открыта скобка — закрываем её
+    // значением. У событийных (поворот, дверь, ...) скобки нет.
+    switch (static_cast<StatusOper>(i)) {
+      case so_none:
+      case so_heet:
+      case so_cool:
+      case so_wet:
+      case so_dry:
+        builder.add(static_cast<unsigned int>(_oper[i]));
+        builder.addP(Txt::PctClose);
+        break;
+      default:
+        break;
+    }
+  }
 
-	return res;
+  if (builder.empty()) builder.addP(Txt::NoActions);
 }
-
-

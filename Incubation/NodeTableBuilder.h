@@ -3,28 +3,22 @@
 #ifndef _NODETABLEBUILDER_h
 #define _NODETABLEBUILDER_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 #include "BaseNode.h"
 
-
-class NodeTableBuilderClass : public BaseNodeClass
-{
-private:
-	BaseNodeClass  **_listMenu;	
-
+// Экран периода схемы. Внутри — редактирование длительности, уставок T/H,
+// поворота и проветривания.
+class NodeTableBuilderClass : public MenuOwnerNodeClass {
  public:
-	 BaseNodeClass *getInner();
-	 void deleteMenu();
-	 void show();
+  NodeTableBuilderClass() : MenuOwnerNodeClass(MENU_SIZE) {}
+  void show() override;
 
+ protected:
+  BaseNodeClass *buildMenu() override;
+
+ private:
+  static constexpr byte MENU_SIZE = 4;
 };
 
-
-
 #endif
-

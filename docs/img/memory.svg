@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" role="img" aria-label="Сравнение расхода памяти">
+<style>text{fill:#57606a}</style>
+<text x="30.0" y="26.0" font-size="15" fill="#57606a" text-anchor="start" font-weight="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">Расход памяти ATmega2560: до и после рефакторинга</text>
+<text x="30.0" y="54.0" font-size="12" fill="#57606a" text-anchor="start" font-weight="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">FLASH (из 253 952 Б)</text>
+<text x="198.0" y="92.0" font-size="11" fill="#57606a" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">было</text>
+<rect x="210.0" y="74.0" width="420.0" height="26.0" rx="3" fill="#57606a" fill-opacity="0.08" stroke="none"/>
+<rect x="210.0" y="74.0" width="91.1" height="26.0" rx="3" fill="#57606a" fill-opacity="0.45" stroke="none"/>
+<text x="309.1" y="92.0" font-size="11" fill="#57606a" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">55 074 Б (22 %)</text>
+<text x="198.0" y="132.0" font-size="11" fill="#57606a" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">стало</text>
+<rect x="210.0" y="114.0" width="420.0" height="26.0" rx="3" fill="#57606a" fill-opacity="0.08" stroke="none"/>
+<rect x="210.0" y="114.0" width="66.0" height="26.0" rx="3" fill="#1a7f37" fill-opacity="0.85" stroke="none"/>
+<text x="284.0" y="132.0" font-size="11" fill="#57606a" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">39 912 Б (16 %)</text>
+<text x="30.0" y="104.0" font-size="15" fill="#1a7f37" text-anchor="start" font-weight="700" font-family="Segoe UI, Helvetica, Arial, sans-serif">−28 %</text>
+<text x="30.0" y="189.0" font-size="12" fill="#57606a" text-anchor="start" font-weight="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">SRAM (из 8 192 Б)</text>
+<text x="198.0" y="227.0" font-size="11" fill="#57606a" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">было</text>
+<rect x="210.0" y="209.0" width="420.0" height="26.0" rx="3" fill="#57606a" fill-opacity="0.08" stroke="none"/>
+<rect x="210.0" y="209.0" width="191.5" height="26.0" rx="3" fill="#57606a" fill-opacity="0.45" stroke="none"/>
+<text x="409.5" y="227.0" font-size="11" fill="#57606a" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">3 736 Б (46 %)</text>
+<text x="198.0" y="267.0" font-size="11" fill="#57606a" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">стало</text>
+<rect x="210.0" y="249.0" width="420.0" height="26.0" rx="3" fill="#57606a" fill-opacity="0.08" stroke="none"/>
+<rect x="210.0" y="249.0" width="91.9" height="26.0" rx="3" fill="#1a7f37" fill-opacity="0.85" stroke="none"/>
+<text x="309.9" y="267.0" font-size="11" fill="#57606a" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">1 793 Б (22 %)</text>
+<text x="30.0" y="239.0" font-size="15" fill="#1a7f37" text-anchor="start" font-weight="700" font-family="Segoe UI, Helvetica, Arial, sans-serif">−52 %</text>
+<text x="30.0" y="282.0" font-size="11" fill="#57606a" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">Освободилось 1 943 Б SRAM — это 24 % всей оперативной памяти контроллера.</text>
+</svg>

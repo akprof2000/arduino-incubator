@@ -1,230 +1,182 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "NodeManager.h"
+
 #include "Alerting.h"
 #include "objects.h"
+#include "timing.h"
 
 NodeManagerClass NodeManager;
 
-void NodeManagerClass::init()
-{
-	_currentnode = Menuconfig.initstatus();
-	_mainnode = _currentnode;
-	_status = true;
+void NodeManagerClass::init() {
+  _currentnode = Menuconfig.initstatus();
+  _mainnode = _currentnode;
+  _status = true;
+  _show = false;
+  _timing = millis();
+  _timingsleep = _timing;
 }
 
-void NodeManagerClass::work()
-{
-	for (byte i = 0; i < 4; i++)
-	{
-		if (bouncer[i].update())
-		{
-			adjustments.setup(BRITHPIN, CONTRPIN, bright, 100 - contr);
-			_timing = millis();
-			_timingsleep = _timing;
-			appl[i] = false;
-
-			if (bouncer[i].read() == HIGH)
-			{
-				bState[i] = btn_up;
-			}
-			else
-			{
-				bState[i] = btn_down;
-				bPressTime[i] = millis();
-			}
-		}
-
-		if (bState[i] == btn_down)
-		{
-			_timingsleep = _timing;
-			if (abs(millis() - bPressTime[i]) > PUSHINTERVAL)
-			{
-				_timing = millis();
-				bState[i] = btn_push;
-				appl[i] = false;
-
-			}
-		}
-
-		if (bState[i] == btn_push)
-		{
-			_timingsleep = _timing;
-		}
-	}
-
-	if (bState[0] == btn_down)
-		Alerting.BlockSound();
-
-	if (bState[3] == btn_down && appl[3] == false)
-	{
-
-
-		if (_currentnode->getOwner() != NULL)
-		{
-
-			if (_currentnode->allowOwner())
-			{
-				_show = false;
-
-				_currentnode = _currentnode->getOwner();
-				bPressTime[3] = millis();
-				appl[3] = true;
-			}
-		}
-		else if (!appl[3])
-		{
-			_show = false;
-			if (_status)
-			{
-
-				_currentnode = Menuconfig.initmenu();
-				Menuconfig.clearstatus();
-				_status = false;
-			}
-			else
-			{
-
-				_currentnode = Menuconfig.initstatus();
-				Menuconfig.clearmenu();
-				_status = true;
-			}
-			appl[3] = true;
-		}
-
-	}
-	else if (bState[0] == btn_down && appl[0] == false)
-	{
-
-		if (_currentnode->getInner() != NULL)
-		{
-
-			if (_currentnode->allowInner())
-			{
-				_show = false;
-
-				_currentnode = _currentnode->getInner();
-				appl[0] = true;
-			}
-		}
-		else if (_currentnode->exit && !_status)
-		{
-
-			_currentnode = Menuconfig.initstatus();
-			Menuconfig.clearmenu();
-			_status = true;
-			_show = false;
-			appl[0] = true;
-		}
-	}
-	else if (bState[1] == btn_down && appl[1] == false)
-	{
-
-
-		if (_currentnode->getNext() != NULL)
-		{
-
-			if (_currentnode->allowNext())
-			{
-				_show = false;
-
-				_currentnode = _currentnode->getNext();
-				appl[1] = true;
-			}
-		}
-	}
-	else	if (bState[2] == btn_down && appl[2] == false)
-	{
-
-		if (_currentnode->getPrev() != NULL)
-		{
-			if (_currentnode->allowPrev())
-			{
-				_show = false;
-
-				_currentnode = _currentnode->getPrev();
-				appl[2] = true;
-			}
-		}
-	}
-
-	if (abs(millis() - _timingsleep) > MENUEXIT || toroot)
-	{
-		
-		if (!_status || toroot)
-		{
-			toroot = false;
-			BaseNodeClass* bnc = _currentnode;
-
-			_currentnode = Menuconfig.initstatus();
-			Menuconfig.clearmenu();
-			_status = true;
-			bPressTime[3] = millis();
-			appl[3] = true;
-
-			reset(bnc);
-
-		}
-
-		_timingsleep = millis();
-		//adjustments.enterPowerSaving();
-		adjustments.setup(BRITHPIN, CONTRPIN, 0, 100 - contr);
-	}
-
-	if (!_show)
-	{
-		_timing = millis();
-		_currentnode->deleteMenu();
-		_currentnode->show();
-		_show = true;
-	}
-
-	else
-	{
-		if (_status == true)
-		{
-			if (abs(millis() - _timing) > DISPLAYINTERVAL)
-			{
-				_timing = millis();
-				_currentnode->renew();
-			}
-		}
-
-		if (abs(millis() - _timing) > ENDINTERVAL)
-		{
-			_currentnode = _mainnode;
-			_show = false;
-			/*
-			if (_currentnode->autoinner)
-			{
-				if (_currentnode->getInner() != NULL)
-				{
-					if (_currentnode->allowInner())
-					{
-						_currentnode = _currentnode-> getInner();
-						_show = false;
-					}
-				}
-			}	*/
-		}
-	}
-	_currentnode->refresh();
-
+void NodeManagerClass::goTo(BaseNodeClass *node) {
+  if (node == nullptr) return;
+  _currentnode = node;
+  _show = false;
 }
 
-void NodeManagerClass::reset(BaseNodeClass* bnc) noexcept
-{
-	int i = 0;
-	while (bnc->getOwner() != NULL)
-	{
-		bnc = bnc->getOwner();
-		bnc->deleteMenu();
-		i++;
-		if (i > 20)
-			return;
-	}
+void NodeManagerClass::goToStatus() {
+  BaseNodeClass *node = Menuconfig.initstatus();
+  Menuconfig.clearmenu();
+  if (node != nullptr) {
+    _currentnode = node;
+    _mainnode = node;
+  }
+  _status = true;
+  _show = false;
 }
 
+void NodeManagerClass::goToMenu() {
+  BaseNodeClass *node = Menuconfig.initmenu();
+  if (node == nullptr) return;  // не хватило памяти — остаёмся в статусе
+  Menuconfig.clearstatus();
+  _currentnode = node;
+  _status = false;
+  _show = false;
+}
 
+// ---------------------------------------------------------------------------
+// Опрос кнопок
+// ---------------------------------------------------------------------------
+void NodeManagerClass::readButtons() {
+  for (byte i = 0; i < BUTTON_COUNT; i++) {
+    if (bouncer[i].update()) {
+      // Любое нажатие «будит» подсветку.
+      adjustments.setup(BRITHPIN, CONTRPIN, bright, 100 - contr);
+      _timing = millis();
+      _timingsleep = _timing;
+      appl[i] = false;
+
+      if (bouncer[i].read() == HIGH) {
+        bState[i] = btn_up;
+      } else {
+        bState[i] = btn_down;
+        bPressTime[i] = millis();
+      }
+    }
+
+    if (bState[i] == btn_down) {
+      _timingsleep = _timing;
+      if (expired(bPressTime[i], PUSHINTERVAL)) {
+        _timing = millis();
+        bState[i] = btn_push;  // перешли в режим удержания
+        appl[i] = false;
+      }
+    } else if (bState[i] == btn_push) {
+      _timingsleep = _timing;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Навигация
+// ---------------------------------------------------------------------------
+bool NodeManagerClass::navigate() {
+  // Долгое удержание «назад» — сразу в корень (экраны статуса).
+  // Раньше выйти из глубокого подменю можно было только пошагово
+  // или дождавшись таймаута в минуту.
+  if (bState[BTN_BACK] == btn_push && !appl[BTN_BACK]) {
+    appl[BTN_BACK] = true;
+    if (!_status) {
+      goToStatus();
+      return true;
+    }
+  }
+
+  if (bState[BTN_BACK] == btn_down && !appl[BTN_BACK]) {
+    appl[BTN_BACK] = true;
+    bPressTime[BTN_BACK] = millis();
+
+    if (_currentnode->getOwner() != nullptr) {
+      if (_currentnode->allowOwner()) goTo(_currentnode->getOwner());
+    } else if (_status) {
+      goToMenu();
+    } else {
+      goToStatus();
+    }
+    return true;
+  }
+
+  if (bState[BTN_OK] == btn_down && !appl[BTN_OK]) {
+    BaseNodeClass *inner = _currentnode->getInner();
+    if (inner != nullptr) {
+      if (_currentnode->allowInner()) {
+        appl[BTN_OK] = true;
+        goTo(inner);
+      }
+    } else if (_currentnode->exit && !_status) {
+      appl[BTN_OK] = true;
+      goToStatus();
+    }
+    return true;
+  }
+
+  if (bState[BTN_UP] == btn_down && !appl[BTN_UP]) {
+    if (_currentnode->getNext() != nullptr && _currentnode->allowNext()) {
+      appl[BTN_UP] = true;
+      goTo(_currentnode->getNext());
+    }
+    return true;
+  }
+
+  if (bState[BTN_DOWN] == btn_down && !appl[BTN_DOWN]) {
+    if (_currentnode->getPrev() != nullptr && _currentnode->allowPrev()) {
+      appl[BTN_DOWN] = true;
+      goTo(_currentnode->getPrev());
+    }
+    return true;
+  }
+
+  return false;
+}
+
+void NodeManagerClass::work() {
+  readButtons();
+
+  // Кнопка «OK» дополнительно глушит звук аварии.
+  if (bState[BTN_OK] == btn_down) Alerting.BlockSound();
+
+  navigate();
+
+  // Бездействие: гасим подсветку и возвращаемся из меню в статус.
+  if (expired(_timingsleep, MENUEXIT) || toroot) {
+    if (!_status || toroot) {
+      toroot = false;
+      goToStatus();
+      bPressTime[BTN_BACK] = millis();
+      appl[BTN_BACK] = true;
+    }
+    _timingsleep = millis();
+    adjustments.setup(BRITHPIN, CONTRPIN, 0, 100 - contr);
+  }
+
+  if (_currentnode == nullptr) return;
+
+  if (!_show) {
+    _timing = millis();
+    _currentnode->deleteMenu();  // подменю пересоздаётся при входе
+    _currentnode->show();
+    _show = true;
+  } else {
+    if (_status && expired(_timing, DISPLAYINTERVAL)) {
+      _timing = millis();
+      _currentnode->renew();
+    }
+
+    if (expired(_timing, ENDINTERVAL)) {
+      goTo(_mainnode);
+    }
+  }
+
+  _currentnode->refresh();
+}

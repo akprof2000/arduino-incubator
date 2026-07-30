@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="760" height="340" role="img" aria-label="График режима инкубации: Утки">
+<style>text{fill:#57606a}</style>
+<text x="55.0" y="24.0" font-size="15" fill="#57606a" text-anchor="start" font-weight="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">Режим инкубации: Утки (30 дней)</text>
+<rect x="55.0" y="46.0" width="346.7" height="218.0" rx="0" fill="#57606a" fill-opacity="0.05" stroke="none"/>
+<text x="228.3" y="38.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">Период 1</text>
+<rect x="401.7" y="46.0" width="216.7" height="218.0" rx="0" fill="#57606a" fill-opacity="0.10" stroke="none"/>
+<text x="510.0" y="38.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">Период 2</text>
+<rect x="618.3" y="46.0" width="43.3" height="218.0" rx="0" fill="#57606a" fill-opacity="0.05" stroke="none"/>
+<text x="640.0" y="38.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">Период 3</text>
+<rect x="661.7" y="46.0" width="43.3" height="218.0" rx="0" fill="#57606a" fill-opacity="0.10" stroke="none"/>
+<text x="683.3" y="38.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">Период 4</text>
+<line x1="55.0" y1="264.0" x2="705.0" y2="264.0" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="268.0" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">36.5</text>
+<line x1="55.0" y1="209.5" x2="705.0" y2="209.5" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="213.5" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">37.0</text>
+<line x1="55.0" y1="155.0" x2="705.0" y2="155.0" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="159.0" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">37.5</text>
+<line x1="55.0" y1="100.5" x2="705.0" y2="100.5" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="104.5" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">38.0</text>
+<line x1="55.0" y1="46.0" x2="705.0" y2="46.0" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="50.0" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">38.5</text>
+<text x="713.0" y="268.0" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">40</text>
+<text x="713.0" y="213.5" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">50</text>
+<text x="713.0" y="159.0" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">60</text>
+<text x="713.0" y="104.5" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">70</text>
+<text x="713.0" y="50.0" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">80</text>
+<text x="14.0" y="32.0" font-size="11" fill="#d1242f" text-anchor="start" font-weight="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">°C</text>
+<text x="726.0" y="32.0" font-size="11" fill="#0969da" text-anchor="start" font-weight="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">%</text>
+<path d="M55.0 100.5 L401.7 100.5 L401.7 155.0 L618.3 155.0 L618.3 187.7 L661.7 187.7 L661.7 209.5 L705.0 209.5" fill="none" stroke="#d1242f" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M55.0 155.0 L401.7 155.0 L401.7 198.6 L618.3 198.6 L618.3 100.5 L661.7 100.5 L661.7 100.5 L705.0 100.5" fill="none" stroke="#0969da" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="55.0" y1="264.0" x2="705.0" y2="264.0" stroke="#57606a" stroke-width="1.2"/>
+<line x1="55.0" y1="264.0" x2="55.0" y2="269.0" stroke="#57606a" stroke-width="1"/>
+<text x="55.0" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">1</text>
+<line x1="401.7" y1="264.0" x2="401.7" y2="269.0" stroke="#57606a" stroke-width="1"/>
+<text x="401.7" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">17</text>
+<line x1="618.3" y1="264.0" x2="618.3" y2="269.0" stroke="#57606a" stroke-width="1"/>
+<text x="618.3" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">27</text>
+<line x1="661.7" y1="264.0" x2="661.7" y2="269.0" stroke="#57606a" stroke-width="1"/>
+<text x="661.7" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">29</text>
+<text x="705.0" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">30</text>
+<text x="380.0" y="300.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">день цикла</text>
+<rect x="56.0" y="303.0" width="344.7" height="17.0" rx="3" fill="#8250df" fill-opacity="0.14" stroke="none"/>
+<text x="228.3" y="315.0" font-size="9" fill="#8250df" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">поворот 4/сут, провет. 2x5м</text>
+<rect x="402.7" y="303.0" width="214.7" height="17.0" rx="3" fill="#8250df" fill-opacity="0.14" stroke="none"/>
+<text x="510.0" y="315.0" font-size="9" fill="#8250df" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">поворот 4/сут, провет. 4x20м</text>
+<rect x="619.3" y="303.0" width="41.3" height="17.0" rx="3" fill="#1a7f37" fill-opacity="0.14" stroke="none"/>
+<text x="640.0" y="315.0" font-size="9" fill="#1a7f37" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">провет. 2x10м</text>
+<rect x="662.7" y="303.0" width="41.3" height="17.0" rx="3" fill="#57606a" fill-opacity="0.14" stroke="none"/>
+<text x="683.3" y="315.0" font-size="9" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">—</text>
+<line x1="515.0" y1="20.0" x2="533.0" y2="20.0" stroke="#d1242f" stroke-width="2.5"/>
+<text x="539.0" y="24.0" font-size="10" fill="#d1242f" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">температура</text>
+<line x1="625.0" y1="20.0" x2="643.0" y2="20.0" stroke="#0969da" stroke-width="2.5"/>
+<text x="649.0" y="24.0" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">влажность</text>
+</svg>

@@ -1,137 +1,53 @@
-// 
-// 
-// 
-#include <EEPROM.h>
+//
+//
+//
+
 #include "ChangeDisplayNode.h"
-#include "objects.h"
+
 #include "function.h"
+#include "objects.h"
+#include "storage.h"
 
-bool ChangeDisplayNodeClass::allowInner()
-{
-	if (_shift > 0 && _shift < 3)
-	{
-		return false;
-	}
-	else
-		return true;
+void ChangeDisplayNodeClass::show() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(T(Txt::Brightness));
+  lcd.setCursor(0, 1);
+  lcd.print(T(Txt::Contrast));
+  drawFields();
 }
 
+void ChangeDisplayNodeClass::drawFields() {
+  lcd.setCursor(9, 0);
+  if (hidden(1)) {
+    lcd.print(T(Txt::Blank3));
+  } else {
+    lcd.print(bright);
+    padTo(9 + (bright > 99 ? 3 : bright > 9 ? 2 : 1), 12);
+  }
 
-
-bool ChangeDisplayNodeClass::allowNext()
-{
-	if (_shift > 0 && _shift < 3)
-	{
-		return false;
-	}
-	else
-		return true;
+  lcd.setCursor(10, 1);
+  if (hidden(2)) {
+    lcd.print(T(Txt::Blank3));
+  } else {
+    lcd.print(contr);
+    padTo(10 + (contr > 99 ? 3 : contr > 9 ? 2 : 1), 13);
+  }
 }
 
-bool ChangeDisplayNodeClass::allowPrev()
-{
-	if (_shift > 0 && _shift < 3)
-	{
-		return false;
-	}
-	else
-		return true;
+void ChangeDisplayNodeClass::editField(byte field) {
+  float val = (field == 1) ? bright : contr;
+  if (!scrollBar(0, 100, 1, val)) return;
 
+  if (field == 1) {
+    bright = static_cast<byte>(val);
+  } else {
+    contr = static_cast<byte>(val);
+  }
+  adjustments.setup(BRITHPIN, CONTRPIN, bright, 100 - contr);
 }
 
-void ChangeDisplayNodeClass::showBr()
-{
-	lcd.setCursor(9, 0);
-	if (_blinc && _shift == 1)
-	{
-		lcd.print(gettextprj(252));
-	}
-	else
-		lcd.print(bright);
-	
-	
-
+void ChangeDisplayNodeClass::commit() {
+  saveSetting(Eeprom::Bright, bright);
+  saveSetting(Eeprom::Contrast, contr);
 }
-
-void ChangeDisplayNodeClass::showCt()
-{
-	lcd.setCursor(10, 1);
-	if (_blinc && _shift == 2)
-	{
-		lcd.print(gettextprj(252));
-	}
-	else
-		lcd.print(contr);
-	
-	
-}
-
-void ChangeDisplayNodeClass::show()
-{
-	lcd.clear();
-	lcd.setCursor(0, 0);
-	lcd.print(gettextprj(26));
-	lcd.setCursor(0, 1);
-	lcd.print(gettextprj(27));
-	showBr();
-	showCt();
-}
-
-void ChangeDisplayNodeClass::refresh()
-{
-	if (bState[0] == btn_down && !appl[0])
-	{
-		_shift++;
-		if (_shift >= 3)
-		{
-			_shift = 0;
-		}
-		EEPROM.update(0, bright);
-		EEPROM.update(1, contr);
-		EEPROM.update(2, 1);
-
-		appl[0] = true;
-		_blinc = false;
-		showBr();
-		showCt();
-
-	}
-	else
-	{
-		if (_shift == 1)
-		{
-			float val = bright;
-			if (scrollBar(0, 100, 1, val))
-			{
-				bright = val;
-				adjustments.setup(BRITHPIN, CONTRPIN, bright, 100 - contr);
-			}
-		}
-		else if (_shift == 2)
-		{
-			float val = contr;
-			if (scrollBar(0, 100, 1, val))
-			{
-				contr = val;
-				adjustments.setup(BRITHPIN, CONTRPIN, bright, 100 - contr);
-			}
-		}
-
-	}
-
-	if (_shift > 0 && _shift < 3)
-	{
-		if (abs(millis() - _timer) > BLINKINTERVAL)
-		{
-			_timer = millis();
-			_blinc = !_blinc;
-		}
-
-		showBr();
-		showCt();
-	}
-
-
-}
-
-

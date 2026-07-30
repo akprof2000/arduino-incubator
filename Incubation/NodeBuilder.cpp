@@ -1,92 +1,41 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "NodeBuilder.h"
+
 #include "NodeTableBuilder.h"
-#include "node.h"
 #include "function.h"
+#include "node.h"
 #include "objects.h"
+#include "storage.h"
 
+BaseNodeClass *NodeBuilderClass::buildMenu() {
+  // Четыре периода схемы...
+  NodeTableBuilderClass *periods[Eeprom::Periods];
+  for (byte i = 0; i < Eeprom::Periods; i++) {
+    auto *node = new NodeTableBuilderClass();
+    if (node == nullptr) return nullptr;
+    _listMenu[i] = node;
+    node->type = i;      // номер периода
+    node->type1 = type;  // номер схемы (вида птицы)
+    node->setOwner(this);
+    periods[i] = node;
+    if (i > 0) link(periods[i - 1], periods[i]);
+  }
 
+  // ...и пункт «Выход», замыкающий кольцо.
+  auto *exitNode = new NodeClass();
+  if (exitNode == nullptr) return periods[0];
+  _listMenu[Eeprom::Periods] = exitNode;
+  exitNode->Text[0] = Txt::Exit;
+  exitNode->setOwner(this);
+  exitNode->setInner(this);
 
+  link(periods[Eeprom::Periods - 1], exitNode);
+  link(exitNode, periods[0]);
 
-const int MENULENGTHD = 5;
-
-
-BaseNodeClass * NodeBuilderClass::getInner()
-{
-	if (_listMenu != nullptr)
-		return _listMenu[0];
-
-	_listMenu = createListMenu(MENULENGTHD);
-
-	auto *msc1 = new NodeTableBuilderClass();
-	_listMenu[0] = msc1;
-	msc1->type1 = type;
-	msc1->type = 0;
-
-	msc1->setOwner(this);
-	this->setInner(msc1);
-
-	
-	auto *msc2 = new NodeTableBuilderClass();
-	_listMenu[1] = msc2;
-	msc2->type1 = type;
-	msc2->type = 1;
-
-	msc2->setOwner(this);
-	msc1->setNext(msc2);
-	msc2->setPrev(msc1);
-
-
-
-	auto *msc3 = new NodeTableBuilderClass();
-	_listMenu[2] = msc3;
-	msc3->type1 = type;
-	msc3->type = 2;
-
-	msc3->setOwner(this);
-	msc2->setNext(msc3);
-	msc3->setPrev(msc2);
-
-
-	auto *msc4 = new NodeTableBuilderClass();
-	_listMenu[3] = msc4;
-	msc4->type1 = type;
-	msc4->type = 3;
-
-	msc4->setOwner(this);
-
-	msc3->setNext(msc4);
-	msc4->setPrev(msc3);
-
-
-	auto *msce = new NodeClass();
-	_listMenu[4] = msce;
-	msce->Text[0] = 253;
-	msce->setOwner(this);
-	msce->setInner(this);
-
-	msc4->setNext(msce);
-	msce->setPrev(msc4);
-	msce->setNext(msc1);
-	msc1->setPrev(msce);
-	
-	return msc1;
+  return periods[0];
 }
 
-void NodeBuilderClass::deleteMenu()
-{
-	deleteListMenu(MENULENGTHD, _listMenu);
-
-	_listMenu = nullptr;
-}
-
-void NodeBuilderClass::show()
-{
-	baseShowData(1, gettextprj(12 + type), gettextprj(0));
-	
-}
-
-
+void NodeBuilderClass::show() { showTwoLines(Txt::BirdFirst + type, Txt::Empty); }

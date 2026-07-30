@@ -1,88 +1,56 @@
-// 
-// 
-// 
-
-
+//
+//
+//
 
 #include "NodeTableBuilder.h"
-#include "function.h"
-#include "objects.h"
+
 #include "RowDayCount.h"
-#include "RowTHVal.h"
 #include "RowRotateVent.h"
+#include "RowTHVal.h"
+#include "function.h"
+#include "node.h"
+#include "objects.h"
 
+BaseNodeClass *NodeTableBuilderClass::buildMenu() {
+  auto *days = new RowDayCountClass();
+  auto *values = new RowTHValClass();
+  auto *rotate = new RowRotateVentClass();
+  auto *exitNode = new NodeClass();
 
-#define MENULENGTHT 4
+  if (days == nullptr || values == nullptr || rotate == nullptr || exitNode == nullptr) {
+    delete days;
+    delete values;
+    delete rotate;
+    delete exitNode;
+    return nullptr;
+  }
 
+  _listMenu[0] = days;
+  _listMenu[1] = values;
+  _listMenu[2] = rotate;
+  _listMenu[3] = exitNode;
 
-BaseNodeClass * NodeTableBuilderClass::getInner()
-{
+  for (byte i = 0; i < 3; i++) {
+    _listMenu[i]->type = type;    // период
+    _listMenu[i]->type1 = type1;  // схема
+    _listMenu[i]->setOwner(this);
+  }
 
-	if (_listMenu != NULL)
-		return _listMenu[0];
+  exitNode->Text[0] = Txt::Exit;
+  exitNode->setOwner(this);
+  exitNode->setInner(this);
 
-	_listMenu = createListMenu(MENULENGTHT);
-	
+  link(days, values);
+  link(values, rotate);
+  link(rotate, exitNode);
+  link(exitNode, days);
 
-
-	RowDayCountClass *mp = new RowDayCountClass();
-	mp->type = type;
-	mp->type1 = type1;
-
-	_listMenu[0] = (mp);
-
-	//mp->Text[0] = 18;
-	//mp->Text[1] = 19;
-	mp->setOwner(this);
-	this->setInner(mp);
-
-	RowTHValClass *mt = new RowTHValClass();
-	mt->type = type;
-	mt->type1 = type1;
-	_listMenu[1] = (mt);
-
-	mt->setOwner(this);
-	mp->setNext(mt);
-	mt->setPrev(mp);
-
-	RowRotateVentClass *mr = new RowRotateVentClass();
-	mr->type = type;
-	mr->type1 = type1;
-
-	_listMenu[2] = (mr);
-	mr->setOwner(this);
-	mt->setNext(mr);
-	mr->setPrev(mt);
-
-	NodeClass *me = new NodeClass();
-	_listMenu[3] = (me);
-
-	mr->setNext(me);
-	me->Text[0] = 253;
-
-	me->setOwner(this);
-	me->setInner(this);
-	me->setNext(mp);
-	me->setPrev(mr);
-	mp->setPrev(me);
-	
-	return mp;
+  return days;
 }
 
-void NodeTableBuilderClass::deleteMenu()
-{
-	deleteListMenu(MENULENGTHT, _listMenu);
-	_listMenu = NULL;
-
-}
-
-void NodeTableBuilderClass::show()
-{
-
-	deleteListMenu(MENULENGTHT, _listMenu);
-	_listMenu = NULL;
-
-
-	baseShowData(2, gettextprj(12 + type1), gettextprj(32 + type));
-
+void NodeTableBuilderClass::show() {
+  // ВАЖНО: раньше show() сам вызывал deleteListMenu(), оставляя _Inner
+  // висячим указателем на освобождённую память. Освобождением подменю
+  // теперь занимается NodeManager (deleteMenu() перед каждым show()).
+  showTwoLines(Txt::BirdFirst + type1, Txt::PeriodFirst + type);
 }

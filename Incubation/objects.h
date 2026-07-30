@@ -1,76 +1,78 @@
 // objects.h
-#pragma once
+//
+// Глобальные объекты и состояние прибора.
 
+#pragma once
 #ifndef _OBJECTS_h
 #define _OBJECTS_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "arduino.h"
-#else
-#include "WProgram.h"
-#endif
-#include <LiquidCrystalRus.h>
+#include <Arduino.h>
 #include <Bounce2.h>
+#include <DallasTemperature.h>
+#include <OneWire.h>
+
+#include "DataRow.h"
+#include "LCDAdjustments.h"
+#include "LiquidCrystalRus.h"
+#include "SparkFunHTU21D.h"
 #include "consts.h"
 #include "types.h"
-#include "LCDAdjustments.h"
-#include "DataRow.h"
-#include "SparkFunHTU21D.h"
-#include <OneWire.h>
-#include <DallasTemperature.h>
 
+// ---------------------------------------------------------------------------
+// ВНИМАНИЕ (исправленная ошибка).
+//
+// Раньше здесь лежали объекты
+//     const Bounce pinbounced0 = Bounce(BUTTON_L, INTERVAL);  // ... и ещё три
+// Переменные с `const` на уровне пространства имён имеют ВНУТРЕННЮЮ связь,
+// поэтому в КАЖДОМ .cpp, подключавшем objects.h (а это почти весь проект),
+// создавалась своя копия всех четырёх Bounce. Десятки лишних объектов
+// в SRAM плюс лишние вызовы pinMode() на старте.
+//
+// Теперь bouncer[] — единственный экземпляр, определённый в objects.cpp.
+// ---------------------------------------------------------------------------
+extern Bounce bouncer[BUTTON_COUNT];
 
-const	Bounce pinbounced0 = Bounce(BUTTON_L, INTERVAL);
-const	Bounce pinbounced1 = Bounce(BUTTON_U, INTERVAL);
-const   Bounce pinbounced2 = Bounce(BUTTON_R, INTERVAL);
-const   Bounce pinbounced3 = Bounce(BUTTON_D, INTERVAL);
-extern  Bounce bouncer[4];
-extern  LiquidCrystalRus lcd;
-extern  LCDAdjustments adjustments;
+extern LiquidCrystalRus lcd;
+extern LCDAdjustments adjustments;
 
-extern  DataRowClass currentRow;
-extern  OneWire oneWire;
-extern  DallasTemperature sensors;
+extern DataRowClass currentRow;
+extern OneWire oneWire;
+extern DallasTemperature sensors;
+extern HTU21D myHumidity;
 
+// --- состояние кнопок ------------------------------------------------------
+extern ButtonState bState[BUTTON_COUNT];
+extern bool appl[BUTTON_COUNT];             // «нажатие уже обработано»
+extern unsigned long bPressTime[BUTTON_COUNT];
+extern bool toroot;                         // запрос возврата в корень меню
 
-extern bool toroot;
-extern ButtonState bState[4];
-extern bool appl[4];
-extern unsigned long bPressTime[4];
+// --- настройки (зеркало EEPROM) --------------------------------------------
+extern byte bright;       // яркость подсветки, %
+extern byte contr;        // контраст, %
+extern byte minheat;      // минимальный процент нагрева
+extern byte minhum;       // минимальный процент увлажнения
+extern byte deltaEggMin;  // перегрев яйца: нижний порог, 0.1 °C
+extern byte deltaEggMax;  // перегрев яйца: верхний порог, 0.1 °C
+extern byte alTmpDel;     // порог включения нагрева, 0.1 °C
+extern byte alTmpMax;     // аварийное отклонение по температуре, °C
+extern byte alHumDel;     // порог включения увлажнения, %
+extern byte alHumMax;     // аварийное отклонение по влажности, %
 
-extern byte minheat;
-extern byte minhum;
-
-extern byte deltaEggMin;
-extern byte deltaEggMax;
-
-
-
-extern byte bright;
-extern byte contr;
-
+// --- состояние цикла инкубации ---------------------------------------------
 extern byte currentDay;
 extern byte currentHour;
 extern byte currentPeriod;
 extern byte currentTable;
 extern byte started;
-extern bool allertEnable;
 extern byte timerUpdated;
 
-extern byte alTmpDel;
-extern byte alTmpMax;
-extern byte alHumDel;
-extern byte alHumMax;
+// --- измерения --------------------------------------------------------------
+extern float currentTemp;       // температура основного датчика (HTU21D)
+extern float currentFirstTemp;  // температура яйца (DS18B20 #1)
+extern float currentHumd;       // относительная влажность, %
+extern float currentSetTemp;    // уставка температуры по текущему режиму
 
-extern HTU21D myHumidity;
-
-extern float currentTemp;
-extern float currentFirstTemp;
-extern float currentHumd;
-extern float currentSetTemp;
+// Показание влажности >= HUM_INVALID означает отказ датчика.
+bool humidityValid(float value);
 
 #endif
-
-
-
-

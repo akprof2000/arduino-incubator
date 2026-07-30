@@ -3,36 +3,24 @@
 #ifndef _ROWDAYCOUNT_h
 #define _ROWDAYCOUNT_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
-#include "node.h"
+#include "EditNode.h"
 
+// Длительность периода в днях и его границы в сквозной нумерации цикла.
+class RowDayCountClass : public EditNodeClass {
+ public:
+  RowDayCountClass() : EditNodeClass(1) {}
+  void show() override;
 
-class RowDayCountClass: public BaseNodeClass
-{
-private:	
-	bool _blinc;
-	byte _shift;
-	unsigned long _timer;
-	void showCount();
-	byte _from;
-	byte _day;
-protected:
-public:
-	bool allowInner();
-	
-	bool allowNext();
-	bool allowPrev();
-	void show();	
-	void refresh();
-	
+ protected:
+  void drawFields() override;
+  void editField(byte field) override;
+  void commit() override;
+
+ private:
+  byte _from = 1;
+  byte _day = 0;
 };
 
-
-
 #endif
-

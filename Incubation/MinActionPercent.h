@@ -3,31 +3,20 @@
 #ifndef _MINACTIONPERCENT_h
 #define _MINACTIONPERCENT_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "Arduino.h"
-#else
-	#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
-#include "BaseNode.h"
+#include "EditNode.h"
 
-class MinActionPercentClass: public BaseNodeClass
-{
-private:
-	byte _shift = 0;
-	bool _blinc = false;
-	unsigned long _timer;
-	void showHeat();
-	void showHum();
-protected:
-public:
-	bool allowInner();
-	bool allowNext();
-	bool allowPrev();
-	void show();
-	void refresh();
+// Минимальные проценты включения нагрева и увлажнения.
+class MinActionPercentClass : public EditNodeClass {
+ public:
+  MinActionPercentClass() : EditNodeClass(2) {}
+  void show() override;
+
+ protected:
+  void drawFields() override;
+  void editField(byte field) override;
+  void commit() override;
 };
 
-
 #endif
-

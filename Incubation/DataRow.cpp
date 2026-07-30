@@ -1,112 +1,68 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "DataRow.h"
-#include "consts.h"
+
 #include <EEPROM.h>
 
-byte DataRowClass::GetFrom()
-{
-	if (_from != 0)
-		return _from;
+#include "consts.h"
+#include "storage.h"
 
-	for (byte i = 0; i < _gperiod; i++)
-	{
-		DataRowClass *dr = new DataRowClass();
-		dr->init(i, _gtable);
-		_from += dr->GetDay();
-		delete dr;
-	}
-	_from++;
-	return _from ;
+void DataRowClass::init(uint8_t period, uint8_t table) {
+  _period = period;
+  _table = table;
+  _from = 0;
+
+  // БЫЛО: цикл for(i=0..8) со switch(i) внутри — восемь итераций ради
+  // шести присваиваний. Читается напрямую.
+  _day = EEPROM.read(Eeprom::rowAddr(_table, _period, 0));
+  _temperature = EEPROM.read(Eeprom::rowAddr(_table, _period, 1));
+  _humidity = EEPROM.read(Eeprom::rowAddr(_table, _period, 2));
+  _rotation = EEPROM.read(Eeprom::rowAddr(_table, _period, 3));
+  _ventilatecount = EEPROM.read(Eeprom::rowAddr(_table, _period, 4));
+  _ventilatetime = EEPROM.read(Eeprom::rowAddr(_table, _period, 5));
 }
 
-
-void DataRowClass::writeRow(byte tbl, byte period, byte day, float temp, byte hum, byte rot, byte vent, byte ventt)
-{
-	_gperiod = period;
-	_gtable = tbl;
-
-	_day = day;
-	_temperature =  (temp  - BASETEMP) * 10;
-	_humidity = hum - BASEHUM;
-	_rotation = rot;
-	_ventilatecount = vent;
-	_ventilatetime = ventt;
-
+void DataRowClass::save() const {
+  EEPROM.update(Eeprom::rowAddr(_table, _period, 0), _day);
+  EEPROM.update(Eeprom::rowAddr(_table, _period, 1), _temperature);
+  EEPROM.update(Eeprom::rowAddr(_table, _period, 2), _humidity);
+  EEPROM.update(Eeprom::rowAddr(_table, _period, 3), _rotation);
+  EEPROM.update(Eeprom::rowAddr(_table, _period, 4), _ventilatecount);
+  EEPROM.update(Eeprom::rowAddr(_table, _period, 5), _ventilatetime);
 }
 
-void DataRowClass::save()
-{
-
-	for (byte i = 0; i < 9; i++)
-	{
-
-		switch (i)
-		{
-		case 0:
-
-			EEPROM.update(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 0, _day);
-			break;
-		case 1:
-			EEPROM.update(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 1, _temperature);
-			break;
-		case 2:
-
-			EEPROM.update(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 2, _humidity);
-			break;
-		case 3:
-			EEPROM.update(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 3, _rotation);
-			break;
-		case 4:
-			EEPROM.update(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 4, _ventilatecount);
-			break;
-		case 5:
-			EEPROM.update(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 5, _ventilatetime);
-			break;
-		default:
-			break;
-		}
-
-	}
-
+void DataRowClass::writeRow(uint8_t table, uint8_t period, uint8_t day, float temp, uint8_t hum,
+                            uint8_t rot, uint8_t vent, uint8_t ventTime) {
+  _table = table;
+  _period = period;
+  _day = day;
+  // +0.5 — иначе float-арифметика даёт (37.3 - 30) * 10 == 72.99999
+  // и усечение до 72 вместо 73.
+  _temperature = static_cast<uint8_t>((temp - BASETEMP) * 10.0f + 0.5f);
+  _humidity = hum - BASEHUM;
+  _rotation = rot;
+  _ventilatecount = vent;
+  _ventilatetime = ventTime;
+  _from = 0;
 }
 
-void DataRowClass::init(int period, int table)
-{
-	_gperiod = period;
-	_gtable = table;
+uint8_t DataRowClass::GetFrom() {
+  if (_from != 0) return _from;
 
-	for (byte i = 0; i < 9; i++)
-	{
-
-		switch (i)
-		{
-		case 0:
-			_day = EEPROM.read(0xFF + _gperiod * 9  + _gtable * 9 * 4);
-			break;
-		case 1:
-			_temperature = EEPROM.read(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 1);
-			break;
-		case 2:
-			_humidity = EEPROM.read(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 2);
-			break;
-		case 3:
-			_rotation = EEPROM.read(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 3);
-			break;
-		case 4:
-			_ventilatecount = EEPROM.read(0xFF + _gperiod * 9  + _gtable * 9 * 4 + 4);
-			break;
-		case 5:
-			_ventilatetime = EEPROM.read(0xFF + _gperiod * 9 + _gtable * 9 * 4 + 5);
-			break;
-		default:
-			break;
-		}
-
-	}
-
-
+  // БЫЛО: в цикле создавался `new DataRowClass()` и тут же удалялся —
+  // выделение в куче на каждой отрисовке экрана. Теперь объект на стеке.
+  uint8_t total = 0;
+  DataRowClass row;
+  for (uint8_t i = 0; i < _period; i++) {
+    row.init(i, _table);
+    total += row.GetDay();
+  }
+  _from = total + 1;
+  return _from;
 }
 
+float DataRowClass::TempCelsius() const { return _temperature / 10.0f + BASETEMP; }
+
+uint8_t DataRowClass::HumidityPercent() const { return _humidity + BASEHUM; }

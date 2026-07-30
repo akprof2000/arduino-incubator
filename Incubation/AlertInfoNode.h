@@ -3,27 +3,17 @@
 #ifndef _ALERTINFONODE_h
 #define _ALERTINFONODE_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
-#include "BaseNode.h"
+#include <Arduino.h>
 
-class AlertInfoNodeClass: public BaseNodeClass
-{
-	 String _data;
-	 String _olddata = "--";
-	 unsigned long _time = 0;
-	 int pos = 0;
+#include "ScrollTextNode.h"
 
-public:
-	void show();
-	void refresh();
-	void printLine(int refreshMSeconds);
+// «Текущее событие»: список активных аварий.
+class AlertInfoNodeClass : public ScrollTextNodeClass {
+ public:
+  AlertInfoNodeClass() : ScrollTextNodeClass(Txt::CurrentEvent) {}
+
+ protected:
+  void buildText(TextBuilder &builder) override;
 };
 
-
-
 #endif
-

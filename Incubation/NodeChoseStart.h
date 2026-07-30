@@ -3,37 +3,35 @@
 #ifndef _NODECHOSESTART_h
 #define _NODECHOSESTART_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
-#include "BaseNode.h"
+#include "EditNode.h"
 
-class NodeChoseStartClass: public BaseNodeClass
-{
-	byte _max = 0;
-	byte _shift = 0;
-	bool _wait = false;
-	byte _period = 0;
-	byte _day = 0;
-	byte _type = 0;
+// Запуск цикла: выбор схемы, периода и дня старта.
+// После прохода по всем трём полям экран переходит в режим ожидания
+// подтверждения — длинное нажатие OK запускает цикл.
+class NodeChoseStartClass : public EditNodeClass {
+ public:
+  NodeChoseStartClass() : EditNodeClass(3) {}
+  void show() override;
+  void refresh() override;
+  // Пока ждём подтверждения, уход с экрана запрещён.
+  bool allowOwner() override { return !_wait; }
 
-	bool _blinc = false;
-	unsigned long _timer;
-	void showData();
-	
-protected:
-public:
-	bool allowInner();
-	bool allowOwner();
-	bool allowNext();
-	bool allowPrev();
-	void show();
-	void refresh();
+ protected:
+  void drawFields() override;
+  void editField(byte field) override;
+  byte nextField(byte current) const override;
 
+ private:
+  byte _maxDay = 0;
+  byte _period = 0;
+  byte _day = 0;
+  byte _table = 0;
+  bool _wait = false;
+
+  void startCycle();
+  void reloadMaxDay();
 };
 
 #endif
-
