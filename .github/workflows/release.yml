@@ -1,0 +1,152 @@
+name: Релиз
+
+# Версия вычисляется автоматически по conventional commits:
+#   BREAKING CHANGE или "тип!:"  -> мажорная  (2.1.0 -> 3.0.0)
+#   feat:                        -> минорная  (2.0.1 -> 2.1.0)
+#   fix: / perf: / refactor:     -> патч      (2.0.0 -> 2.0.1)
+#   всё остальное (docs, chore, ci, test, style) — релиз не создаётся.
+#
+# Запустить вручную с принудительным уровнем можно через «Run workflow».
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Уровень версии'
+        required: true
+        default: auto
+        type: choice
+        options: [auto, patch, minor, major]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # нужна вся история и теги
+
+      - name: Вычислить следующую версию
+        id: ver
+        run: |
+          set -euo pipefail
+
+          last_tag=$(git tag --list 'v*' --sort=-v:refname | head -n1)
+          if [ -z "$last_tag" ]; then
+            last_tag="v0.0.0"
+            range=""
+            echo "Тегов ещё нет, берём всю историю."
+          else
+            range="${last_tag}..HEAD"
+          fi
+          echo "Последний тег: $last_tag"
+
+          # Если на HEAD уже висит тег — релизить нечего.
+          if git describe --exact-match --tags HEAD >/dev/null 2>&1; then
+            echo "HEAD уже помечен тегом, релиз не нужен."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          commits=$(git log --format='%s%n%b' ${range})
+          if [ -z "$commits" ]; then
+            echo "Новых коммитов нет."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          bump="${{ github.event.inputs.bump || 'auto' }}"
+          if [ "$bump" = "auto" ]; then
+            bump="none"
+            if grep -qE '^(BREAKING CHANGE|BREAKING-CHANGE)' <<< "$commits" \
+               || grep -qE '^[a-z]+(\([^)]*\))?!:' <<< "$commits"; then
+              bump="major"
+            elif grep -qE '^feat(\([^)]*\))?:' <<< "$commits"; then
+              bump="minor"
+            elif grep -qE '^(fix|perf|refactor)(\([^)]*\))?:' <<< "$commits"; then
+              bump="patch"
+            fi
+          fi
+
+          if [ "$bump" = "none" ]; then
+            echo "Значимых изменений нет — релиз не создаём."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          IFS=. read -r major minor patch <<< "${last_tag#v}"
+          case "$bump" in
+            major) major=$((major + 1)); minor=0; patch=0 ;;
+            minor) minor=$((minor + 1)); patch=0 ;;
+            patch) patch=$((patch + 1)) ;;
+          esac
+
+          version="${major}.${minor}.${patch}"
+          echo "Уровень: $bump -> версия v$version"
+          {
+            echo "skip=false"
+            echo "version=$version"
+            echo "tag=v$version"
+            echo "prev=$last_tag"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Установить arduino-cli
+        if: steps.ver.outputs.skip == 'false'
+        uses: arduino/setup-arduino-cli@v2
+
+      - name: Собрать прошивку
+        if: steps.ver.outputs.skip == 'false'
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
+          arduino-cli lib install \
+            "Bounce2" "Time" "DS1307RTC" "OneWire" "DallasTemperature" \
+            "GyverWDT" "SparkFun HTU21D Humidity and Temperature Sensor Breakout"
+          arduino-cli compile --clean -b arduino:avr:mega --output-dir build Incubation
+          cp build/Incubation.ino.hex \
+             "incubator-mega2560-v${{ steps.ver.outputs.version }}.hex"
+
+      - name: Собрать описание релиза
+        if: steps.ver.outputs.skip == 'false'
+        run: |
+          set -euo pipefail
+          {
+            echo "## Изменения"
+            echo
+            git log --no-merges --format='* %s' \
+              "${{ steps.ver.outputs.prev }}..HEAD" \
+              | grep -vE '^\* (chore|ci|style|test)(\([^)]*\))?:' || true
+            echo
+            echo "## Расход памяти"
+            echo
+            arduino-cli compile -b arduino:avr:mega Incubation 2>&1 \
+              | grep -E 'память|memory' || true
+            echo
+            echo "## Прошивка"
+            echo
+            echo '```bash'
+            echo "avrdude -p atmega2560 -c wiring -P COM3 -b 115200 -D -U flash:w:incubator-mega2560-v${{ steps.ver.outputs.version }}.hex:i"
+            echo '```'
+            echo
+            echo "> ⚠️ Прошивка проверена только сборкой. Перед заливкой"
+            echo "> в работающий инкубатор прогоните вхолостую."
+            echo
+            echo "**Полный список изменений:** https://github.com/${{ github.repository }}/compare/${{ steps.ver.outputs.prev }}...${{ steps.ver.outputs.tag }}"
+          } > NOTES.md
+          cat NOTES.md
+
+      - name: Создать релиз
+        if: steps.ver.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.ver.outputs.tag }}" \
+            --target "${{ github.sha }}" \
+            --title "${{ steps.ver.outputs.tag }}" \
+            --notes-file NOTES.md \
+            "incubator-mega2560-v${{ steps.ver.outputs.version }}.hex"

@@ -88,8 +88,8 @@ def rect(x, y, w, h, fill, opacity=1.0, rx=2, stroke='none'):
 def schedule_chart(index, filename):
     rows = FACTORY[index]
     days = sum(r[0] for r in rows)
-    W, H = 760, 366
-    L, R, T, B = 55, 55, 46, 102
+    W, H = 760, 380
+    L, R, T, B = 55, 55, 46, 116
     pw, ph = W - L - R, H - T - B
 
     tmin, tmax = 36.5, 38.5
@@ -156,13 +156,13 @@ def schedule_chart(index, filename):
     # Раньше это была одна строка с длинной подписью — в коротких периодах
     # (по два дня) текст не помещался и наезжал на соседний.
     bands = (
-        ('поворот, раз/сут', C_ROT, lambda r: ('%d' % r[3]) if r[3] else '', lambda r: r[3]),
-        ('проветривание', C_VENT, lambda r: ('%d×%dм' % (r[4], r[5])) if r[4] else '',
+        ('поворот', C_ROT, lambda r: ('%d' % r[3]) if r[3] else '', lambda r: r[3]),
+        ('провет.', C_VENT, lambda r: ('%d×%dм' % (r[4], r[5])) if r[4] else '',
          lambda r: r[4]),
     )
     for bi, (title, color, fmt, active) in enumerate(bands):
-        yb = H - 62 + bi * 24
-        b.append(txt(L - 8, yb + 12, title, 9, color, 'end'))
+        yb = H - 76 + bi * 24
+        b.append(txt(L - 6, yb + 12, title, 9, color, 'end'))
         d0 = 0
         for r in rows:
             x0, x1 = xd(d0), xd(d0 + r[0])
@@ -182,6 +182,9 @@ def schedule_chart(index, filename):
     b.append(txt(lx + 24, 24, 'температура', 10, C_TEMP))
     b.append(line(lx + 110, 20, lx + 128, 20, C_HUM, 2.5))
     b.append(txt(lx + 134, 24, 'влажность', 10, C_HUM))
+
+    b.append(txt(L, H - 6, 'поворот — раз в сутки; проветривание — раз в сутки × минут',
+                 9, MUTED_R))
 
     open(os.path.join(OUT, filename), 'w', encoding='utf-8').write(
         svg(W, H, ''.join(b), 'График режима инкубации: ' + BIRDS[index]))
@@ -236,8 +239,8 @@ def regulator_chart():
         b.append(txt(x(d), T + ph + 18, '%.1f' % d, 10, FG, 'middle'))
     b.append(txt(L + pw / 2, T + ph + 38,
                  'отклонение от уставки, °C  (при alTmpMax = 2 °C — 100 %)', 11, FG, 'middle'))
-    b.append(txt(6, T + ph / 2, 'мощность, %', 10, FG, 'middle', '600',
-                 rotate=(6, T + ph / 2)))
+    b.append(txt(13, T + ph / 2, 'мощность, %', 10, FG, 'middle', '600',
+                 rotate=(13, T + ph / 2)))
 
     open(os.path.join(OUT, 'regulator.svg'), 'w', encoding='utf-8').write(
         svg(W, H, ''.join(b), 'Квадратичный закон регулирования'))

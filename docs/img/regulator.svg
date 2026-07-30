@@ -31,5 +31,5 @@
 <line x1="690.0" y1="270.0" x2="690.0" y2="275.0" stroke="#57606a" stroke-width="1"/>
 <text x="690.0" y="288.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">2.0</text>
 <text x="375.0" y="308.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">отклонение от уставки, °C  (при alTmpMax = 2 °C — 100 %)</text>
-<text x="6.0" y="160.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="600" transform="rotate(-90 6.0 160.0)" font-family="Segoe UI, Helvetica, Arial, sans-serif">мощность, %</text>
+<text x="13.0" y="160.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="600" transform="rotate(-90 13.0 160.0)" font-family="Segoe UI, Helvetica, Arial, sans-serif">мощность, %</text>
 </svg>

@@ -1,0 +1,83 @@
+name: Сборка
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Прошивка для Mega 2560
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Установить arduino-cli
+        uses: arduino/setup-arduino-cli@v2
+
+      - name: Установить ядро и библиотеки
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
+          arduino-cli lib install \
+            "Bounce2" \
+            "Time" \
+            "DS1307RTC" \
+            "OneWire" \
+            "DallasTemperature" \
+            "GyverWDT" \
+            "SparkFun HTU21D Humidity and Temperature Sensor Breakout"
+
+      - name: Собрать
+        run: |
+          arduino-cli compile --clean \
+            -b arduino:avr:mega \
+            --warnings all \
+            --output-dir build \
+            Incubation 2>&1 | tee build.log
+
+      - name: Проверить, что предупреждений в коде проекта нет
+        run: |
+          # Предупреждения сторонних библиотек не учитываем — правим только своё.
+          if grep -E "Incubation/[A-Za-z]+\.(cpp|h|ino):.*warning" build.log; then
+            echo "::error::В файлах проекта есть предупреждения компилятора"
+            exit 1
+          fi
+          echo "Предупреждений в файлах проекта нет."
+
+      - name: Опубликовать артефакт
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-mega2560
+          path: build/Incubation.ino.hex
+
+  docs:
+    name: Проверка иллюстраций
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Перегенерировать SVG и сверить с репозиторием
+        working-directory: docs
+        run: |
+          python gen_docs.py
+          python gen_wiring.py
+          cp out/*.svg img/
+
+      - name: Подписи не должны налезать друг на друга и обрезаться
+        working-directory: docs
+        run: python check_overlap.py
+
+      - name: Картинки в репозитории должны совпадать со скриптами
+        run: |
+          if ! git diff --quiet -- docs/img; then
+            echo "::error::docs/img устарел — перегенерируйте: cd docs && python gen_docs.py && python gen_wiring.py && cp out/*.svg img/"
+            git diff --stat -- docs/img
+            exit 1
+          fi
+          echo "Иллюстрации актуальны."

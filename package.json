@@ -1,7 +1,7 @@
 {
     "name": "Incubation",
-    "version": "0.0.1",
-    "description": "Инкубатор на Arduino",
+    "version": "2.0.1",
+    "description": "Контроллер инкубатора на Arduino Mega 2560",
     "scripts": {
         "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
         "postversion": "git push && git push --tags"
@@ -16,5 +16,10 @@
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },
-    "author": "Alexey Kozlov"
+    "author": "Alexey Kozlov",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/akprof2000/arduino-incubator.git"
+    }
 }
