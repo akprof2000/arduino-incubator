@@ -1,138 +1,69 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "StatusMainInfo.h"
+
+#include "Alerting.h"
+#include "consts.h"
 #include "function.h"
 #include "objects.h"
-#include "consts.h"
-#include "Alerting.h"
 
+void StatusMainInfoClass::show() {
+  const float humd = myHumidity.readHumidity();
+  currentHumd = humd;
 
-bool StatusMainInfoClass::allowInner()
-{
-	return _work;
-}
+  if (started == 0) {
+    _work = false;
+    Alerting.Start(at_endplan);
+    showTwoLines(Txt::ChooseMode1, Txt::ChooseMode2);
+    Serial.print(T(Txt::ChooseMode1));
+    Serial.print(' ');
+    Serial.println(T(Txt::ChooseMode2));
+    return;
+  }
 
-bool StatusMainInfoClass::allowNext()
-{
-	return _work;
-}
+  if (!humidityValid(humd)) {
+    _work = false;
+    showTwoLines(Txt::Alarm1, Txt::Alarm2);
+    Serial.print(T(Txt::Alarm1));
+    Serial.print(' ');
+    Serial.println(T(Txt::Alarm2));
+    return;
+  }
 
-bool StatusMainInfoClass::allowPrev()
-{
-	return _work;
-}
+  _work = true;
 
-void StatusMainInfoClass::show()
-{
-	_timer = millis();
-	float humd = myHumidity.readHumidity();
+  if (_refersh) {
+    lcd.setCursor(0, 0);
+    lcd.print(T(Txt::StatusT));
+    lcd.setCursor(0, 1);
+    lcd.print(T(Txt::StatusH));
+  }
 
-	if (started == 0)
-	{
-		_work = false;
-		Alerting.Start(at_endplan);
-		lcd.setCursor(0, 0);
-		lcd.print(gettextprj(45));
-		lcd.setCursor(0, 1);
-		lcd.print(gettextprj(46));
+  // БЫЛО: readTemperature() вызывался дважды подряд — лишний обмен по I2C
+  // на каждой отрисовке.
+  currentTemp = myHumidity.readTemperature();
 
-		Serial.print(gettextprj(45));
-		Serial.print("  ");
-		Serial.println(gettextprj(46));
+  lcd.setCursor(5, 0);
+  lcd.print(currentSetTemp, 1);
+  lcd.setCursor(5, 1);
+  lcd.print(currentRow.HumidityPercent());
+  padTo(7, 9);
 
+  lcd.setCursor(12, 0);
+  lcd.print(currentTemp, 1);
+  lcd.setCursor(12, 1);
+  lcd.print(humd, 0);
+  padTo(14, 16);
 
-	}
-	else if (humd >= 997)
-	{
-		_work = false;
-		//Alerting.Start(at_hum);
-		lcd.setCursor(0, 0);
-		lcd.print(gettextprj(41));
-		lcd.setCursor(0, 1);
-		lcd.print(gettextprj(42));
+  Serial.print(T(Txt::LogTempSet));
+  Serial.print(currentRow.TempCelsius(), 1);
+  Serial.print(T(Txt::LogCurrent));
+  Serial.println(currentTemp, 1);
 
-		Serial.print(gettextprj(41));
-		Serial.print("  ");
-		Serial.println(gettextprj(42));
-
-
-	}
-	else
-	{
-		_work = true;
-		//Alerting.Finish(at_hum);
-		if (_refersh)
-		{
-			lcd.setCursor(0, 0);
-			lcd.print(gettextprj(39));
-			lcd.setCursor(0, 1);
-			lcd.print(gettextprj(40));
-		}
-		lcd.setCursor(5, 0);
-		lcd.print(currentSetTemp, 1);
-		
-		lcd.setCursor(5, 1);
-		lcd.print(currentRow.GetHum() + BASEHUM);
-		
-
-		currentTemp = myHumidity.readTemperature();
-		lcd.setCursor(12, 0);
-		
-		lcd.print(myHumidity.readTemperature(), 1);
-		lcd.setCursor(12, 1);
-		
-		lcd.print(humd, 0);
-
-		Serial.print(gettextprj(204));
-		Serial.print(currentRow.GetTemp() / 10.0 + BASETEMP, 1);
-		Serial.print(gettextprj(205));
-		Serial.println(currentTemp, 1);
-
-		Serial.print(gettextprj(206));
-		Serial.print(currentRow.GetHum() + BASEHUM, 1);
-		Serial.print(gettextprj(205));
-		Serial.println(humd, 1);
-	}
-	currentHumd = humd;
-
-}
-
-void StatusMainInfoClass::refresh()
-{
-	if (!_work)
-	{
-		if (started == 1)
-		{
-			_work = true;
-			
-		}
-		return;
-	}
-		
-	if (abs(millis() - _timer) < ERRORINTERVAL)
-	{
-		return;
-	}
-	_timer = millis();
-	if (started == 0)
-	{
-
-	}
-	else if (myHumidity.readHumidity() > 997)
-	{
-
-	}
-	else
-	{
-		/*if (abs(currentHumd - (currentRow.GetHum() + BASEHUM)) > alHumMax)
-		{
-			Alerting.Start(at_hum);
-		}
-		else
-			Alerting.Finish(at_hum);*/
-
-	}
-
+  Serial.print(T(Txt::LogHumSet));
+  Serial.print(currentRow.HumidityPercent());
+  Serial.print(T(Txt::LogCurrent));
+  Serial.println(humd, 1);
 }

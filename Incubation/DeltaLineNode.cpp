@@ -1,224 +1,74 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "DeltaLineNode.h"
+
 #include "function.h"
 #include "objects.h"
-#include <EEPROM.h>
+#include "storage.h"
 
-
-void DeltaLineNodeClass::showDTmp()
-{
-	lcd.setCursor(4, 1);
-	if (_blinc && _shift == 1)
-	{
-		lcd.print(gettextprj(250));
-	}
-	else
-		lcd.print(alTmpDel / 10.0);
-
-
+void DeltaLineNodeClass::show() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(T(isTemperature() ? Txt::TempC : Txt::HumidityPct));
+  lcd.setCursor(0, 1);
+  lcd.print(T(isTemperature() ? Txt::DeltaMaxT : Txt::DeltaMaxH));
+  drawFields();
 }
 
-void DeltaLineNodeClass::showMTmp()
-{
-	lcd.setCursor(14, 1);
-	if (_blinc && _shift == 2)
-	{
-		lcd.print(gettextprj(251));
-	}
-	else
-		lcd.print(alTmpMax);
+void DeltaLineNodeClass::drawFields() {
+  lcd.setCursor(4, 1);
+  if (hidden(1)) {
+    lcd.print(T(Txt::Blank4));
+  } else if (isTemperature()) {
+    lcd.print(alTmpDel / 10.0, 1);
+  } else {
+    lcd.print(alHumDel);
+    padTo(4 + (alHumDel > 9 ? 2 : 1), 8);
+  }
 
+  lcd.setCursor(14, 1);
+  if (hidden(2)) {
+    lcd.print(T(Txt::Blank2));
+  } else {
+    const byte value = isTemperature() ? alTmpMax : alHumMax;
+    lcd.print(value);
+    padTo(14 + (value > 9 ? 2 : 1), 16);
+  }
 }
 
-void DeltaLineNodeClass::showDHum()
-{
-	lcd.setCursor(4, 1);
-	if (_blinc && _shift == 1)
-	{
-		lcd.print(gettextprj(252));
-	}
-	else
-		lcd.print(alHumDel);
+void DeltaLineNodeClass::editField(byte field) {
+  if (field == 1) {
+    float val = isTemperature() ? alTmpDel : alHumDel;
+    if (!scrollBar(1, isTemperature() ? 99 : 30, 1, val)) return;
+    if (isTemperature()) {
+      alTmpDel = static_cast<byte>(val);
+    } else {
+      alHumDel = static_cast<byte>(val);
+    }
+    return;
+  }
+
+  // ИСПРАВЛЕНО: раньше это поле для влажности инициализировалось из
+  // alTmpMax (`float val = alTmpMax;`) и только потом перезаписывалось —
+  // при переполнении диапазона в alHumMax могло попасть значение
+  // температурного порога.
+  float val = isTemperature() ? alTmpMax : alHumMax;
+  if (!scrollBar(1, isTemperature() ? 10 : 50, 1, val)) return;
+  if (isTemperature()) {
+    alTmpMax = static_cast<byte>(val);
+  } else {
+    alHumMax = static_cast<byte>(val);
+  }
 }
 
-void DeltaLineNodeClass::showMHum()
-{
-	lcd.setCursor(14, 1);
-	if (_blinc && _shift == 2)
-	{
-		lcd.print(gettextprj(251));
-	}
-	else
-		lcd.print(alHumMax);
-}
-
-bool DeltaLineNodeClass::allowInner()
-{
-	if (_shift > 0 && _shift < 3)
-	{
-		return false;
-	}
-	else
-		return true;
-
-}
-
-
-bool DeltaLineNodeClass::allowNext()
-{
-	if (_shift > 0 && _shift < 3)
-	{
-		return false;
-	}
-	else
-		return true;
-}
-
-bool DeltaLineNodeClass::allowPrev()
-{
-	if (_shift > 0 && _shift < 3)
-	{
-		return false;
-	}
-	else
-		return true;
-}
-
-void DeltaLineNodeClass::show()
-{
-	lcd.clear();
-	lcd.setCursor(0, 0);
-	if (type == 0)
-		lcd.print(gettextprj(28));
-	else
-		lcd.print(gettextprj(30));
-	lcd.setCursor(0, 1);
-	if (type == 0)
-		lcd.print(gettextprj(29));
-	else
-		lcd.print(gettextprj(31));
-	if (type == 0)
-	{
-		showDTmp();
-		showMTmp();
-	}
-	else
-	{
-		showDHum();
-		showMHum();
-	}
-}
-
-
-void DeltaLineNodeClass::refresh()
-{
-	if (bState[0] == btn_down && !appl[0])
-	{
-		_shift++;
-		if (_shift >= 3)
-		{
-			_shift = 0;
-		}
-		if (type == 0)
-		{
-			EEPROM.update(3, alTmpDel);
-			EEPROM.update(4, alTmpMax);
-		}
-		else
-		{
-			EEPROM.update(5, alHumDel);
-			EEPROM.update(6, alHumMax);
-		}
-		EEPROM.update(2, 1);
-
-		appl[0] = true;
-		_blinc = false;
-		if (type == 0)
-		{
-			showDTmp();
-			showMTmp();
-		}
-		else
-		{
-			showDHum();
-			showMHum();
-		}
-
-	}
-	else
-	{
-		if (_shift == 1)
-		{
-			float val = 0;
-			if (type == 0)
-			{
-				val = alTmpDel;
-			} else
-				val = alHumDel;
-
-			if (scrollBar(1, type==0?99:30, 1, val))
-			{
-
-				if (type == 0)
-				{
-					alTmpDel = val;
-				}
-				else
-				{
-					alHumDel = val;
-				}
-
-
-			}
-		}
-		else if (_shift == 2)
-		{
-			float val = alTmpMax;
-			if (type == 0)
-			{
-				val = alTmpMax;
-			}
-			else
-				val = alHumMax;
-
-			if (scrollBar(1, type==0?10:50, 1, val))
-			{
-				
-
-				if (type == 0)
-				{
-					alTmpMax = val;
-				}
-				else
-				{
-					alHumMax = val;
-				}
-
-			}
-		}
-	
-	}
-
-	if (_shift > 0 && _shift < 3)
-	{
-		if (abs(millis() - _timer) > BLINKINTERVAL)
-		{
-			_timer = millis();
-			_blinc = !_blinc;
-		}
-
-		if (type == 0)
-		{
-			showDTmp();
-			showMTmp();
-		}
-		else
-		{
-			showDHum();
-			showMHum();
-		}
-	}
+void DeltaLineNodeClass::commit() {
+  if (isTemperature()) {
+    saveSetting(Eeprom::AlTmpDel, alTmpDel);
+    saveSetting(Eeprom::AlTmpMax, alTmpMax);
+  } else {
+    saveSetting(Eeprom::AlHumDel, alHumDel);
+    saveSetting(Eeprom::AlHumMax, alHumMax);
+  }
 }

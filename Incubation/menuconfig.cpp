@@ -1,172 +1,132 @@
-// 
-// 
-// 
-
-#define MENULENGTH 10
+//
+//
+//
 
 #include "menuconfig.h"
-#include "NodeManager.h"
-#include "ChangeDisplayNode.h"
-#include "DeltaLineNode.h"
-#include "NodeBuilder.h"
-#include "MainNodeBuilder.h"
-#include "function.h"
-#include "StatusMainInfo.h"
-#include "TemperatureStatusInfo.h"
-#include "TaskStatusInfo.h"
-#include "CurrentOperation.h"
-#include "objects.h"
-#include "ControlSession.h"
+
 #include "AlertInfoNode.h"
+#include "ControlSession.h"
+#include "CurrentOperation.h"
+#include "MainNodeBuilder.h"
+#include "NodeBuilder.h"
+#include "StatusMainInfo.h"
+#include "TaskStatusInfo.h"
+#include "TemperatureStatusInfo.h"
+#include "function.h"
+#include "objects.h"
 
 MenuconfigClass Menuconfig;
 
-void MenuconfigClass::clearmenu()
-{
-	deleteListMenu(MENULENGTH, _listMenu);
-	_listMenu = nullptr;
-
-}
-void MenuconfigClass::clearstatus()
-{
-	deleteListMenu(5, _listStatus);
-	_listStatus = nullptr;
-
-}
-BaseNodeClass *MenuconfigClass::initstatus()
-{
-	currentRow.init(currentPeriod, currentTable);
-	ControlSession.init();
-
-	_listStatus = createListMenu(5);
-
-
-	StatusMainInfoClass  *sn = new StatusMainInfoClass();
-	_listStatus[0] = sn;
-	sn->autoinner = true;
-
-	TemperatureStatusInfoClass *sn1 = new TemperatureStatusInfoClass();
-	sn1->autoinner = true;
-	sn->setInner(sn1);
-	_listStatus[1] = sn1;
-
-	TaskStatusInfoClass *sn2 = new TaskStatusInfoClass();
-	sn2->autoinner = true;
-	sn1->setInner(sn2);
-	_listStatus[2] = sn2;
-
-	CurrentOperationClass *sn3 = new CurrentOperationClass();
-	sn3->autoinner = true;
-	_listStatus[3] = sn3;
-	sn2->setInner(sn3);
-
-	AlertInfoNodeClass *sn4 = new AlertInfoNodeClass();
-	sn4->autoinner = true;
-	_listStatus[4] = sn4;
-	sn3->setInner(sn4);
-
-	sn4->setInner(sn);
-
-	return sn;
+void MenuconfigClass::clearmenu() {
+  deleteListMenu(MENU_SIZE, _listMenu);
+  _listMenu = nullptr;
 }
 
-BaseNodeClass *MenuconfigClass::initmenu()
-{
-	
-	_listMenu = createListMenu(MENULENGTH);
-
-	MainNodeBuilderClass *mm = new MainNodeBuilderClass();
-	_listMenu[0] = mm;
-
-
-	NodeClass *ms = new NodeClass();
-	ms->Text[0] = 3;
-	ms->Text[1] = 4;
-	_listMenu[1] = (ms);
-
-
-	mm->setNext(ms);
-	ms->setPrev(mm);
-	shememenu(ms);
-
-
-
-	NodeClass *me = new NodeClass();
-	me->Text[0] = 253;
-
-	_listMenu[2] = (me);
-	me->exit = true;
-
-	ms->setNext(me);
-	me->setPrev(ms);
-	me->setNext(mm);
-	mm->setPrev(me);
-	
-
-	return mm;
+void MenuconfigClass::clearstatus() {
+  deleteListMenu(STATUS_SIZE, _listStatus);
+  _listStatus = nullptr;
 }
 
+// ---------------------------------------------------------------------------
+// Экраны статуса
+// ---------------------------------------------------------------------------
+BaseNodeClass *MenuconfigClass::initstatus() {
+  clearstatus();  // защита от повторного вызова без освобождения (была утечка)
 
+  currentRow.init(currentPeriod, currentTable);
+  ControlSession.init();
 
-void  MenuconfigClass::shememenu(BaseNodeClass *node)
-{
-	
-	NodeBuilderClass *msc = new NodeBuilderClass();
-	msc->type = 0;
-	_listMenu[3] = (msc);
-	msc->setOwner(node);
-	node->setInner(msc);
+  _listStatus = createListMenu(STATUS_SIZE);
+  if (_listStatus == nullptr) return nullptr;
 
+  _listStatus[0] = new StatusMainInfoClass();
+  _listStatus[1] = new TemperatureStatusInfoClass();
+  _listStatus[2] = new TaskStatusInfoClass();
+  _listStatus[3] = new CurrentOperationClass();
+  _listStatus[4] = new AlertInfoNodeClass();
 
-	NodeBuilderClass *msi = new NodeBuilderClass();	
-	_listMenu[4] = (msi);
-	msi->type = 1;
-	msi->setOwner(node);
-	msi->setPrev(msc);
-	msc->setNext(msi);
+  for (byte i = 0; i < STATUS_SIZE; i++) {
+    if (_listStatus[i] == nullptr) {
+      clearstatus();
+      return nullptr;
+    }
+    _listStatus[i]->autoinner = true;
+  }
 
-	NodeBuilderClass *msu = new NodeBuilderClass();
-	_listMenu[5] = (msu);
-	msu->type = 2;
-	msu->setOwner(node);
-	msu->setPrev(msi);
-	msi->setNext(msu);
+  // Экраны статуса замкнуты в кольцо. Кнопка «OK» листает их по Inner
+  // (как было раньше), а кнопки «вверх»/«вниз» — по Next/Prev.
+  // Раньше Next/Prev не были связаны вовсе, и пролистать статус
+  // можно было только одной кнопкой.
+  for (byte i = 0; i < STATUS_SIZE; i++) {
+    BaseNodeClass *next = _listStatus[(i + 1) % STATUS_SIZE];
+    _listStatus[i]->setInner(next);
+    BaseNodeClass::link(_listStatus[i], next);
+  }
 
-	NodeBuilderClass *msiu = new NodeBuilderClass();	
-	_listMenu[6] = (msiu);
-	msiu->type = 3;
-	msiu->setOwner(node);
-	msiu->setPrev(msu);
-	msu->setNext(msiu);
-
-
-	NodeBuilderClass *msg = new NodeBuilderClass();
-	_listMenu[7] = (msg);
-	msg->type = 4;
-	msg->setOwner(node);
-	msg->setPrev(msiu);
-	msiu->setNext(msg);
-
-
-	NodeBuilderClass *msp = new NodeBuilderClass();
-	_listMenu[8] = (msp);
-	msp->type = 5;
-	msp->setOwner(node);
-	msp->setPrev(msg);
-	msg->setNext(msp);
-
-
-	NodeClass *mse = new NodeClass();
-	_listMenu[9] = (mse);
-
-	mse->Text[0] = 253;
-	mse->setOwner(node);
-	mse->setInner(node);
-	mse->setPrev(msp);
-	msc->setPrev(mse);
-	mse->setNext(msc);
-	msp->setNext(mse);
-	
+  return _listStatus[0];
 }
 
+// ---------------------------------------------------------------------------
+// Экраны меню
+// ---------------------------------------------------------------------------
+BaseNodeClass *MenuconfigClass::initmenu() {
+  clearmenu();
 
+  _listMenu = createListMenu(MENU_SIZE);
+  if (_listMenu == nullptr) return nullptr;
+
+  auto *main = new MainNodeBuilderClass();
+  auto *schemes = new NodeClass();
+  auto *exitNode = new NodeClass();
+  if (main == nullptr || schemes == nullptr || exitNode == nullptr) {
+    delete main;
+    delete schemes;
+    delete exitNode;
+    clearmenu();
+    return nullptr;
+  }
+
+  _listMenu[0] = main;
+  _listMenu[1] = schemes;
+  _listMenu[2] = exitNode;
+
+  schemes->Text[0] = Txt::SchemeSetup1;
+  schemes->Text[1] = Txt::SchemeSetup2;
+
+  exitNode->Text[0] = Txt::Exit;
+  exitNode->exit = true;  // возврат к экранам статуса
+
+  BaseNodeClass::link(main, schemes);
+  BaseNodeClass::link(schemes, exitNode);
+  BaseNodeClass::link(exitNode, main);
+
+  buildSchemeMenu(schemes);
+
+  return main;
+}
+
+void MenuconfigClass::buildSchemeMenu(BaseNodeClass *parent) {
+  NodeBuilderClass *items[SCHEME_COUNT];
+
+  for (byte i = 0; i < SCHEME_COUNT; i++) {
+    auto *node = new NodeBuilderClass();
+    if (node == nullptr) return;
+    _listMenu[3 + i] = node;
+    node->type = i;
+    node->setOwner(parent);
+    items[i] = node;
+    if (i > 0) BaseNodeClass::link(items[i - 1], items[i]);
+  }
+
+  auto *exitNode = new NodeClass();
+  if (exitNode == nullptr) return;
+  _listMenu[3 + SCHEME_COUNT] = exitNode;
+  exitNode->Text[0] = Txt::Exit;
+  exitNode->setOwner(parent);
+  exitNode->setInner(parent);
+
+  BaseNodeClass::link(items[SCHEME_COUNT - 1], exitNode);
+  BaseNodeClass::link(exitNode, items[0]);
+
+  parent->setInner(items[0]);
+}

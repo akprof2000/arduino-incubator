@@ -3,33 +3,20 @@
 #ifndef _CHANGEDISPLAYNODE_h
 #define _CHANGEDISPLAYNODE_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
-#include "BaseNode.h"
+#include "EditNode.h"
 
-class ChangeDisplayNodeClass: public BaseNodeClass
-{
-private:	
-	byte _shift = 0;
-	bool _blinc = false;
-	unsigned long _timer;
-	void showBr();
-	void showCt();	
- protected:
+// Яркость подсветки и контраст.
+class ChangeDisplayNodeClass : public EditNodeClass {
  public:
-	 bool allowInner();	 
-	 bool allowNext();
-	 bool allowPrev();
-	 void show();
-	 void refresh();
-	
+  ChangeDisplayNodeClass() : EditNodeClass(2) {}
+  void show() override;
+
+ protected:
+  void drawFields() override;
+  void editField(byte field) override;
+  void commit() override;
 };
 
-
-
 #endif
-

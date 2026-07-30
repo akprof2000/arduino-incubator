@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 366" width="760" height="366" role="img" aria-label="График режима инкубации: Индейка">
+<style>text{fill:#57606a}</style>
+<text x="55.0" y="24.0" font-size="15" fill="#57606a" text-anchor="start" font-weight="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">Режим инкубации: Индейка (25 дней)</text>
+<rect x="55.0" y="46.0" width="208.0" height="218.0" rx="0" fill="#57606a" fill-opacity="0.05" stroke="none"/>
+<text x="159.0" y="38.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">Период 1</text>
+<rect x="263.0" y="46.0" width="104.0" height="218.0" rx="0" fill="#57606a" fill-opacity="0.10" stroke="none"/>
+<text x="315.0" y="38.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">Период 2</text>
+<rect x="367.0" y="46.0" width="260.0" height="218.0" rx="0" fill="#57606a" fill-opacity="0.05" stroke="none"/>
+<text x="497.0" y="38.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">Период 3</text>
+<rect x="627.0" y="46.0" width="78.0" height="218.0" rx="0" fill="#57606a" fill-opacity="0.10" stroke="none"/>
+<text x="666.0" y="38.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">Период 4</text>
+<line x1="55.0" y1="264.0" x2="705.0" y2="264.0" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="268.0" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">36.5</text>
+<line x1="55.0" y1="209.5" x2="705.0" y2="209.5" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="213.5" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">37.0</text>
+<line x1="55.0" y1="155.0" x2="705.0" y2="155.0" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="159.0" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">37.5</text>
+<line x1="55.0" y1="100.5" x2="705.0" y2="100.5" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="104.5" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">38.0</text>
+<line x1="55.0" y1="46.0" x2="705.0" y2="46.0" stroke="#d0d7de" stroke-width="1"/>
+<text x="47.0" y="50.0" font-size="10" fill="#d1242f" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">38.5</text>
+<text x="713.0" y="268.0" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">40</text>
+<text x="713.0" y="213.5" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">50</text>
+<text x="713.0" y="159.0" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">60</text>
+<text x="713.0" y="104.5" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">70</text>
+<text x="713.0" y="50.0" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">80</text>
+<text x="14.0" y="32.0" font-size="11" fill="#d1242f" text-anchor="start" font-weight="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">°C</text>
+<text x="726.0" y="32.0" font-size="11" fill="#0969da" text-anchor="start" font-weight="600" font-family="Segoe UI, Helvetica, Arial, sans-serif">%</text>
+<path d="M55.0 100.5 L263.0 100.5 L263.0 155.0 L367.0 155.0 L367.0 187.7 L627.0 187.7 L627.0 209.5 L705.0 209.5" fill="none" stroke="#d1242f" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M55.0 100.5 L263.0 100.5 L263.0 155.0 L367.0 155.0 L367.0 176.8 L627.0 176.8 L627.0 100.5 L705.0 100.5" fill="none" stroke="#0969da" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="55.0" y1="264.0" x2="705.0" y2="264.0" stroke="#57606a" stroke-width="1.2"/>
+<line x1="55.0" y1="264.0" x2="55.0" y2="269.0" stroke="#57606a" stroke-width="1"/>
+<text x="55.0" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">1</text>
+<line x1="263.0" y1="264.0" x2="263.0" y2="269.0" stroke="#57606a" stroke-width="1"/>
+<text x="263.0" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">9</text>
+<line x1="367.0" y1="264.0" x2="367.0" y2="269.0" stroke="#57606a" stroke-width="1"/>
+<text x="367.0" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">13</text>
+<line x1="627.0" y1="264.0" x2="627.0" y2="269.0" stroke="#57606a" stroke-width="1"/>
+<text x="627.0" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">23</text>
+<text x="705.0" y="282.0" font-size="10" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">25</text>
+<text x="380.0" y="298.0" font-size="11" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">день цикла</text>
+<text x="47.0" y="316.0" font-size="9" fill="#8250df" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">поворот, раз/сут</text>
+<rect x="56.0" y="304.0" width="206.0" height="17.0" rx="3" fill="#8250df" fill-opacity="0.16" stroke="none"/>
+<text x="159.0" y="316.0" font-size="9" fill="#8250df" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">4</text>
+<rect x="264.0" y="304.0" width="102.0" height="17.0" rx="3" fill="#8250df" fill-opacity="0.16" stroke="none"/>
+<text x="315.0" y="316.0" font-size="9" fill="#8250df" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">4</text>
+<rect x="368.0" y="304.0" width="258.0" height="17.0" rx="3" fill="#8250df" fill-opacity="0.16" stroke="none"/>
+<text x="497.0" y="316.0" font-size="9" fill="#8250df" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">4</text>
+<rect x="628.0" y="304.0" width="76.0" height="17.0" rx="3" fill="#57606a" fill-opacity="0.06" stroke="none"/>
+<text x="666.0" y="316.0" font-size="9" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">—</text>
+<text x="47.0" y="340.0" font-size="9" fill="#1a7f37" text-anchor="end" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">проветривание</text>
+<rect x="56.0" y="328.0" width="206.0" height="17.0" rx="3" fill="#57606a" fill-opacity="0.06" stroke="none"/>
+<text x="159.0" y="340.0" font-size="9" fill="#57606a" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">—</text>
+<rect x="264.0" y="328.0" width="102.0" height="17.0" rx="3" fill="#1a7f37" fill-opacity="0.16" stroke="none"/>
+<text x="315.0" y="340.0" font-size="9" fill="#1a7f37" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">2×5м</text>
+<rect x="368.0" y="328.0" width="258.0" height="17.0" rx="3" fill="#1a7f37" fill-opacity="0.16" stroke="none"/>
+<text x="497.0" y="340.0" font-size="9" fill="#1a7f37" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">4×20м</text>
+<rect x="628.0" y="328.0" width="76.0" height="17.0" rx="3" fill="#1a7f37" fill-opacity="0.16" stroke="none"/>
+<text x="666.0" y="340.0" font-size="9" fill="#1a7f37" text-anchor="middle" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">2×10м</text>
+<line x1="515.0" y1="20.0" x2="533.0" y2="20.0" stroke="#d1242f" stroke-width="2.5"/>
+<text x="539.0" y="24.0" font-size="10" fill="#d1242f" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">температура</text>
+<line x1="625.0" y1="20.0" x2="643.0" y2="20.0" stroke="#0969da" stroke-width="2.5"/>
+<text x="649.0" y="24.0" font-size="10" fill="#0969da" text-anchor="start" font-weight="normal" font-family="Segoe UI, Helvetica, Arial, sans-serif">влажность</text>
+</svg>

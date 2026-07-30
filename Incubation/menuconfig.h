@@ -3,29 +3,30 @@
 #ifndef _MENUCONFIG_h
 #define _MENUCONFIG_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
-	#include "node.h"
-	
+#include <Arduino.h>
 
-class MenuconfigClass
-{
-private:
-	//void shema(BaseNodeClass *node, int ind, int period );
-	BaseNodeClass  **_listMenu;
-	BaseNodeClass **_listStatus;	
-	void shememenu(BaseNodeClass *node);
- protected:	 
-	 
+#include "node.h"
 
+// Сборка двух деревьев экранов: «статус» (то, что видно всегда)
+// и «меню» (настройки). В памяти одновременно живёт только одно из них.
+class MenuconfigClass {
  public:
-	 BaseNodeClass *initmenu();
-	void clearmenu();
-	void clearstatus();
-	BaseNodeClass *initstatus();
+  BaseNodeClass *initmenu();
+  BaseNodeClass *initstatus();
+  void clearmenu();
+  void clearstatus();
+
+ private:
+  // БЫЛО: указатели не инициализировались, а clearmenu() сразу вызывал
+  // delete по мусору из SRAM.
+  BaseNodeClass **_listMenu = nullptr;
+  BaseNodeClass **_listStatus = nullptr;
+
+  static constexpr byte MENU_SIZE = 10;
+  static constexpr byte STATUS_SIZE = 5;
+  static constexpr byte SCHEME_COUNT = 6;  // видов птицы
+
+  void buildSchemeMenu(BaseNodeClass *parent);
 };
 
 extern MenuconfigClass Menuconfig;

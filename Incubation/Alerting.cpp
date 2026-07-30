@@ -1,110 +1,79 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "Alerting.h"
+
 #include "consts.h"
 #include "objects.h"
-#include "function.h"
+#include "timing.h"
 
 AlertingClass Alerting;
 
-String AlertingClass::Print()
-{
-	byte len = 0;
-	String res = "";
-	for (size_t i = 0; i < ENUMALERTLENGTH; i++)
-	{
-		String curr = len > 0 ? "; " : "";
-		curr += gettextprj(150 + i);
-		
-		if (_info[i])
-		{
-			res += curr;
-			len++;
-		}
-	}
+void AlertingClass::Print(TextBuilder &builder) const {
+  for (uint8_t i = 0; i < at_count; i++) {
+    if (!_info[i]) continue;
+    builder.addSeparator();
+    builder.addP(Txt::AlertFirst + i);
+  }
 
-	if (len == 0)
-		res = gettextprj(111);
-
-	return res;
-}
-void AlertingClass::Finish()
-{
-	_sound = false;
-	_work = false;
+  // БЫЛО: разделитель "; " добавлялся к строке ДО проверки _info[i],
+  // из-за чего первый же неактивный флаг сдвигал разделители
+  // и строка начиналась с "; ".
+  if (builder.empty()) builder.addP(Txt::NoDeviations);
 }
 
-void AlertingClass::SetWaitAllert()
-{
-	_wait = millis();
-	_sound = false;
+void AlertingClass::Finish() {
+  _sound = false;
+  _work = false;
 }
 
-void AlertingClass::Start(AlertingType alert)
-{
-	if (!_info[(int)alert])
-	{
-		_info[(int)alert] = true;
-		if (abs(millis() - _wait) > WAITAFTEREVENT)
-			_sound = true;
-		_work = true;
-	}
-
+void AlertingClass::SetWaitAllert() {
+  _wait = millis();
+  if (_wait == 0) _wait = 1;  // 0 зарезервирован под «ожидания нет»
+  _sound = false;
 }
 
-void AlertingClass::Finish(AlertingType alert)
-{
-	if (_info[(int)alert])
-	{
-		_info[(int)alert] = false;
-	}
+void AlertingClass::Start(AlertingType alert) {
+  if (alert >= at_count) return;
+  if (_info[alert]) return;
 
-	bool alrt = false;
-	for (size_t i = 0; i < ENUMALERTLENGTH; i++)
-	{
-		if (_info[i] == true)
-		{
-			alrt = true;
-		}
-	}
-	if (!alrt)
-	{
-		Finish();
-	}
+  _info[alert] = true;
+  // Звук не включаем, пока действует «окно тишины» после действий оператора
+  // (и первые WAITAFTEREVENT мс после включения прибора).
+  if (expired(_wait, WAITAFTEREVENT)) _sound = true;
+  _work = true;
 }
 
-void AlertingClass::BlockSound()
-{
-	if (_wait == 0)
-		_sound = false;
+void AlertingClass::Finish(AlertingType alert) {
+  if (alert >= at_count) return;
+  _info[alert] = false;
+
+  for (uint8_t i = 0; i < at_count; i++) {
+    if (_info[i]) return;  // осталась хотя бы одна авария
+  }
+  Finish();
 }
 
-void AlertingClass::refresh()
-{
-	
-	
-	if (_wait != 0)
-	{
-		if (abs(millis() - _wait) > WAITAFTEREVENT)
-		{
-			_sound = true;
-			_wait = 0;
-		}	
-	}
+void AlertingClass::BlockSound() {
+  if (_wait == 0) _sound = false;
+}
 
-	if (abs(millis() - _timer) < ERRORINTERVAL)
-	{
-		return;
-	}
-	_timer = millis();
+void AlertingClass::refresh() {
+  if (_wait != 0 && expired(_wait, WAITAFTEREVENT)) {
+    _sound = true;
+    _wait = 0;
+  }
 
-	if (_work)
-	{
-		_blink = !_blink;
-	}
-	digitalWrite(ALARMLEDPIN, _blink == true && _work == true ? HIGH : LOW);
-	digitalWrite(ALARMSOUNDPIN, _blink == true && _work == true && _sound == true ? HIGH : LOW);
+  if (!expired(_timer, ERRORINTERVAL)) return;
+  _timer = millis();
 
+  if (_work) {
+    _blink = !_blink;
+  } else {
+    _blink = false;
+  }
+
+  digitalWrite(ALARMLEDPIN, (_blink && _work) ? HIGH : LOW);
+  digitalWrite(ALARMSOUNDPIN, (_blink && _work && _sound) ? HIGH : LOW);
 }

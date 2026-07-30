@@ -1,142 +1,62 @@
-// 
-// 
-// 
+//
+//
+//
 
 #include "RowDayCount.h"
+
+#include "DataRow.h"
 #include "function.h"
 #include "objects.h"
 
+void RowDayCountClass::show() {
+  // БЫЛО: `DataRowClass *row = new DataRowClass(); ... delete row;`
+  // — выделение в куче на каждой отрисовке экрана. Объект на стеке.
+  DataRowClass row;
+  row.init(type, type1);
+  _day = row.GetDay();
+  _from = row.GetFrom();
 
-void RowDayCountClass::showCount()
-{
-	
-	lcd.setCursor(7, 0);
-	lcd.print(_from);
-	
-	lcd.setCursor(13, 0);
-	if (_day == 0)
-	{
-		lcd.print(gettextprj(250));
-	}
-	else if (_from + _day - 1 < 10)
-	{
-		lcd.print(0);
-		lcd.setCursor(14, 0);
-	}
-
-	if (_day != 0)
-		lcd.print(_from + _day - 1);
-	
-	lcd.setCursor(8, 1);
-	if (_blinc && _shift == 1)
-	{
-		lcd.print(gettextprj(250));
-	}
-	else
-		lcd.print(_day);
-
-
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(T(Txt::DayFromTo));
+  lcd.setCursor(0, 1);
+  lcd.print(T(Txt::Period));
+  drawFields();
 }
 
+void RowDayCountClass::drawFields() {
+  lcd.setCursor(7, 0);
+  lcd.print(_from);
+  padTo(7 + (_from > 9 ? 2 : 1), 9);
 
+  lcd.setCursor(13, 0);
+  if (_day == 0) {
+    lcd.print(T(Txt::Blank4));
+  } else {
+    const byte last = _from + _day - 1;
+    if (last < 10) lcd.print('0');
+    lcd.print(last);
+  }
 
-bool RowDayCountClass::allowInner()
-{
-	if (_shift > 0 && _shift < 2)
-	{
-		return false;
-	}
-	else
-		return true;
+  lcd.setCursor(8, 1);
+  if (hidden(1)) {
+    lcd.print(T(Txt::Blank4));
+  } else {
+    lcd.print(_day);
+    padTo(8 + (_day > 9 ? 2 : 1), 12);
+  }
 }
 
-
-bool RowDayCountClass::allowNext()
-{
-	if (_shift > 0 && _shift < 2)
-	{
-		return false;
-	}
-	else
-		return true;
+void RowDayCountClass::editField(byte field) {
+  (void)field;
+  float val = _day;
+  if (!scrollBar(0, 30, 1, val)) return;
+  _day = static_cast<byte>(val);
 }
 
-bool RowDayCountClass::allowPrev()
-{
-	if (_shift > 0 && _shift < 2)
-	{
-		return false;
-	}
-	else
-		return true;
-
+void RowDayCountClass::commit() {
+  DataRowClass row;
+  row.init(type, type1);
+  row.SetDay(_day);
+  row.save();
 }
-
-void RowDayCountClass::show()
-{
-	DataRowClass *row = new DataRowClass();
-	row->init(type, type1);	
-	_day = row->GetDay();
-	_from = row->GetFrom();
-	delete row;
-
-	lcd.clear();
-	lcd.setCursor(0, 0);
-	lcd.print(gettextprj(18));
-	lcd.setCursor(0, 1);
-	lcd.print(gettextprj(19));
-	showCount();
-}
-
-
-void RowDayCountClass::refresh()
-{
-	
-	if (bState[0] == btn_down && !appl[0])
-	{
-		_shift++;
-		if (_shift >= 2)
-		{
-			_shift = 0;
-		}
-
-		DataRowClass *row = new DataRowClass();
-		row->init(type, type1);
-		row->SetDay(_day);
-		row->save();
-		delete row;
-
-
-		appl[0] = true;
-		_blinc = false;
-		showCount();
-
-
-	}
-	else
-	{
-		if (_shift == 1)
-		{
-			float val = _day;
-			if (scrollBar(0, 30, 1, val))
-			{
-				_day = val;
-			}
-		}
-
-	}
-
-	if (_shift > 0 && _shift < 2)
-	{
-		if (abs(millis() - _timer) > BLINKINTERVAL)
-		{
-			_timer = millis();
-			_blinc = !_blinc;
-		}
-
-		showCount();
-	}
-
-}
-
-

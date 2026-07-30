@@ -1,70 +1,24 @@
-// 
-// 
-// 
+//
+// Общая реализация узла-владельца подменю.
+//
 
 #include "BaseNode.h"
 
+#include "function.h"
 
-bool BaseNodeClass::allowInner()
-{
-	return true;
+BaseNodeClass *MenuOwnerNodeClass::getInner() {
+  if (_listMenu != nullptr) return _listMenu[0];
+
+  _listMenu = createListMenu(_menuSize);
+  if (_listMenu == nullptr) return nullptr;  // не хватило кучи — остаёмся здесь
+
+  BaseNodeClass *first = buildMenu();
+  setInner(first);
+  return first;
 }
 
-bool BaseNodeClass::allowOwner()
-{
-	return true;
+void MenuOwnerNodeClass::releaseMenu() {
+  deleteListMenu(_menuSize, _listMenu);
+  _listMenu = nullptr;
+  setInner(nullptr);  // не оставляем висячий указатель
 }
-
-bool BaseNodeClass::allowNext()
-{
-	return true;
-}
-bool BaseNodeClass::allowPrev()
-{
-	return true;
-}
-
-BaseNodeClass * BaseNodeClass::getPrev()
-{
-	return _Prev;
-}
-
-BaseNodeClass * BaseNodeClass::getNext()
-{
-	return _Next;
-}
-
-BaseNodeClass * BaseNodeClass::getOwner()
-{
-	return _Owner;
-}
-
-BaseNodeClass * BaseNodeClass::getInner()
-{
-	return _Inner;
-}
-
-void BaseNodeClass::setPrev(BaseNodeClass * node)
-{
-	_Prev = node;
-}
-
-void BaseNodeClass::setNext(BaseNodeClass * node)
-{
-	_Next = node;
-}
-
-void BaseNodeClass::setOwner(BaseNodeClass * node)
-{
-	_Owner = node;
-}
-
-
-void BaseNodeClass::setInner(BaseNodeClass * node)
-{
-	_Inner = node;
-}
-
-
-
-

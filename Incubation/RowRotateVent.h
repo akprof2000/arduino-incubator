@@ -3,34 +3,27 @@
 #ifndef _ROWROTATEVENT_h
 #define _ROWROTATEVENT_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
-#include "BaseNode.h"
+#include "EditNode.h"
 
-class RowRotateVentClass: public BaseNodeClass
-{
-	byte _rotate = 0;
-	byte _vent = 0;
-	byte _venttime = 0;
-	byte _shift = 0;
-	bool _blinc = false;
-	bool _write = false;
-	unsigned long _timer;
-	void showRotate();
-	void showVentilate();
+// Поворот лотка и проветривание: сколько раз в сутки и по сколько минут.
+class RowRotateVentClass : public EditNodeClass {
  public:
-	 bool allowInner();
-	 
-	 bool allowNext();
-	 bool allowPrev();
-	 void show();
-	 void refresh();
+  RowRotateVentClass() : EditNodeClass(3) {}
+  void show() override;
+
+ protected:
+  void drawFields() override;
+  void editField(byte field) override;
+  void commit() override;
+  // Если проветривание выключено, поле «длительность» пропускается.
+  byte nextField(byte current) const override;
+
+ private:
+  byte _rotate = 0;    // поворотов в сутки
+  byte _vent = 0;      // проветриваний в сутки
+  byte _venttime = 0;  // минут на одно проветривание
 };
 
-
 #endif
-
