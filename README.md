@@ -64,7 +64,13 @@
 
 ## Железо и подключение
 
+![Схема подключения периферии](docs/img/wiring.svg)
+
+<details>
+<summary>Та же распиновка списком</summary>
+
 ![Распиновка](docs/img/pinout.svg)
+</details>
 
 ### Список компонентов
 
@@ -565,3 +571,17 @@ classDiagram
 
 Код `LiquidCrystalRus` — Ilya V. Danilov, на основе `LiquidCrystal` из Arduino IDE.
 Код `LCDAdjustments` — Andy Brown, лицензия CC BY-SA 3.0.
+
+---
+
+## Иллюстрации
+
+Все схемы и графики в `docs/img/` генерируются скриптами и строятся
+из тех же данных, что зашиты в прошивку, — они не могут разойтись с кодом.
+
+```bash
+cd docs && python gen_docs.py && python gen_wiring.py && python check_overlap.py
+```
+
+`check_overlap.py` проверяет, что подписи на схемах нигде не накладываются
+друг на друга.

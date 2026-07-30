@@ -13,6 +13,7 @@ C_HUM = '#0969da'
 C_ROT = '#8250df'
 C_VENT = '#1a7f37'
 C_ACC = '#bf8700'
+MUTED_R = '#8b949e'
 
 FONT = 'font-family="Segoe UI, Helvetica, Arial, sans-serif"'
 
@@ -28,6 +29,23 @@ FACTORY = [
     [(12, 76, 13, 4, 2, 5), (4, 73, 8, 4, 2, 20), (2, 72, 2, 0, 0, 0), (2, 70, 21, 0, 0, 0)],
 ]
 BASETEMP, BASEHUM = 30, 45
+
+
+def text_w(s, size):
+    """Грубая оценка ширины строки в пикселях для данного кегля."""
+    w = 0.0
+    for ch in s:
+        if ch in 'ilj.,:;| ':
+            w += 0.30
+        elif ch in 'frt()':
+            w += 0.38
+        elif ch.isdigit():
+            w += 0.55
+        elif ch.isupper() or ch in 'мшщжюфыЮ':
+            w += 0.72
+        else:
+            w += 0.56
+    return w * size
 
 
 def plural_days(n):
@@ -46,9 +64,11 @@ def svg(w, h, body, title):
     )
 
 
-def txt(x, y, s, size=12, color=FG, anchor='start', weight='normal'):
+def txt(x, y, s, size=12, color=FG, anchor='start', weight='normal', rotate=None):
+    tr = ' transform="rotate(-90 %.1f %.1f)"' % rotate if rotate else ''
     return ('<text x="%.1f" y="%.1f" font-size="%d" fill="%s" text-anchor="%s" '
-            'font-weight="%s" %s>%s</text>\n' % (x, y, size, color, anchor, weight, FONT, s))
+            'font-weight="%s"%s %s>%s</text>\n'
+            % (x, y, size, color, anchor, weight, tr, FONT, s))
 
 
 def line(x1, y1, x2, y2, color=GRID, w=1, dash=None):
@@ -68,8 +88,8 @@ def rect(x, y, w, h, fill, opacity=1.0, rx=2, stroke='none'):
 def schedule_chart(index, filename):
     rows = FACTORY[index]
     days = sum(r[0] for r in rows)
-    W, H = 760, 340
-    L, R, T, B = 55, 55, 46, 76
+    W, H = 760, 366
+    L, R, T, B = 55, 55, 46, 102
     pw, ph = W - L - R, H - T - B
 
     tmin, tmax = 36.5, 38.5
@@ -93,7 +113,10 @@ def schedule_chart(index, filename):
     for i, r in enumerate(rows):
         shade = 0.05 if i % 2 == 0 else 0.10
         b.append(rect(xd(d0), T, xd(d0 + r[0]) - xd(d0), ph, FG, shade, 0))
-        b.append(txt((xd(d0) + xd(d0 + r[0])) / 2, T - 8, 'Период %d' % (i + 1), 11, FG, 'middle'))
+        w = xd(d0 + r[0]) - xd(d0)
+        label = 'Период %d' % (i + 1) if text_w('Период %d' % (i + 1), 11) + 6 <= w else str(i + 1)
+        if text_w(label, 11) + 4 <= w:
+            b.append(txt((xd(d0) + xd(d0 + r[0])) / 2, T - 8, label, 11, FG, 'middle'))
         d0 += r[0]
 
     # сетка и оси
@@ -127,23 +150,31 @@ def schedule_chart(index, filename):
         b.append(txt(xd(d0), T + ph + 18, str(d0 + 1), 10, FG, 'middle'))
         d0 += r[0]
     b.append(txt(xd(days), T + ph + 18, str(days), 10, FG, 'middle'))
-    b.append(txt(L + pw / 2, T + ph + 36, 'день цикла', 11, FG, 'middle'))
+    b.append(txt(L + pw / 2, T + ph + 34, 'день цикла', 11, FG, 'middle'))
 
-    # полоса операций
-    yb = H - 26
-    d0 = 0
-    for r in rows:
-        x0, x1 = xd(d0), xd(d0 + r[0])
-        parts = []
-        if r[3]:
-            parts.append(('поворот %d/сут' % r[3], C_ROT))
-        if r[4]:
-            parts.append(('провет. %dx%dм' % (r[4], r[5]), C_VENT))
-        label = ', '.join(p[0] for p in parts) if parts else '—'
-        color = parts[0][1] if parts else FG
-        b.append(rect(x0 + 1, yb - 11, x1 - x0 - 2, 17, color, 0.14, 3))
-        b.append(txt((x0 + x1) / 2, yb + 1, label, 9, color, 'middle'))
-        d0 += r[0]
+    # Две отдельные компактные полосы: поворот и проветривание.
+    # Раньше это была одна строка с длинной подписью — в коротких периодах
+    # (по два дня) текст не помещался и наезжал на соседний.
+    bands = (
+        ('поворот, раз/сут', C_ROT, lambda r: ('%d' % r[3]) if r[3] else '', lambda r: r[3]),
+        ('проветривание', C_VENT, lambda r: ('%d×%dм' % (r[4], r[5])) if r[4] else '',
+         lambda r: r[4]),
+    )
+    for bi, (title, color, fmt, active) in enumerate(bands):
+        yb = H - 62 + bi * 24
+        b.append(txt(L - 8, yb + 12, title, 9, color, 'end'))
+        d0 = 0
+        for r in rows:
+            x0, x1 = xd(d0), xd(d0 + r[0])
+            d0 += r[0]
+            on = active(r)
+            b.append(rect(x0 + 1, yb, x1 - x0 - 2, 17, color if on else FG,
+                          0.16 if on else 0.06, 3))
+            label = fmt(r) if on else '—'
+            if text_w(label, 9) + 6 <= (x1 - x0):
+                b.append(txt((x0 + x1) / 2, yb + 12, label, 9,
+                             color if on else FG, 'middle'))
+        d0 = 0
 
     # легенда
     lx = L + pw - 190
@@ -171,13 +202,12 @@ def regulator_chart():
     def y(p):
         return T + ph * (100 - p) / 100.0
 
-    b = [txt(L, 24, 'Закон регулирования: мощность = (отклонение / порог)² × 100 %', 15, FG,
-             'start', '600')]
+    b = [txt(L - 30, 22, 'Закон регулирования', 15, FG, 'start', '600'),
+         txt(L - 30, 40, 'мощность = (отклонение / порог)² × 100 %', 11, MUTED_R)]
 
     for p in range(0, 101, 20):
         b.append(line(L, y(p), L + pw, y(p), GRID))
         b.append(txt(L - 8, y(p) + 4, '%d' % p, 10, FG, 'end'))
-    b.append(txt(L - 40, T - 16, 'мощность, %', 11, FG, 'start', '600'))
 
     # зона нечувствительности
     b.append(rect(x(0), T, x(0.1) - x(0), ph, FG, 0.10, 0))
@@ -206,6 +236,8 @@ def regulator_chart():
         b.append(txt(x(d), T + ph + 18, '%.1f' % d, 10, FG, 'middle'))
     b.append(txt(L + pw / 2, T + ph + 38,
                  'отклонение от уставки, °C  (при alTmpMax = 2 °C — 100 %)', 11, FG, 'middle'))
+    b.append(txt(6, T + ph / 2, 'мощность, %', 10, FG, 'middle', '600',
+                 rotate=(6, T + ph / 2)))
 
     open(os.path.join(OUT, 'regulator.svg'), 'w', encoding='utf-8').write(
         svg(W, H, ''.join(b), 'Квадратичный закон регулирования'))
