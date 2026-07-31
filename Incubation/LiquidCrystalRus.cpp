@@ -5,11 +5,7 @@
 #include <inttypes.h>
 #include <avr/pgmspace.h>
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 // it is a russian alphabet translation
 // except 0401 --> 0xa2 = ╗, 0451 --> 0xb5

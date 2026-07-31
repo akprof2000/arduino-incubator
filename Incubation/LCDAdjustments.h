@@ -11,11 +11,7 @@
 #define __B66E1DAA_232C_4362_86C4_86F942C1F9C8
 
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 
 #include <stdint.h>

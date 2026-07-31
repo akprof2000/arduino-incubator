@@ -31,6 +31,9 @@ jobs:
 
       - name: Собрать
         run: |
+          # pipefail обязателен: без него код возврата берётся от tee,
+          # и провалившаяся компиляция проходила бы как успешная.
+          set -o pipefail
           arduino-cli compile --clean \
             -b arduino:avr:mega \
             --warnings all \
