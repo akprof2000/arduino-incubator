@@ -100,6 +100,10 @@ void LiquidCrystalRus::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t
 }
 
 void LiquidCrystalRus::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
+	// Число столбцов контроллеру HD44780 не передаётся: адреса строк в DDRAM
+	// фиксированы. Параметр оставлен ради совместимости с LiquidCrystal.
+	(void)cols;
+
 	if (lines > 1) {
 		_displayfunction |= LCD_2LINE;
 	}
