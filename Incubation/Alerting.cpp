@@ -7,6 +7,7 @@
 #include "consts.h"
 #include "objects.h"
 #include "timing.h"
+#include "io.h"
 
 AlertingClass Alerting;
 
@@ -74,6 +75,6 @@ void AlertingClass::refresh() {
     _blink = false;
   }
 
-  digitalWrite(ALARMLEDPIN, (_blink && _work) ? HIGH : LOW);
-  digitalWrite(ALARMSOUNDPIN, (_blink && _work && _sound) ? HIGH : LOW);
+  alarmLedSet(_blink && _work);
+  alarmSoundSet(_blink && _work && _sound);
 }

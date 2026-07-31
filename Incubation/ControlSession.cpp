@@ -11,6 +11,7 @@
 #include "VentilationControl.h"
 #include "objects.h"
 #include "timing.h"
+#include "io.h"
 
 ControlSessionClass ControlSession;
 
@@ -33,10 +34,7 @@ bool ControlSessionClass::due(const TimeShift &data) {
   return (minutesToday % data.count == 0) && (minutesToday <= MINUTES_PER_DAY) && (second() < 30);
 }
 
-void ControlSessionClass::stopTray() {
-  digitalWrite(TRAYLEFTPIN, LOW);
-  digitalWrite(TRAYRIGHTPIN, LOW);
-}
+void ControlSessionClass::stopTray() { trayStop(); }
 
 void ControlSessionClass::init() {
   center.update();
@@ -62,8 +60,12 @@ void ControlSessionClass::startRotation() {
   _rotchange = !_rotchange;
   _cetration = false;
 
-  digitalWrite(TRAYLEFTPIN, _rotchange ? LOW : HIGH);
-  digitalWrite(TRAYRIGHTPIN, _rotchange ? HIGH : LOW);
+  // Направление чередуется от поворота к повороту.
+  if (_rotchange) {
+    trayMoveRight();
+  } else {
+    trayMoveLeft();
+  }
 
   _rotate = true;
 }

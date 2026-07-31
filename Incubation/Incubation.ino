@@ -28,6 +28,7 @@
 #include "objects.h"
 #include "storage.h"
 #include "timing.h"
+#include "io.h"
 
 static unsigned long sensorTimer = 0;
 static uint8_t deviceCount = 0;
@@ -43,22 +44,9 @@ static void setupPins() {
   pinMode(DOOREPIN, INPUT_PULLUP);
   pinMode(TRAYCENTERPIN, INPUT_PULLUP);
 
-  pinMode(ALARMLEDPIN, OUTPUT);
-  pinMode(ALARMSOUNDPIN, OUTPUT);
-  digitalWrite(ALARMLEDPIN, LOW);
-  digitalWrite(ALARMSOUNDPIN, LOW);
-
-  pinMode(TRAYLEFTPIN, OUTPUT);
-  digitalWrite(TRAYLEFTPIN, LOW);
-  pinMode(TRAYRIGHTPIN, OUTPUT);
-  digitalWrite(TRAYRIGHTPIN, LOW);
-
-  pinMode(HEATCONTROL, OUTPUT);
-  digitalWrite(HEATCONTROL, LOW);
-  pinMode(FANPIN, OUTPUT);
-  digitalWrite(FANPIN, LOW);
-  pinMode(COOLERPIN, OUTPUT);
-  digitalWrite(COOLERPIN, LOW);
+  // Все нагрузки — в безопасное состояние, с учётом полярности
+  // и без кратковременного включения в момент настройки вывода.
+  actuatorsInitSafe();
 }
 
 // Полный сброс: удерживать кнопку «вниз» при подаче питания.
@@ -67,15 +55,14 @@ static void setupPins() {
 static void handleFactoryReset() {
   if (digitalRead(BUTTON_D) != LOW) return;
 
-  pinMode(RESETLEDPIN, OUTPUT);
   const unsigned long pressStart = millis();
 
   while (digitalRead(BUTTON_D) == LOW) {
     // Мигаем, пока кнопка удерживается; после RESETINTERVAL — горим ровно.
     const bool confirmed = elapsed(pressStart) > RESETINTERVAL;
-    digitalWrite(RESETLEDPIN, HIGH);
+    alarmLedSet(true);
     delay(50);
-    if (!confirmed) digitalWrite(RESETLEDPIN, LOW);
+    if (!confirmed) alarmLedSet(false);
     delay(50);
   }
 
@@ -85,9 +72,9 @@ static void handleFactoryReset() {
   writeFactoryTables();
 
   for (uint8_t i = 0; i < 3; i++) {
-    digitalWrite(RESETLEDPIN, HIGH);
+    alarmLedSet(true);
     delay(500);
-    digitalWrite(RESETLEDPIN, LOW);
+    alarmLedSet(false);
     delay(500);
   }
 }

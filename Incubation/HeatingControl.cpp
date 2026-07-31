@@ -9,6 +9,7 @@
 #include "VentilationControl.h"
 #include "consts.h"
 #include "objects.h"
+#include "io.h"
 
 HeatingControlClass HeatingControl;
 
@@ -34,7 +35,7 @@ void HeatingControlClass::wait() {
   StatusInfo.AddStatus(so_cool, 0);
   StatusInfo.AddStatus(so_heet, 0);
   VentilationControl.SetSpeed(0, fu_temp);
-  analogWrite(HEATCONTROL, 0);
+  heaterOff();
 }
 
 // Обдув: снимает перегрев воздуха и, отдельно, перегрев самого яйца.
@@ -83,19 +84,19 @@ void HeatingControlClass::refresh() {
   // Греть нельзя, если яйцо уже теплее уставки на deltaEggMin.
   if (deficit <= 0 || (currentFirstTemp - target > deltaEggMin / 10.0)) {
     StatusInfo.AddStatus(so_heet, 0);
-    analogWrite(HEATCONTROL, 0);
+    heaterOff();
     return;
   }
 
   if (deficit >= alTmpMax) {
     StatusInfo.AddStatus(so_heet, 0xFF);
-    analogWrite(HEATCONTROL, 0xFF);
+    heaterPower(255);
     return;
   }
 
   if (deficit > alTmpDel / 10.0) {
     const double power = quadraticPower(deficit, alTmpMax, minheat);
-    analogWrite(HEATCONTROL, static_cast<int>(power));
+    heaterPower(static_cast<uint8_t>(power));
     StatusInfo.AddStatus(so_heet, power);
   }
 }

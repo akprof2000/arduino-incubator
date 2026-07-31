@@ -6,6 +6,7 @@
 
 #include "objects.h"
 #include "timing.h"
+#include "io.h"
 
 VentilationControlClass VentilationControl;
 
@@ -43,20 +44,20 @@ void VentilationControlClass::SetSpeed(double val, FanUser user) {
 }
 
 void VentilationControlClass::wait() {
-  digitalWrite(COOLERPIN, LOW);
+  coolerSet(false);
   _on = false;
 }
 
 void VentilationControlClass::refresh() {
   if (_currentVal == 0) {
-    digitalWrite(COOLERPIN, LOW);
+    coolerSet(false);
     _on = false;
     return;
   }
 
   // Почти полная мощность — держим включённым постоянно.
   if (_currentVal >= 255 || _delta < PEEKVALUE) {
-    digitalWrite(COOLERPIN, HIGH);
+    coolerSet(true);
     _on = true;
     return;
   }
@@ -65,13 +66,13 @@ void VentilationControlClass::refresh() {
     if (expired(_timer, PEEKVALUE)) {
       _timer = millis();
       _on = false;
-      digitalWrite(COOLERPIN, LOW);
+      coolerSet(false);
     }
   } else {
     if (expired(_timer, static_cast<unsigned long>(_delta))) {
       _timer = millis();
       _on = true;
-      digitalWrite(COOLERPIN, HIGH);
+      coolerSet(true);
     }
   }
 }

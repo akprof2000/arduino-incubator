@@ -9,6 +9,7 @@
 #include "consts.h"
 #include "objects.h"
 #include "timing.h"
+#include "io.h"
 
 HumidityControlClass HumidityControl;
 
@@ -29,7 +30,7 @@ void HumidityControlClass::wait() {
   StatusInfo.AddStatus(so_dry, 0);
   StatusInfo.AddStatus(so_wet, 0);
   VentilationControl.SetSpeed(0, fu_hum);
-  digitalWrite(FANPIN, LOW);
+  evaporatorSet(false);
   _on = false;
 }
 
@@ -59,7 +60,7 @@ void HumidityControlClass::dryControl() {
 
 void HumidityControlClass::refresh() {
   if (!humidityValid(currentHumd)) {
-    digitalWrite(FANPIN, LOW);
+    evaporatorSet(false);
     StatusInfo.AddStatus(so_wet, 0);
     _on = false;
     return;
@@ -71,14 +72,14 @@ void HumidityControlClass::refresh() {
   const float deficit = target - currentHumd;
 
   if (deficit <= 0) {
-    digitalWrite(FANPIN, LOW);
+    evaporatorSet(false);
     StatusInfo.AddStatus(so_wet, 0);
     _on = false;
     return;
   }
 
   if (deficit >= alHumMax) {
-    digitalWrite(FANPIN, HIGH);
+    evaporatorSet(true);
     StatusInfo.AddStatus(so_wet, 0xFF);
     _on = true;
     return;
@@ -91,9 +92,9 @@ void HumidityControlClass::refresh() {
 
   if (power >= 255 || _delta < PEEKVALUE) {
     StatusInfo.AddStatus(so_wet, 0xFF);
-    // ИСПРАВЛЕНО: здесь стоял digitalWrite(FANPIN, LOW) — при максимальном
-    // запросе на увлажнение испаритель ВЫКЛЮЧАЛСЯ вместо включения.
-    digitalWrite(FANPIN, HIGH);
+    // ИСПРАВЛЕНО: здесь испаритель ВЫКЛЮЧАЛСЯ при максимальном запросе
+    // на увлажнение вместо того, чтобы включиться.
+    evaporatorSet(true);
     _on = true;
     return;
   }
@@ -105,13 +106,13 @@ void HumidityControlClass::refresh() {
     if (expired(_timer, PEEKVALUE)) {
       _timer = millis();
       _on = false;
-      digitalWrite(FANPIN, LOW);
+      evaporatorSet(false);
     }
   } else {
     if (expired(_timer, static_cast<unsigned long>(_delta))) {
       _timer = millis();
       _on = true;
-      digitalWrite(FANPIN, HIGH);
+      evaporatorSet(true);
     }
   }
 }
