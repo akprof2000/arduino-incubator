@@ -54,6 +54,7 @@ jobs:
         with:
           name: firmware-mega2560
           path: build/Incubation.ino.hex
+          retention-days: 1
 
   docs:
     name: Проверка иллюстраций
